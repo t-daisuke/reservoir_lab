@@ -49,9 +49,6 @@ def cut_mlist(m_array, Smesh_list=[45]):
 def get_raw_mesh_array(df):
     return df["mesh_code"].unique()
 
-# #TEST
-# len(cut_mlist(get_raw_mesh_array(df),[46]))
-
 
 """## Get_mesh_list(New)
 
@@ -97,16 +94,6 @@ def get_matrix_of_mesh(Smesh_l=[[54, 55, 56, 57], [44, 45, 46, 47], [34, 35, 36,
             dic[mat[y, x]] = (y, x)
 
     return {"mat": mat, "dic": dic}
-
-# #TEST
-# tmp = (1,2)
-# print(tmp)
-# A = get_matrix_of_mesh()
-# a_tmp = A["mat"][tmp[0],tmp[1]]
-# print(a_tmp)
-# a2_tmp = A["dic"][a_tmp]
-# print(a2_tmp)
-
 
 """#### get_n_list"""
 
@@ -165,10 +152,7 @@ def get_mesh_list(mesh_O, GMoM, GNL):
 
     return mesh_list
 
-# TEST
-# gmom = get_matrix_of_mesh()
-# gnl = get_n_list(9)
-# get_mesh_list(533945002,gmom,gnl)
+
 
 
 """## resercoir_list, resercoir_list_dict(New)
@@ -190,16 +174,6 @@ def get_R_list(data_mesh_array, GMoM, GNL):
         if not (False in np.in1d(np.array(tmp_l), data_mesh_array)):
             r_list.append(tmp_l[0])
     return r_list
-
-# # TEST
-# gmom = get_matrix_of_mesh()
-# gnl = get_n_list(9)
-# dma = get_raw_mesh_array(df) #おおすぎた
-# # dma = cut_mlist(dma,[45]) #Smesh == 45に固定
-# print(len(dma))
-# Rl = get_R_list(dma, gmom, gnl)
-# print(len(Rl))
-
 
 """### get_reservoir_list_dict(NEW)"""
 
