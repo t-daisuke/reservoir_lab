@@ -273,10 +273,10 @@ def complement_linear(start, end, interval=60):
     comp = [i*differ + start for i in range(interval)]
     return comp
 
-# mesh_listからTraining用のraw_dataをつくる
+# mesh_listからTraining用のraw_data_subsetをつくる
 
 
-def create_data_from_mesh_list(df, mesh_list):
+def create_subset_from_data_and_mesh_list(df, mesh_list):
     test = df.sort_values(
         ['mesh_code', 'yyyymm', 'hour', 'holiday_flg', 'gender'])
     data_list = []  # np.array
@@ -363,36 +363,43 @@ def create_data_from_mesh_list(df, mesh_list):
 # in :res_params, path(path/train/e/C/...にほぞんされる)
 
 
-def train_LGR(path, res_params, raw_data, expIndex, mesh_code, is_update=False):
-    (leakingRate, resSize, spectralRadius, inSize, outSize,
-     initLen, trainLen, testLen, reg, seed_num) = res_params
+def train_LGR(main_path, res_params, raw_data_subset, mesh_code, is_update=False):
+    (expIndex, leakingRate, resSize, spectralRadius, inSize, outSize,
+     initLen, trainLen, testLen, reg, seed_num, conectivity) = res_params
+    
+    train_path = main_path
+    train_path+= str(expIndex) + "-"
+    train_path+= str(leakingRate) + "-"
+    train_path+= str(resSize) + "-"
+    train_path+= str(spectralRadius) + "-"
+    train_path+= str(inSize) + "-"
+    train_path+= str(outSize) + "-"
+    train_path+= str(initLen) + "-"
+    train_path+= str(trainLen) + "-"
+    train_path+= str(testLen) + "-"
+    train_path+= str(reg) + "-"
+    train_path+= str(seed_num) + "-"
+    train_path+= str(conectivity) + "/"
 
-    train_path = path+"seed" + str(seed_num) + "/"
     if not os.path.isdir(train_path):
         os.mkdir(train_path)
+        print("make " + str(train_path))
     train_path = train_path+"train/"
     if not os.path.isdir(train_path):
         os.mkdir(train_path)
-    train_path = train_path+str(mesh_code)+"/"
-    if not os.path.isdir(train_path):
-        os.mkdir(train_path)
-    train_path = train_path+"e"+str(expIndex)+"/"
-    if not os.path.isdir(train_path):
-        os.mkdir(train_path)
-    train_path = train_path+"C"+str(inSize)+"/"
-    if not os.path.isdir(train_path):
-        os.mkdir(train_path)
+        print("make " + str(train_path))
 
     # mesh_codeのデータがある→読み出し
-    Tdata_file = train_path + "Tdata"
-    if os.path.isfile(Tdata_file+".npz") and (not is_update):
-        Tdata = np.load(Tdata_file+".npz")
+    trained_file = train_path + str(mesh_code)
+    if os.path.isfile(trained_file+".npz") and (not is_update):
+        trained_data = np.load(trained_file+".npz")
         (Win, W, X, Wout, x, Data) = (
-            Tdata["Win"], Tdata["W"], Tdata["X"], Tdata["Wout"], Tdata["x"], Tdata["Data"])
+            trained_data["Win"], trained_data["W"], trained_data["X"], trained_data["Wout"],
+            trained_data["x"], trained_data["Data"])
         return (Win, W, X, Wout, x, Data)
 
     # Train
-    Data = raw_data * 10**expIndex
+    Data = raw_data_subset * 10**expIndex
     Data = Data.astype(np.float64)
     # trainは1 timeずつ
     In = Data[0:inSize, 0:trainLen+testLen-1]  # 入力
@@ -419,7 +426,7 @@ def train_LGR(path, res_params, raw_data, expIndex, mesh_code, is_update=False):
                         np.eye(1+resSize), np.dot(X, Yt.T)).T
 
     # save
-    np.savez_compressed(Tdata_file, Win=Win, W=W, X=X,
+    np.savez_compressed(trained_file, Win=Win, W=W, X=X,
                         Wout=Wout, x=x, Data=Data)
 
     return (Win, W, X, Wout, x, Data)
@@ -433,7 +440,7 @@ def train_LGR(path, res_params, raw_data, expIndex, mesh_code, is_update=False):
 #out: なし
 
 
-def create_Tdata(path, res_params, df, expIndex, is_update=False):
+def create_Tdata(path, res_params, df, is_update=False):
     gmom = get_matrix_of_mesh()
     gnl = get_n_list(res_params[3])  # たぶんinSize
     dma = get_raw_mesh_array(df)  # おおすぎた
@@ -441,9 +448,9 @@ def create_Tdata(path, res_params, df, expIndex, is_update=False):
     Rlist = get_R_list(dma, gmom, gnl)
     for index, mesh_code in enumerate(Rlist):
         gml = get_mesh_list(mesh_code, gmom, gnl)
-        raw_data = create_data_from_mesh_list(df, gml)
-        _ = train_LGR(path, res_params, raw_data, expIndex,
+        raw_data_subset = create_subset_from_data_and_mesh_list(df, gml)
+        _ = train_LGR(path, res_params, raw_data_subset,
                       mesh_code, is_update=is_update)
-        print(str(100 * index/len(Rlist)))
+        print(str(100 * index/len(Rlist)) + "% trained")
     print("Train Data Saved")
     return
