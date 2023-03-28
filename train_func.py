@@ -363,28 +363,33 @@ def create_subset_from_data_and_mesh_list(df, mesh_list):
 # in :res_params, path(path/train/e/C/...にほぞんされる)
 
 
-def train_LGR(main_path, res_params, raw_data_subset, mesh_code, is_update=False):
+def train_GR(main_path, res_params, raw_data_subset, mesh_code, is_update=False):
     (expIndex, leakingRate, resSize, spectralRadius, inSize, outSize,
-     initLen, trainLen, testLen, reg, seed_num, conectivity) = res_params
+     initLen, trainLen, testLen,
+     reg, seed_num, conectivity) = res_params
     
-    train_path = main_path
-    train_path+= str(expIndex) + "-"
-    train_path+= str(leakingRate) + "-"
-    train_path+= str(resSize) + "-"
-    train_path+= str(spectralRadius) + "-"
-    train_path+= str(inSize) + "-"
-    train_path+= str(outSize) + "-"
-    train_path+= str(initLen) + "-"
-    train_path+= str(trainLen) + "-"
-    train_path+= str(testLen) + "-"
-    train_path+= str(reg) + "-"
-    train_path+= str(seed_num) + "-"
-    train_path+= str(conectivity) + "/"
+    train_path = main_path + str(res_params[0])
+    for prm_i in range(1,len(res_params)):
+        train_path += "-" + str(res_params[prm_i])
+    train_path += "/"
+    
+    # train_path = main_path
+    # train_path+= str(expIndex) + "-"
+    # train_path+= str(leakingRate) + "-"
+    # train_path+= str(resSize) + "-"
+    # train_path+= str(spectralRadius) + "-"
+    # train_path+= str(inSize) + "-"
+    # train_path+= str(outSize) + "-"
+    # train_path+= str(initLen) + "-"
+    # train_path+= str(trainLen) + "-"
+    # train_path+= str(testLen) + "-"
+    # train_path+= str(reg) + "-"
+    # train_path+= str(seed_num) + "-"
+    # train_path+= str(conectivity) + "/"
 
     if not os.path.isdir(train_path):
         os.mkdir(train_path)
-        print("make " + str(train_path))
-    train_path = train_path+"train/"
+    train_path += "train/"
     if not os.path.isdir(train_path):
         os.mkdir(train_path)
         print("make " + str(train_path))
@@ -414,7 +419,6 @@ def train_LGR(main_path, res_params, raw_data_subset, mesh_code, is_update=False
     # normalizing and setting spectral radius (correct, slow):
     rhoW = max(abs(linalg.eig(W)[0]))
     W *= spectralRadius / rhoW
-    print("Training...")
     # run the reservoir with the Data and collect X
     x = np.zeros((resSize, 1))
     for t in range(trainLen):
@@ -440,16 +444,42 @@ def train_LGR(main_path, res_params, raw_data_subset, mesh_code, is_update=False
 #out: なし
 
 
-def create_Tdata(path, res_params, df, is_update=False):
+def create_trained_data(main_path, res_params, df, is_update=False):
     gmom = get_matrix_of_mesh()
-    gnl = get_n_list(res_params[3])  # たぶんinSize
-    dma = get_raw_mesh_array(df)  # おおすぎた
+    gnl = get_n_list(res_params[4])  # inSize
+    dma = get_raw_mesh_array(df)
 
     Rlist = get_R_list(dma, gmom, gnl)
     for index, mesh_code in enumerate(Rlist):
         gml = get_mesh_list(mesh_code, gmom, gnl)
         raw_data_subset = create_subset_from_data_and_mesh_list(df, gml)
-        _ = train_LGR(path, res_params, raw_data_subset,
+        _ = train_GR(main_path, res_params, raw_data_subset,
+                      mesh_code, is_update=is_update)
+        print(str(100 * index/len(Rlist)) + "% trained")
+    print("Train Data Saved")
+    return
+
+def create_local_area_trained_data(main_path, res_params, df, Smesh_list,is_update=False):
+    gmom = get_matrix_of_mesh()
+    gnl = get_n_list(res_params[4])  # inSize
+    print("Local area trained at " + str(Smesh_list))
+    all_dma = get_raw_mesh_array(df)
+    dma = cut_mlist(all_dma,Smesh_list)
+    
+    local_area_path = main_path + "smesh"
+    for smesh in Smesh_list:
+        local_area_path += "-" + str(smesh)
+    local_area_path += "/"
+    
+    if not os.path.isdir(local_area_path):
+        os.mkdir(local_area_path)
+        print("make " + str(local_area_path))
+
+    Rlist = get_R_list(dma, gmom, gnl)
+    for index, mesh_code in enumerate(Rlist):
+        gml = get_mesh_list(mesh_code, gmom, gnl)
+        raw_data_subset = create_subset_from_data_and_mesh_list(df, gml)
+        _ = train_GR(local_area_path, res_params, raw_data_subset,
                       mesh_code, is_update=is_update)
         print(str(100 * index/len(Rlist)) + "% trained")
     print("Train Data Saved")

@@ -26,12 +26,13 @@ if __name__ == '__main__':
                   24*60, 3*24*60, 2*24*60-60+1,
                   1e-8, 2, 0.01)
     is_up = False
+    Smesh_list = [45]
 
 
     start_time = time.perf_counter() #Start
     print("Start:"+ str(start_time))
 
-    create_trained_data(main_path,res_params,df,is_update = is_up)
+    create_local_area_trained_data(main_path,res_params,df,Smesh_list,is_update = is_up)
 
     end_time = time.perf_counter() #End
     print("Save Train Data:"+ str(end_time - start_time) + "s")
