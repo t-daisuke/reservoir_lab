@@ -184,7 +184,6 @@ def get_R_list(data_mesh_array, GMoM, GNL):
 
 
 def get_Rlist_dict(R_list, GMoM, GNL):
-    # TODO
     SOdict = {}
     R_set = set(R_list)
     for r in R_list:
@@ -202,22 +201,7 @@ def get_Rlist_dict(R_list, GMoM, GNL):
 
     return SOdict
 
-#  #TEST
-# gmom = get_matrix_of_mesh()
-# gnl = get_n_list(9)
-# dma = get_raw_mesh_array(df) #おおすぎた
-# # dma = cut_mlist(dma,[45]) #Smesh == 45に固定
-# print(len(dma))
-# Rl = get_R_list(dma, gmom, gnl)
-# print(len(Rl))
-# grld = get_Rlist_dict(Rl,gmom,gnl)
-# print(len(grld.keys()))
-# tmp=533934493
-# print(tmp in Rl)
-# print(grld[tmp])
-# tmp=533934482
-# print(tmp in Rl)
-# print(grld[tmp]) #KeyError Reservoirじゃないから
+
 
 
 """## メッシュの要素の調査(in_dim: 9)
@@ -225,53 +209,55 @@ def get_Rlist_dict(R_list, GMoM, GNL):
 ### matrix create
 """
 
-# gmom = get_matrix_of_mesh()
-# gnl = get_n_list(9)
-# #Out_put_matrix
-# gmom_mat = gmom["mat"]
-# exist_mat = gmom_mat.copy()
-# #Data
-# grmr = get_raw_mesh_array(df)
-# set_grmr = set(grmr)
-# #Reservoir
-# grl = get_R_list(grmr, gmom, gnl)
-# set_grl = set(grl)
+def create_fig_pop_mesh_map():
+    gmom = get_matrix_of_mesh()
+    gnl = get_n_list(9)
+    #Out_put_matrix
+    gmom_mat = gmom["mat"]
+    exist_mat = gmom_mat.copy()
+    #Data
+    grmr = get_raw_mesh_array(df)
+    set_grmr = set(grmr)
+    #Reservoir
+    grl = get_R_list(grmr, gmom, gnl)
+    set_grl = set(grl)
 
-# for y in range(gmom_mat.shape[0]):
-#   for x in range(gmom_mat.shape[1]):
-#     tmp = gmom_mat[y,x]
-#     if tmp in set_grmr:
-#       if tmp in set_grmr:
-#         exist_mat[y,x] = 2 #R
-#       else:
-#         exist_mat[y,x] = 1 #D
-#     else:
-#       exist_mat[y,x] = 0 #ND
+    for y in range(gmom_mat.shape[0]):
+      for x in range(gmom_mat.shape[1]):
+        tmp = gmom_mat[y,x]
+        if tmp in set_grmr:
+          if tmp in set_grmr:
+            exist_mat[y,x] = 2 #R
+          else:
+            exist_mat[y,x] = 1 #D
+        else:
+          exist_mat[y,x] = 0 #ND
 
-"""### fig"""
+    """### fig"""
 
-# #Fig Params
-# plt.rcParams["font.size"] =15
-# Figsize = (25,12.5)
-# plt.rcParams['image.cmap'] = 'bwr'
+    #Fig Params
+    plt.rcParams["font.size"] =15
+    Figsize = (25,12.5)
+    plt.rcParams['image.cmap'] = 'bwr'
 
-# fig = plt.figure(figsize=Figsize)
-# ax = fig.add_subplot(111, title="mesh_map")
-# im = ax.imshow(exist_mat)
-# c = fig.colorbar(im)
+    fig = plt.figure(figsize=Figsize)
+    ax = fig.add_subplot(111, title="mesh_map")
+    im = ax.imshow(exist_mat)
+    c = fig.colorbar(im)
 
-# #grid
-# major_ticks = np.arange(0, gmom_mat.shape[0], 20)
-# minor_ticks = np.arange(0, gmom_mat.shape[0], 10)
-# ax.set_xticks(major_ticks)
-# ax.set_xticks(minor_ticks, minor=True)
-# ax.set_yticks(major_ticks)
-# ax.set_yticks(minor_ticks, minor=True)
-# ax.grid(which='minor', color="white", linestyle="--")
-# ax.grid(which='major', color="yellow")
+    #grid
+    major_ticks = np.arange(0, gmom_mat.shape[0], 20)
+    minor_ticks = np.arange(0, gmom_mat.shape[0], 10)
+    ax.set_xticks(major_ticks)
+    ax.set_xticks(minor_ticks, minor=True)
+    ax.set_yticks(major_ticks)
+    ax.set_yticks(minor_ticks, minor=True)
+    ax.grid(which='minor', color="white", linestyle="--")
+    ax.grid(which='major', color="yellow")
 
-# # im.set_clim(0,4000) #limits
-# fig.show()
+    # im.set_clim(0,4000) #limits
+    fig.show()
+    return
 
 """## Create Training Data Set(Doing)
 

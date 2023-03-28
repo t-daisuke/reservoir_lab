@@ -55,3 +55,19 @@ if __name__ == '__main__':
     Rl = get_R_list(dma, gmom, gnl)
     print(len(Rl))
     print()
+    
+    gmom = get_matrix_of_mesh()
+    gnl = get_n_list(9)
+    dma = get_raw_mesh_array(df) #おおすぎた
+    # dma = cut_mlist(dma,[45]) #Smesh == 45に固定
+    print(len(dma))
+    Rl = get_R_list(dma, gmom, gnl)
+    print(len(Rl))
+    grld = get_Rlist_dict(Rl,gmom,gnl)
+    print(len(grld.keys()))
+    tmp=533934493
+    print(tmp in Rl)
+    print(grld[tmp])
+    # tmp=533934482
+    # print(tmp in Rl)
+    # print(grld[tmp]) #KeyError Reservoirじゃないから
