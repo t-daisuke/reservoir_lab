@@ -354,6 +354,23 @@ def create_subset_from_data_and_mesh_list(df, mesh_list):
         data = np.vstack((data, np.array(data_list[i])))
     return data
 
+# function for generating random matrix
+# m x n matrix with certain density
+# nonzero values -0.5~0.5
+def sparserand(m, n, density):
+    matrix = np.zeros([m,n])
+    place = []
+    count = 0
+    limit=round(m*n*density)
+    while count<limit:
+        try_index=[np.random.randint(0,m), np.random.randint(0,n)]
+    if try_index not in place:
+        place.append(try_index)
+        count=count+1
+    for index in place:
+        matrix[index[0], index[1]]=np.random.random(1) - 0.5
+    return matrix
+
 
 """### train_GR
 
@@ -372,20 +389,6 @@ def train_GR(main_path, res_params, raw_data_subset, mesh_code, is_update=False)
     for prm_i in range(1,len(res_params)):
         train_path += "-" + str(res_params[prm_i])
     train_path += "/"
-    
-    # train_path = main_path
-    # train_path+= str(expIndex) + "-"
-    # train_path+= str(leakingRate) + "-"
-    # train_path+= str(resSize) + "-"
-    # train_path+= str(spectralRadius) + "-"
-    # train_path+= str(inSize) + "-"
-    # train_path+= str(outSize) + "-"
-    # train_path+= str(initLen) + "-"
-    # train_path+= str(trainLen) + "-"
-    # train_path+= str(testLen) + "-"
-    # train_path+= str(reg) + "-"
-    # train_path+= str(seed_num) + "-"
-    # train_path+= str(conectivity) + "/"
 
     if not os.path.isdir(train_path):
         os.mkdir(train_path)
@@ -412,13 +415,13 @@ def train_GR(main_path, res_params, raw_data_subset, mesh_code, is_update=False)
     a = leakingRate
     np.random.seed(seed_num)
     Win = (np.random.rand(resSize, 1+inSize) - 0.5) * 1  # -0.5~0.5の一様分布
-    W = np.random.rand(resSize, resSize) - 0.5
+    W = sparserand(resSize, resSize, conectivity)
+    rhoW = max(abs(linalg.eig(W)[0]))
+    W *= spectralRadius / rhoW
     X = np.zeros((1+resSize, trainLen-initLen))
     Yt = Out[0:outSize, initLen:trainLen]  # init ~ train-1でtrain(train-init分)
 
-    # normalizing and setting spectral radius (correct, slow):
-    rhoW = max(abs(linalg.eig(W)[0]))
-    W *= spectralRadius / rhoW
+    
     # run the reservoir with the Data and collect X
     x = np.zeros((resSize, 1))
     for t in range(trainLen):
@@ -455,7 +458,7 @@ def create_trained_data(main_path, res_params, df, is_update=False):
         raw_data_subset = create_subset_from_data_and_mesh_list(df, gml)
         _ = train_GR(main_path, res_params, raw_data_subset,
                       mesh_code, is_update=is_update)
-        print(str(100 * index/len(Rlist)) + "% trained")
+        print("{:.2f}".format(100 * index/len(Rlist)) + "% trained")
     print("Train Data Saved")
     return
 
