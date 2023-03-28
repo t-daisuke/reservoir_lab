@@ -354,21 +354,28 @@ def create_subset_from_data_and_mesh_list(df, mesh_list):
         data = np.vstack((data, np.array(data_list[i])))
     return data
 
-# function for generating random matrix
-# m x n matrix with certain density
-# nonzero values -0.5~0.5
-def sparserand(m, n, density):
-    matrix = np.zeros([m,n])
-    place = []
-    count = 0
-    limit=round(m*n*density)
-    while count<limit:
-        try_index=[np.random.randint(0,m), np.random.randint(0,n)]
-    if try_index not in place:
-        place.append(try_index)
-        count=count+1
-    for index in place:
-        matrix[index[0], index[1]]=np.random.random(1) - 0.5
+def create_sparse_rand_matrix(m, n, density):
+    """
+    Create a sparse matrix of size m x n with density specified by the given value.
+
+    Args:
+        m (int): The number of rows in the matrix.
+        n (int): The number of columns in the matrix.
+        density (float): The desired density of the matrix, specified as a value between 0 and 1.
+
+    Returns:
+        numpy.ndarray: The sparse matrix with the specified density.
+    """
+    if not (0 <= density <= 1):
+        raise ValueError("Density must be a value between 0 and 1.")
+    
+    num_nonzeros = round(m * n * density)
+    indices = np.random.choice(m * n, size=num_nonzeros, replace=False)
+    values = np.random.random(num_nonzeros) - 0.5
+    
+    matrix = np.zeros([m, n])
+    matrix.flat[indices] = values
+    
     return matrix
 
 
@@ -415,7 +422,7 @@ def train_GR(main_path, res_params, raw_data_subset, mesh_code, is_update=False)
     a = leakingRate
     np.random.seed(seed_num)
     Win = (np.random.rand(resSize, 1+inSize) - 0.5) * 1  # -0.5~0.5の一様分布
-    W = sparserand(resSize, resSize, conectivity)
+    W = create_sparse_rand_matrix(resSize, resSize, conectivity)
     rhoW = max(abs(linalg.eig(W)[0]))
     W *= spectralRadius / rhoW
     X = np.zeros((1+resSize, trainLen-initLen))
