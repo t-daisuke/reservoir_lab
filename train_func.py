@@ -484,6 +484,6 @@ def create_local_area_trained_data(main_path, res_params, df, Smesh_list,is_upda
         raw_data_subset = create_subset_from_data_and_mesh_list(df, gml)
         _ = train_GR(local_area_path, res_params, raw_data_subset,
                       mesh_code, is_update=is_update)
-        print(str(100 * index/len(Rlist)) + "% trained")
+        print("{:.2f}".format(100 * index/len(Rlist)) + "% trained")
     print("Train Data Saved")
     return
