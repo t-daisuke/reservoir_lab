@@ -602,7 +602,7 @@ def test_GR(main_path, res_params, Distance, Rlist_dict):
         All_R_dict[r] = tmp_dict
         
         rate = 100 * t/len(Rlist)
-        if rate*10000//1 % 1000 == 0:
+        if rate*10000//1 % 100000 == 0:
             print("{:.2f}".format(rate) + "% done " + "{:.2f}".format(time.time() -start_time) + " s passed, this subset needs " + "{:.2f}".format(time.time() - subsection_time)
                   + " s and this section time is " "{:.2f}".format(time.time() - sectiontime) + " s")
         subsection_time = time.time()
@@ -672,7 +672,7 @@ def test_GR(main_path, res_params, Distance, Rlist_dict):
                 All_R_dict[r]["u"] = In[0:inSize, t+1:t+2]
 
         rate = 100*t/(testLen//Distance)
-        if rate*10000//1 % 1000 == 0:
+        if rate*10000//1 % 100000 == 0:
             print("{:.2f}".format(rate) + "% done " + "{:.2f}".format(time.time() -start_time) + " s passed, this subset needs " + "{:.2f}".format(time.time() - subsection_time)
                   + " s and this section time is " "{:.2f}".format(time.time() - sectiontime) + " s")
         subsection_time = time.time()
@@ -707,7 +707,7 @@ def test_GR(main_path, res_params, Distance, Rlist_dict):
                             Out=Out, trainO=trainO)
         
         rate = 100 * t/len(Rlist)
-        if rate*10000//1 % 1000 == 0:
+        if rate*10000//1 % 100000 == 0:
             print("{:.2f}".format(rate) + "% done " + "{:.2f}".format(time.time() -start_time) + " s passed, this subset needs " + "{:.2f}".format(time.time() - subsection_time)
                   + " s and this section time is " "{:.2f}".format(time.time() - sectiontime) + " s")
         subsection_time = time.time()
