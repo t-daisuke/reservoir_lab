@@ -23,49 +23,39 @@ plt.rcParams["font.size"] =15
 Figsize = (40,20)
 plt.rcParams['image.cmap'] = 'bwr'
 
-#test_dataを吸い出して出力
-#For Test ver 1.0
-def load_test_data(path, mesh_code, expIndex, Distance, inSize):
-  Test_path = path + "train/"
-  if not os.path.isdir(Test_path): return("Error" + str(mesh_code))
-  Test_path=Test_path+str(mesh_code)+"/"
-  if not os.path.isdir(Test_path): return("Error" + str(mesh_code))
-  Test_path=Test_path+"e"+str(expIndex)+"/"
-  if not os.path.isdir(Test_path): return("Error" + str(mesh_code))
-  Test_path=Test_path+"C"+str(inSize)+"/"
-  if not os.path.isdir(Test_path): os.mkdir(Test_path)
-  Test_path=Test_path+str(Distance) + "step/"
-  if not os.path.isdir(Test_path): os.mkdir(Test_path)
+def load_geo_test_data(main_path, res_params, Distance, mesh_code):
+    test_path = main_path + str(res_params[0])
+    for prm_i in range(1,len(res_params)):
+        test_path += "-" + str(res_params[prm_i])
+    test_path += "/"
+    test_path += str(Distance)+"step-test/"
 
-  test_file = Test_path + "test_data"
-
-  if os.path.isfile(test_file+".npz"):
-    test_data = np.load(test_file+".npz")
-    (Y,UU,XX,Out,trainO) = (test_data["Y"],test_data["UU"],test_data["XX"],test_data["Out"],test_data["trainO"])
-    return (Y,UU,XX,Out,trainO)
-  else: return("Error" + str(mesh_code))
+    # read mesh_code
+    tested_file = test_path + str(mesh_code)
+    if os.path.isfile(tested_file+".npz"):
+        test_data = np.load(tested_file+".npz")
+        (Y,UU,XX,Out,trainO) = (test_data["Y"],test_data["UU"],test_data["XX"],test_data["Out"],test_data["trainO"])
+        return (Y,UU,XX,Out,trainO)
+    else:
+        print(test_path)
+        print("ERROR at " + str(mesh_code))
   
-  # test_dataを吸い出して出力
-# For Test ver 1.1
-def load_NCo_data(path, mesh_code, expIndex, Distance, inSize):
-  Test_path = path + "NCo/"
-  if not os.path.isdir(Test_path): return("Error" + str(mesh_code))
-  Test_path=Test_path+str(mesh_code)+"/"
-  if not os.path.isdir(Test_path): return("Error" + str(mesh_code))
-  Test_path=Test_path+"e"+str(expIndex)+"/"
-  if not os.path.isdir(Test_path): return("Error" + str(mesh_code))
-  Test_path=Test_path+"C"+str(inSize)+"/"
-  if not os.path.isdir(Test_path): os.mkdir(Test_path)
-  Test_path=Test_path+str(Distance) + "step/"
-  if not os.path.isdir(Test_path): os.mkdir(Test_path)
+def load_nco_test_data(main_path, res_params, Distance, mesh_code):
+    test_path = main_path + str(res_params[0])
+    for prm_i in range(1,len(res_params)):
+        test_path += "-" + str(res_params[prm_i])
+    test_path += "/"
+    test_path += str(Distance)+"step-test-nco/"
 
-  test_file = Test_path + "test_data"
-
-  if os.path.isfile(test_file+".npz"):
-    test_data = np.load(test_file+".npz")
-    (Y,UU,XX,Out,trainO) = (test_data["Y"],test_data["UU"],test_data["XX"],test_data["Out"],test_data["trainO"])
-    return (Y,UU,XX,Out,trainO)
-  else: return("Error" + str(mesh_code))
+    # read mesh_code
+    tested_file = test_path + str(mesh_code)
+    if os.path.isfile(tested_file+".npz"):
+        test_data = np.load(tested_file+".npz")
+        (Y,UU,XX,Out,trainO) = (test_data["Y"],test_data["UU"],test_data["XX"],test_data["Out"],test_data["trainO"])
+        return (Y,UU,XX,Out,trainO)
+    else:
+        print(test_path)
+        print("ERROR at " + str(mesh_code))
   
 def print_MSE(teacher, output, inputScaling, name, is_save, is_show, ylim=0,out_path="", now_str=""):
   if len(teacher) != len(output):
@@ -220,13 +210,13 @@ def print_all_GR(path, mesh_code, expIndex, Distance, inSize, project_name_main,
     return
   (Win,W,X,Wout,x,Data) = tmp["trained_data"]
 
-  tmp = load_test_data(path, mesh_code, expIndex, Distance, inSize)
+  tmp = load_geo_test_data(path, mesh_code, expIndex, Distance, inSize)
   if type(tmp) != type((1,2)):
     print(tmp)
     return
   (Y,UU,XX,Out,trainO) = tmp
 
-  tmp = load_NCo_data(path, mesh_code, expIndex, Distance, inSize)
+  tmp = load_nco_test_data(path, mesh_code, expIndex, Distance, inSize)
   if type(tmp) != type((1,2)):
     print(tmp)
     return
@@ -266,13 +256,13 @@ def print_one_data_GR(path, mesh_code, expIndex, Distance, inSize, project_name_
     return
   (Win,W,X,Wout,x,Data) = tmp["trained_data"]
 
-  tmp = load_test_data(path, mesh_code, expIndex, Distance, inSize)
+  tmp = load_geo_test_data(path, mesh_code, expIndex, Distance, inSize)
   if type(tmp) != type((1,2)):
     print(tmp)
     return
   (Y,UU,XX,Out,trainO) = tmp
 
-  tmp = load_NCo_data(path, mesh_code, expIndex, Distance, inSize)
+  tmp = load_nco_test_data(path, mesh_code, expIndex, Distance, inSize)
   if type(tmp) != type((1,2)):
     print(tmp)
     return
@@ -326,7 +316,7 @@ def get_ave_MSE(teacher, output):
 """#### get_mse_map_LGR"""
 
 #リザバーにすることができるメッシュのMSEをMAP
-#sub_in: get_matrix_of_mesh, get_R_list,load_test_data, get_ave_mse
+#sub_in: get_matrix_of_mesh, get_R_list,load_geo_test_data, get_ave_mse
 #in: Reservoir List, Matrix_of_mesh, expIndex,Distance,path,inSize
 #out: Reservoir_list
 #note: 上のget_mesh_list()やその子関数の出力が必要
@@ -341,7 +331,7 @@ def get_mse_map_LGR(grl, gmom, expIndex,Distance, path, inSize):
     for x in range(gmom_mat.shape[1]):
       tmp_mesh = gmom_mat[y,x]
       if tmp_mesh in set_grl:
-        tmp_test_data = load_test_data(path, tmp_mesh, expIndex, Distance, inSize)
+        tmp_test_data = load_geo_test_data(path, tmp_mesh, expIndex, Distance, inSize)
 
         if type(tmp_test_data) != type((1,2)):
           #ERROE
@@ -396,7 +386,7 @@ def save_or_load_mse_map(path, expIndex, Distance, inSize, mse_map):
 """#### get_mse_NCo_map"""
 
 #リザバーにすることができるメッシュのMSEをMAP
-#sub_in: get_matrix_of_mesh, get_R_list,load_test_data, get_ave_mse
+#sub_in: get_matrix_of_mesh, get_R_list,load_geo_test_data, get_ave_mse
 #in: Reservoir List, Matrix_of_mesh, expIndex,Distance,path,inSize
 #out: Reservoir_list
 #note: 上のget_mesh_list()やその子関数の出力が必要
@@ -411,7 +401,7 @@ def get_mse_NCo_map_LGR(grl, gmom, expIndex,Distance, path, inSize):
     for x in range(gmom_mat.shape[1]):
       tmp_mesh = gmom_mat[y,x]
       if tmp_mesh in set_grl:
-        tmp_test_data = load_NCo_data(path, tmp_mesh, expIndex, Distance, inSize)
+        tmp_test_data = load_nco_test_data(path, tmp_mesh, expIndex, Distance, inSize)
 
         if type(tmp_test_data) != type((1,2)):
           #ERROE
