@@ -568,7 +568,8 @@ def test_GR(main_path, res_params, Distance, Rlist_dict):
 
     # (Win,W,X,Wout,Data) main_path,x,u,(Y,UU,XX,In,Out,trainO)全てを格納する
     All_R_dict = {}
-    load_time = 0
+    subsection_time = time.time()
+    sectiontime = time.time()
     for t, r in enumerate(Rlist):
         tmp = load_trained_data(main_path, res_params, r)
         if type(tmp) != type({"A": 1}):
@@ -599,30 +600,23 @@ def test_GR(main_path, res_params, Distance, Rlist_dict):
         tmp_dict["XX"] = np.zeros((resSize, testLen//Distance * Distance))
 
         All_R_dict[r] = tmp_dict
-
-        if load_time == 0:
-            load_time = (time.time() - start_time)
         
         rate = 100 * t/len(Rlist)
-        if rate*1000//1 % 1000 == 0:
-            print("{:.2f}".format(rate) + "% done @ " + "{:.2f}".format(time.time() -start_time) + " s in " + str(load_time))
+        if rate*10000//1 % 1000 == 0:
+            print("{:.2f}".format(rate) + "% done " + "{:.2f}".format(time.time() -start_time) + " s passed, this subset needs " + "{:.2f}".format(time.time() - subsection_time)
+                  + " s and this section time is " "{:.2f}".format(time.time() - sectiontime) + " s")
+        subsection_time = time.time()
 
-    print()
-    print(str((time.time() - start_time)//1) + "s: " +
-          str(load_time) + "s load. Loaded and Initialized...")
+    print("Load Ended")
+    print("{:.2f}".format(time.time() -start_time) + " s passed, this section " + "{:.2f}".format(time.time() - sectiontime) + " s")
+    sectiontime = time.time()
+    subsection_time = time.time()
+    print("Initialize and Compute Geo reservoir...")
 
     a = leakingRate
-    print("Compute Geo reservoir...")
     for t in range(testLen//Distance):
-        sst = time.time()
-        check_time = sst
         for d_i in range(Distance):
             # Compute Each
-
-            # Check Time
-            # print("d_i is " + str(d_i))
-            #print(str((time.time() - check_time)) + "s @AAA")
-            check_time = time.time()
 
             for r in Rlist:
                 tmp_dict = All_R_dict[r]  # params
@@ -649,10 +643,6 @@ def test_GR(main_path, res_params, Distance, Rlist_dict):
                 # tmp_dict["XX"] = XX
                 tmp_dict["UU"] = UU
 
-            # Check Time
-            #print(str((time.time() - check_time)) + "s @BBB")
-            check_time = time.time()
-
             # Self Organize
             for r in Rlist:
                 u = All_R_dict[r]["u"]
@@ -671,21 +661,9 @@ def test_GR(main_path, res_params, Distance, Rlist_dict):
 
                 tmp_dict["u"] = u
 
-            # Check Time
-            #print(str((time.time() - check_time)) + "s @CCC")
-            check_time = time.time()
-
-        # Check Time
-        #print(str((time.time() - check_time)) + "s @DDD")
-        check_time = time.time()
-
         # set Y
         for r in Rlist:
             All_R_dict[r]["Y"][:, t] = All_R_dict[r]["u"][0:, 0]
-
-        # Check Time
-        #print(str((time.time() - check_time)) + "s @EEE")
-        check_time = time.time()
 
         # for next time
         if t+2 < All_R_dict[Rlist[0]]["In"].shape[1]:
@@ -693,13 +671,16 @@ def test_GR(main_path, res_params, Distance, Rlist_dict):
                 In = All_R_dict[r]["In"]
                 All_R_dict[r]["u"] = In[0:inSize, t+1:t+2]
 
-        rate = (1000*t/(testLen//Distance))//1 / 10
-        if t % 10 == 0:
-            print(str(rate) + "% done @ " + str((time.time() - start_time) //
-                  1) + " s in " + str((time.time() - sst)//1) + "s")
-        # print(str((time.time() - sst)//1) + "s "+str( (1000*t/(testLen//Distance))//1 /10 ) +"% done")
+        rate = 100*t/(testLen//Distance)
+        if rate*10000//1 % 1000 == 0:
+            print("{:.2f}".format(rate) + "% done " + "{:.2f}".format(time.time() -start_time) + " s passed, this subset needs " + "{:.2f}".format(time.time() - subsection_time)
+                  + " s and this section time is " "{:.2f}".format(time.time() - sectiontime) + " s")
+        subsection_time = time.time()
 
-    print(str((time.time() - start_time)//1) + "s " + "Coputed !!")
+    print("Coputed !!")
+    print("{:.2f}".format(time.time() -start_time) + " s passed, this section " + "{:.2f}".format(time.time() - sectiontime) + " s")
+    sectiontime = time.time()
+    subsection_time = time.time()
     print("Saving...")
 
     for r in Rlist:
@@ -724,8 +705,15 @@ def test_GR(main_path, res_params, Distance, Rlist_dict):
         
         np.savez_compressed(test_file, Y=Y, UU=UU, XX=XX,
                             Out=Out, trainO=trainO)
+        
+        rate = 100 * t/len(Rlist)
+        if rate*10000//1 % 1000 == 0:
+            print("{:.2f}".format(rate) + "% done " + "{:.2f}".format(time.time() -start_time) + " s passed, this subset needs " + "{:.2f}".format(time.time() - subsection_time)
+                  + " s and this section time is " "{:.2f}".format(time.time() - sectiontime) + " s")
+        subsection_time = time.time()
 
-    print(print(str((time.time() - start_time)//1) + "s " + "All Completed"))
+    print("All completed")
+    print("{:.2f}".format(time.time() -start_time) + " s passed, this section " + "{:.2f}".format(time.time() - sectiontime) + "s")
     return
 
 # NotCoopolateReservoir実行、結果を保存
@@ -752,7 +740,7 @@ def test_NCoGR(path, res_params, expIndex, Distance, Rlist_dict):
     print(str((now_time - s_time)//1) + "s " + "NotCoopGeoReservoir Start...")
 
     for t_r, r in enumerate(Rlist):
-        sst = time.time()
+        subsection_time = time.time()
 
         tmp = load_trained_data(path, expIndex, r, inSize, seed_num)
         if type(tmp) != type({"A": 1}):
@@ -820,7 +808,7 @@ def test_NCoGR(path, res_params, expIndex, Distance, Rlist_dict):
 
         rate = (10000*(t_r+1)) / len(Rlist) // 1 / 100
 
-        print(str((time.time() - sst) * 100 // 1 / 100) +
+        print(str((time.time() - subsection_time) * 100 // 1 / 100) +
               "s "+str(rate) + "% done")
 
     now_time = time.time()
