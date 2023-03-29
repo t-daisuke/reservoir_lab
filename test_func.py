@@ -13,8 +13,6 @@ from scipy import linalg
 import os
 import time
 
-from train_func import *
-
 """TRAIN FUNC"""
 
 # Smeshのリストの分をrawから選定
