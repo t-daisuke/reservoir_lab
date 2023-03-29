@@ -30,7 +30,7 @@ if __name__ == '__main__':
 
 
     start_time = time.perf_counter() #Start
-    print("Start:"+ str(start_time))
+    print("Start")
 
     create_local_area_trained_data(main_path,res_params,df,Smesh_list,is_update = is_up)
 

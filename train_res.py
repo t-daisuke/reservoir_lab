@@ -29,7 +29,7 @@ if __name__ == '__main__':
 
 
     start_time = time.perf_counter() #Start
-    print("Start:"+ str(start_time))
+    print("Start")
 
     create_trained_data(main_path,res_params,df,is_update = is_up)
 

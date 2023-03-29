@@ -577,7 +577,7 @@ print(path)
 print(res_params)
 
 start_time = time.perf_counter() #Start
-print("Start:"+ str(start_time))
+print("Start")
 create_Tdata(path,res_params,df,expIndex,is_update = is_up)
 end_time = time.perf_counter() #End
 print("Save Train Data:"+ str(end_time - start_time) + "s")

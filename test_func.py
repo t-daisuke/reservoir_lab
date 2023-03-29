@@ -5,12 +5,6 @@
 import pandas as pd
 import os
 import time
-
-from train_func import *
-# -*- coding: utf-8 -*-
-# Ver0324
-
-# import
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -19,6 +13,7 @@ from scipy import linalg
 import os
 import time
 
+from train_func import *
 
 """TRAIN FUNC"""
 
@@ -513,33 +508,24 @@ def create_fig_pop_mesh_map():
 #out: {"Tdata":(Win,W,X,Wout,x,Data), "path":train_path}
 
 
-def load_Tdata(path, expIndex, mesh_code, inSize, seed_num):
+def load_trained_data(main_path, res_params, mesh_code):
+    train_path = main_path + str(res_params[0])
+    for prm_i in range(1,len(res_params)):
+        train_path += "-" + str(res_params[prm_i])
+    train_path += "/train/"
 
-    train_path = path+"seed" + str(seed_num) + "/"
-    if not os.path.isdir(train_path):
-        return("Error" + str(mesh_code))
-    train_path = train_path+"train/"
-    if not os.path.isdir(train_path):
-        return("Error" + str(mesh_code))
-    train_path = train_path+str(mesh_code)+"/"
-    if not os.path.isdir(train_path):
-        return("Error" + str(mesh_code))
-    train_path = train_path+"e"+str(expIndex)+"/"
-    if not os.path.isdir(train_path):
-        return("Error" + str(mesh_code))
-    train_path = train_path+"C"+str(inSize)+"/"
-    if not os.path.isdir(train_path):
-        return("Error" + str(mesh_code))
-
-    # 読み出し
-    Tdata_file = train_path + "Tdata"
-    if os.path.isfile(Tdata_file+".npz"):
-        Tdata = np.load(Tdata_file+".npz")
+    # read mesh_code
+    trained_file = train_path + str(mesh_code)
+    if os.path.isfile(trained_file+".npz"):
+        trained_data = np.load(trained_file+".npz")
         (Win, W, X, Wout, x, Data) = (
-            Tdata["Win"], Tdata["W"], Tdata["X"], Tdata["Wout"], Tdata["x"], Tdata["Data"])
+            trained_data["Win"], trained_data["W"], trained_data["X"], trained_data["Wout"],
+            trained_data["x"], trained_data["Data"])
+        # return (Win, W, X, Wout, x, Data)
         return {"Tdata": (Win, W, X, Wout, x, Data), "path": train_path}
     else:
-        return("Error" + str(mesh_code))
+        print(train_path)
+        print("ERROR at " + str(mesh_code))
 
 
 def dis_in_out(Data, inSize, outSize, dis):
@@ -561,16 +547,17 @@ def dis_in_out(Data, inSize, outSize, dis):
 # Trainingはファイルに保存されてる前提
 # Rlist_dictを制限すれば
 # subin:  get_Rlist_dict(この子関数であるR_list,GMoM,GNL,(get_mesh_listは中で使ってる)は外に出てる)
-# sub_func: load_Tdata, dis_in_out
-# in:path,res_params,expIndex,Distance,Rlist_dict
+# sub_func: load_trained_data, dis_in_out
+# in:main_path,res_params,expIndex,Distance,Rlist_dict
 #out: なし
 
 
-def test_GR(path, res_params, expIndex, Distance, Rlist_dict):
+def test_GR(main_path, res_params, Distance, Rlist_dict):
     start_time = time.time()
     # trainを全てのセルで終えてる前提
-    (leakingRate, resSize, spectralRadius, inSize, outSize,
-     initLen, trainLen, testLen, reg, seed_num) = res_params
+    (expIndex, leakingRate, resSize, spectralRadius, inSize, outSize,
+     initLen, trainLen, testLen,
+     reg, seed_num, conectivity) = res_params
 
     #各testの時に学習するmeshのdict: Rlist_dict(input)
 
@@ -579,11 +566,11 @@ def test_GR(path, res_params, expIndex, Distance, Rlist_dict):
     print(str((time.time() - start_time)//1) +
           "s " + "LargeGeoReservoir Start...")
 
-    # (Win,W,X,Wout,Data) path,x,u,(Y,UU,XX,In,Out,trainO)全てを格納する
+    # (Win,W,X,Wout,Data) main_path,x,u,(Y,UU,XX,In,Out,trainO)全てを格納する
     All_R_dict = {}
     load_time = 0
     for t, r in enumerate(Rlist):
-        tmp = load_Tdata(path, expIndex, r, inSize, seed_num)
+        tmp = load_trained_data(main_path, res_params, r)
         if type(tmp) != type({"A": 1}):
             print(tmp)
             return
@@ -613,19 +600,16 @@ def test_GR(path, res_params, expIndex, Distance, Rlist_dict):
 
         All_R_dict[r] = tmp_dict
 
-        rate = (1000*(t+1)) / len(Rlist) // 1 / 10
-
         if load_time == 0:
-            load_time = (time.time() - start_time)//1
-
-        if rate*10//1 % 100 == 0:
-            print(str(rate) + "% done @ " + str((time.time() -
-                  start_time)//1) + " s in " + str(load_time))
+            load_time = (time.time() - start_time)
+        
+        rate = 100 * t/len(Rlist)
+        if rate*1000//1 % 1000 == 0:
+            print("{:.2f}".format(rate) + "% done @ " + "{:.2f}".format(time.time() -start_time) + " s in " + str(load_time))
 
     print()
     print(str((time.time() - start_time)//1) + "s: " +
           str(load_time) + "s load. Loaded and Initialized...")
-    print(gc.collect())
 
     a = leakingRate
     print("Compute Geo reservoir...")
@@ -712,11 +696,10 @@ def test_GR(path, res_params, expIndex, Distance, Rlist_dict):
         rate = (1000*t/(testLen//Distance))//1 / 10
         if t % 10 == 0:
             print(str(rate) + "% done @ " + str((time.time() - start_time) //
-                  1) + " s in　" + str((time.time() - sst)//1) + "s")
+                  1) + " s in " + str((time.time() - sst)//1) + "s")
         # print(str((time.time() - sst)//1) + "s "+str( (1000*t/(testLen//Distance))//1 /10 ) +"% done")
 
     print(str((time.time() - start_time)//1) + "s " + "Coputed !!")
-    print(gc.collect())
     print("Saving...")
 
     for r in Rlist:
@@ -727,27 +710,18 @@ def test_GR(path, res_params, expIndex, Distance, Rlist_dict):
         XX = tmp_dict["XX"]
         Out = tmp_dict["Out"]
         trainO = tmp_dict["trainO"]
-
-        Test_path = path+"Test/"
-        if not os.path.isdir(Test_path):
-            os.mkdir(Test_path)
-        Test_path = Test_path+"seed"+str(seed_num)+"/"
-        if not os.path.isdir(Test_path):
-            os.mkdir(Test_path)
-        Test_path = Test_path+str(r)+"/"
-        if not os.path.isdir(Test_path):
-            os.mkdir(Test_path)
-        Test_path = Test_path+"e"+str(expIndex)+"/"
-        if not os.path.isdir(Test_path):
-            os.mkdir(Test_path)
-        Test_path = Test_path+"C"+str(inSize)+"/"
-        if not os.path.isdir(Test_path):
-            os.mkdir(Test_path)
-        Test_path = Test_path + str(Distance) + "step/"
-        if not os.path.isdir(Test_path):
-            os.mkdir(Test_path)
-        test_file = Test_path + "test_data"
-
+        
+        test_path = main_path + str(res_params[0])
+        for prm_i in range(1,len(res_params)):
+            test_path += "-" + str(res_params[prm_i])
+        test_path += "/"
+        test_path += str(Distance)+"step-test/"
+        if not os.path.isdir(test_path):
+            os.mkdir(test_path)
+            print("make " + str(test_path))
+        
+        test_file = test_path + str(r)
+        
         np.savez_compressed(test_file, Y=Y, UU=UU, XX=XX,
                             Out=Out, trainO=trainO)
 
@@ -853,27 +827,29 @@ def test_NCoGR(path, res_params, expIndex, Distance, Rlist_dict):
     print(print(str((now_time - s_time)//1) + "s " + "All Completed"))
     return
 
+def create_gr_test_data(main_path, res_params, distance):
+    gmom = get_matrix_of_mesh()
+    gnl = get_n_list(res_params[4])
+    dma = get_raw_mesh_array(df) #すべてのメッシュ
+    # dma = cut_mlist(dma,[45]) #Smesh == 45に固定
+    Rl = get_R_list(dma, gmom, gnl)
+    grld = get_Rlist_dict(Rl,gmom,gnl)
+    
+    print("Data mesh:" + str(len(dma)))
+    print("Reservoir mesh:" + str(len(Rl)))
+    test_GR(main_path, res_params, distance, grld)
+    return
 
+def create_nco_test_data(main_path, res_params, distance):
+    gmom = get_matrix_of_mesh()
+    gnl = get_n_list(res_params[4])
+    dma = get_raw_mesh_array(df) #すべてのメッシュ
+    # dma = cut_mlist(dma,[45]) #Smesh == 45に固定
+    Rl = get_R_list(dma, gmom, gnl)
+    grld = get_Rlist_dict(Rl,gmom,gnl)
+    
+    print("Data mesh:" + str(len(dma)))
+    print("Reservoir mesh:" + str(len(Rl)))
+    test_NCoGR(main_path, res_params, distance, grld)
+    return
 """TEST FUNC END"""
-"""# まわすところ"""
-# path = './KDDI/'
-# res_params = (1, 1000, 0.75, 9, 9, 24*60, 3*24*60, 2*24*60-60+1, 1e-8,1)
-# expIndex = -9.5
-# dis = 30
-# print("Res Params")
-# print(res_params)
-# print("Exp Index")
-# print(expIndex)
-# print("Dis")
-# print(dis)
-# print(path)
-# gmom = get_matrix_of_mesh()
-# gnl = get_n_list(res_params[3])
-# dma = get_raw_mesh_array(df) #すべてのメッシュ
-# # dma = cut_mlist(dma,[45]) #Smesh == 45に固定
-# print("Data mesh:" + str(len(dma)))
-# Rl = get_R_list(dma, gmom, gnl)
-# print("Reservoir mesh:" + str(len(Rl)))
-# grld = get_Rlist_dict(Rl,gmom,gnl)
-
-# test_GR(path,res_params,expIndex,dis,grld)
