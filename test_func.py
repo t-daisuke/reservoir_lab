@@ -318,7 +318,7 @@ def test_NCoGR(main_path, res_params, Distance, Rlist_dict):
                             Out=Out, trainO=trainO)
 
         rate = 100 * t_r/len(Rlist)
-        if sprit_printer(t_r,len(Rlist),sprit_num=25):
+        if sprit_printer(t_r,len(Rlist),sprit_num=40):
             print("{:.2f}".format(rate) + "% done " + "{:.2f}".format(time.time() -start_time) + " s passed, this subset needs " + "{:.2f}".format(time.time() - subsection_time)
                   + " s")
         subsection_time = time.time()
