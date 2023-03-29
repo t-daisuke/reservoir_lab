@@ -201,7 +201,7 @@ def get_Rlist_dict(R_list, GMoM, GNL):
 """
 
 
-def create_fig_pop_mesh_map():
+def create_fig_pop_mesh_map(df):
     gmom = get_matrix_of_mesh()
     gnl = get_n_list(9)
     # Out_put_matrix
@@ -574,7 +574,7 @@ def test_NCoGR(path, res_params, expIndex, Distance, Rlist_dict):
     print(print(str((now_time - s_time)//1) + "s " + "All Completed"))
     return
 
-def create_gr_test_data(main_path, res_params, distance):
+def create_gr_test_data(main_path, res_params, distance, df):
     gmom = get_matrix_of_mesh()
     gnl = get_n_list(res_params[4])
     dma = get_raw_mesh_array(df) #すべてのメッシュ
@@ -587,7 +587,7 @@ def create_gr_test_data(main_path, res_params, distance):
     test_GR(main_path, res_params, distance, grld)
     return
 
-def create_nco_test_data(main_path, res_params, distance):
+def create_nco_test_data(main_path, res_params, distance, df):
     gmom = get_matrix_of_mesh()
     gnl = get_n_list(res_params[4])
     dma = get_raw_mesh_array(df) #すべてのメッシュ

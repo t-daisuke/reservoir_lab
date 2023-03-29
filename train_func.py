@@ -12,13 +12,13 @@ import time
 
 # Variable
 
-df_path = "./KDDI/df/"
-path = './KDDI/'
+# df_path = "./KDDI/df/"
+# path = './KDDI/'
 
-if os.path.isfile(df_path+"df.csv"):
-    df = pd.read_csv(df_path+"df.csv")
-else:
-    print("NO DF FILE")
+# if os.path.isfile(df_path+"df.csv"):
+#     df = pd.read_csv(df_path+"df.csv")
+# else:
+#     print("NO DF FILE")
 
 
 """### cut_mesh_list"""
@@ -209,7 +209,7 @@ def get_Rlist_dict(R_list, GMoM, GNL):
 ### matrix create
 """
 
-def create_fig_pop_mesh_map():
+def create_fig_pop_mesh_map(df):
     gmom = get_matrix_of_mesh()
     gnl = get_n_list(9)
     #Out_put_matrix

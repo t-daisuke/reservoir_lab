@@ -31,7 +31,7 @@ if __name__ == '__main__':
     start_time = time.perf_counter()  # Start
     print("Start GR")
 
-    create_gr_test_data(main_path, res_params, distance)
+    create_gr_test_data(main_path, res_params, distance, df)
 
     end_time = time.perf_counter()  # End
     print("Save GR Test Data:" + str(end_time - start_time) + "s")
