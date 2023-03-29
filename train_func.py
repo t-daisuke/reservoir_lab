@@ -12,13 +12,13 @@ import time
 
 # Variable
 
-df_path = "./KDDI/df/"
-path = './KDDI/'
+# df_path = "./KDDI/df/"
+# path = './KDDI/'
 
-if os.path.isfile(df_path+"df.csv"):
-    df = pd.read_csv(df_path+"df.csv")
-else:
-    print("NO DF FILE")
+# if os.path.isfile(df_path+"df.csv"):
+#     df = pd.read_csv(df_path+"df.csv")
+# else:
+#     print("NO DF FILE")
 
 
 """### cut_mesh_list"""
@@ -209,7 +209,7 @@ def get_Rlist_dict(R_list, GMoM, GNL):
 ### matrix create
 """
 
-def create_fig_pop_mesh_map():
+def create_fig_pop_mesh_map(df):
     gmom = get_matrix_of_mesh()
     gnl = get_n_list(9)
     #Out_put_matrix
@@ -273,10 +273,10 @@ def complement_linear(start, end, interval=60):
     comp = [i*differ + start for i in range(interval)]
     return comp
 
-# mesh_listからTraining用のraw_dataをつくる
+# mesh_listからTraining用のraw_data_subsetをつくる
 
 
-def create_data_from_mesh_list(df, mesh_list):
+def create_subset_from_data_and_mesh_list(df, mesh_list):
     test = df.sort_values(
         ['mesh_code', 'yyyymm', 'hour', 'holiday_flg', 'gender'])
     data_list = []  # np.array
@@ -354,6 +354,30 @@ def create_data_from_mesh_list(df, mesh_list):
         data = np.vstack((data, np.array(data_list[i])))
     return data
 
+def create_sparse_rand_matrix(m, n, density):
+    """
+    Create a sparse matrix of size m x n with density specified by the given value.
+
+    Args:
+        m (int): The number of rows in the matrix.
+        n (int): The number of columns in the matrix.
+        density (float): The desired density of the matrix, specified as a value between 0 and 1.
+
+    Returns:
+        numpy.ndarray: The sparse matrix with the specified density.
+    """
+    if not (0 <= density <= 1):
+        raise ValueError("Density must be a value between 0 and 1.")
+    
+    num_nonzeros = round(m * n * density)
+    indices = np.random.choice(m * n, size=num_nonzeros, replace=False)
+    values = np.random.random(num_nonzeros) - 0.5
+    
+    matrix = np.zeros([m, n])
+    matrix.flat[indices] = values
+    
+    return matrix
+
 
 """### train_GR
 
@@ -363,36 +387,34 @@ def create_data_from_mesh_list(df, mesh_list):
 # in :res_params, path(path/train/e/C/...にほぞんされる)
 
 
-def train_LGR(path, res_params, raw_data, expIndex, mesh_code, is_update=False):
-    (leakingRate, resSize, spectralRadius, inSize, outSize,
-     initLen, trainLen, testLen, reg, seed_num) = res_params
+def train_GR(main_path, res_params, raw_data_subset, mesh_code, is_update=False):
+    (expIndex, leakingRate, resSize, spectralRadius, inSize, outSize,
+     initLen, trainLen, testLen,
+     reg, seed_num, conectivity) = res_params
+    
+    train_path = main_path + str(res_params[0])
+    for prm_i in range(1,len(res_params)):
+        train_path += "-" + str(res_params[prm_i])
+    train_path += "/"
 
-    train_path = path+"seed" + str(seed_num) + "/"
     if not os.path.isdir(train_path):
         os.mkdir(train_path)
-    train_path = train_path+"train/"
+    train_path += "train/"
     if not os.path.isdir(train_path):
         os.mkdir(train_path)
-    train_path = train_path+str(mesh_code)+"/"
-    if not os.path.isdir(train_path):
-        os.mkdir(train_path)
-    train_path = train_path+"e"+str(expIndex)+"/"
-    if not os.path.isdir(train_path):
-        os.mkdir(train_path)
-    train_path = train_path+"C"+str(inSize)+"/"
-    if not os.path.isdir(train_path):
-        os.mkdir(train_path)
+        print("make " + str(train_path))
 
     # mesh_codeのデータがある→読み出し
-    Tdata_file = train_path + "Tdata"
-    if os.path.isfile(Tdata_file+".npz") and (not is_update):
-        Tdata = np.load(Tdata_file+".npz")
+    trained_file = train_path + str(mesh_code)
+    if os.path.isfile(trained_file+".npz") and (not is_update):
+        trained_data = np.load(trained_file+".npz")
         (Win, W, X, Wout, x, Data) = (
-            Tdata["Win"], Tdata["W"], Tdata["X"], Tdata["Wout"], Tdata["x"], Tdata["Data"])
+            trained_data["Win"], trained_data["W"], trained_data["X"], trained_data["Wout"],
+            trained_data["x"], trained_data["Data"])
         return (Win, W, X, Wout, x, Data)
 
     # Train
-    Data = raw_data * 10**expIndex
+    Data = raw_data_subset * 10**expIndex
     Data = Data.astype(np.float64)
     # trainは1 timeずつ
     In = Data[0:inSize, 0:trainLen+testLen-1]  # 入力
@@ -400,14 +422,13 @@ def train_LGR(path, res_params, raw_data, expIndex, mesh_code, is_update=False):
     a = leakingRate
     np.random.seed(seed_num)
     Win = (np.random.rand(resSize, 1+inSize) - 0.5) * 1  # -0.5~0.5の一様分布
-    W = np.random.rand(resSize, resSize) - 0.5
+    W = create_sparse_rand_matrix(resSize, resSize, conectivity)
+    rhoW = max(abs(linalg.eig(W)[0]))
+    W *= spectralRadius / rhoW
     X = np.zeros((1+resSize, trainLen-initLen))
     Yt = Out[0:outSize, initLen:trainLen]  # init ~ train-1でtrain(train-init分)
 
-    # normalizing and setting spectral radius (correct, slow):
-    rhoW = max(abs(linalg.eig(W)[0]))
-    W *= spectralRadius / rhoW
-    print("Training...")
+    
     # run the reservoir with the Data and collect X
     x = np.zeros((resSize, 1))
     for t in range(trainLen):
@@ -419,7 +440,7 @@ def train_LGR(path, res_params, raw_data, expIndex, mesh_code, is_update=False):
                         np.eye(1+resSize), np.dot(X, Yt.T)).T
 
     # save
-    np.savez_compressed(Tdata_file, Win=Win, W=W, X=X,
+    np.savez_compressed(trained_file, Win=Win, W=W, X=X,
                         Wout=Wout, x=x, Data=Data)
 
     return (Win, W, X, Wout, x, Data)
@@ -433,17 +454,43 @@ def train_LGR(path, res_params, raw_data, expIndex, mesh_code, is_update=False):
 #out: なし
 
 
-def create_Tdata(path, res_params, df, expIndex, is_update=False):
+def create_trained_data(main_path, res_params, df, is_update=False):
     gmom = get_matrix_of_mesh()
-    gnl = get_n_list(res_params[3])  # たぶんinSize
-    dma = get_raw_mesh_array(df)  # おおすぎた
+    gnl = get_n_list(res_params[4])  # inSize
+    dma = get_raw_mesh_array(df)
 
     Rlist = get_R_list(dma, gmom, gnl)
     for index, mesh_code in enumerate(Rlist):
         gml = get_mesh_list(mesh_code, gmom, gnl)
-        raw_data = create_data_from_mesh_list(df, gml)
-        _ = train_LGR(path, res_params, raw_data, expIndex,
+        raw_data_subset = create_subset_from_data_and_mesh_list(df, gml)
+        _ = train_GR(main_path, res_params, raw_data_subset,
                       mesh_code, is_update=is_update)
-        print(str(100 * index/len(Rlist)))
+        print("{:.2f}".format(100 * index/len(Rlist)) + "% trained")
+    print("Train Data Saved")
+    return
+
+def create_local_area_trained_data(main_path, res_params, df, Smesh_list,is_update=False):
+    gmom = get_matrix_of_mesh()
+    gnl = get_n_list(res_params[4])  # inSize
+    print("Local area trained at " + str(Smesh_list))
+    all_dma = get_raw_mesh_array(df)
+    dma = cut_mlist(all_dma,Smesh_list)
+    
+    local_area_path = main_path + "smesh"
+    for smesh in Smesh_list:
+        local_area_path += "-" + str(smesh)
+    local_area_path += "/"
+    
+    if not os.path.isdir(local_area_path):
+        os.mkdir(local_area_path)
+        print("make " + str(local_area_path))
+
+    Rlist = get_R_list(dma, gmom, gnl)
+    for index, mesh_code in enumerate(Rlist):
+        gml = get_mesh_list(mesh_code, gmom, gnl)
+        raw_data_subset = create_subset_from_data_and_mesh_list(df, gml)
+        _ = train_GR(local_area_path, res_params, raw_data_subset,
+                      mesh_code, is_update=is_update)
+        print("{:.2f}".format(100 * index/len(Rlist)) + "% trained")
     print("Train Data Saved")
     return

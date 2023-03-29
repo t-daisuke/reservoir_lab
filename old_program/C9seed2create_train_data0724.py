@@ -300,7 +300,7 @@ def get_R_list(data_mesh_array, GMoM, GNL):
 # # TEST
 # gmom = get_matrix_of_mesh()
 # gnl = get_n_list(9)
-# dma = get_raw_mesh_array(df) #おおすぎた
+# dma = get_raw_mesh_array(df) 
 # # dma = cut_mlist(dma,[45]) #Smesh == 45に固定
 # print(len(dma))
 # Rl = get_R_list(dma, gmom, gnl)
@@ -335,7 +335,7 @@ def get_Rlist_dict(R_list, GMoM, GNL):
 #  #TEST
 # gmom = get_matrix_of_mesh()
 # gnl = get_n_list(9)
-# dma = get_raw_mesh_array(df) #おおすぎた
+# dma = get_raw_mesh_array(df) 
 # # dma = cut_mlist(dma,[45]) #Smesh == 45に固定
 # print(len(dma))
 # Rl = get_R_list(dma, gmom, gnl)
@@ -557,7 +557,7 @@ def train_LGR(path,res_params,raw_data,expIndex,mesh_code,is_update = False):
 def create_Tdata(path,res_params,df,expIndex, is_update=False):
   gmom = get_matrix_of_mesh()
   gnl = get_n_list(res_params[3]) #たぶんinSize
-  dma = get_raw_mesh_array(df) #おおすぎた
+  dma = get_raw_mesh_array(df) 
 
   Rlist = get_R_list(dma,gmom,gnl)
   for index,mesh_code in enumerate(Rlist):
@@ -577,7 +577,7 @@ print(path)
 print(res_params)
 
 start_time = time.perf_counter() #Start
-print("Start:"+ str(start_time))
+print("Start")
 create_Tdata(path,res_params,df,expIndex,is_update = is_up)
 end_time = time.perf_counter() #End
 print("Save Train Data:"+ str(end_time - start_time) + "s")

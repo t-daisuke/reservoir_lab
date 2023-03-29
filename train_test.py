@@ -40,10 +40,10 @@ if __name__ == '__main__':
     print(get_mesh_list(533945002,gmom,gnl))
     print()
 
-    print("Test count mesh and resrvoir-ble mesh")
+    print("Test count mesh and resrvoir-able mesh")
     gmom = get_matrix_of_mesh()
     gnl = get_n_list(9)
-    dma = get_raw_mesh_array(df) #おおすぎた
+    dma = get_raw_mesh_array(df)
     
     print(len(dma))
     Rl = get_R_list(dma, gmom, gnl)
@@ -58,7 +58,7 @@ if __name__ == '__main__':
     
     gmom = get_matrix_of_mesh()
     gnl = get_n_list(9)
-    dma = get_raw_mesh_array(df) #おおすぎた
+    dma = get_raw_mesh_array(df) 
     # dma = cut_mlist(dma,[45]) #Smesh == 45に固定
     print(len(dma))
     Rl = get_R_list(dma, gmom, gnl)

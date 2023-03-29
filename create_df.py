@@ -112,7 +112,6 @@ def main():
         df = df.append(df4)
         df = df.append(df5)
         df = df.append(df6)
-        return True
         df.to_csv(df_path+"df.csv", index=False, header=True)
         
 

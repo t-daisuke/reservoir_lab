@@ -6,7 +6,7 @@ import pandas as pd
 import os
 import time
 
-from train_func import *
+from test_func import *
 
 if __name__ == '__main__':
     # Variable
@@ -25,13 +25,13 @@ if __name__ == '__main__':
     res_params = (-9.5, 1, 1000, 0.75, 9, 9,
                   24*60, 3*24*60, 2*24*60-60+1,
                   1e-8, 2, 0.01)
+    distance = 30
     is_up = False
 
+    start_time = time.perf_counter()  # Start
+    print("Start NCO")
 
-    start_time = time.perf_counter() #Start
-    print("Start")
+    create_nco_test_data(main_path, res_params, distance, df)
 
-    create_trained_data(main_path,res_params,df,is_update = is_up)
-
-    end_time = time.perf_counter() #End
-    print("Save Train Data:"+ str(end_time - start_time) + "s")
+    end_time = time.perf_counter()  # End
+    print("Save NCO Test Data:" + str(end_time - start_time) + "s")
