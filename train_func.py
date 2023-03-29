@@ -378,6 +378,9 @@ def create_sparse_rand_matrix(m, n, density):
     
     return matrix
 
+def sprit_printer(i,M,sprit_num=20):
+    subset_size = M//sprit_num
+    return (i % subset_size == 1)
 
 """### train_GR
 
@@ -460,12 +463,20 @@ def create_trained_data(main_path, res_params, df, is_update=False):
     dma = get_raw_mesh_array(df)
 
     Rlist = get_R_list(dma, gmom, gnl)
+    start_time = time.time()
+    subsection_time = time.time()
     for index, mesh_code in enumerate(Rlist):
         gml = get_mesh_list(mesh_code, gmom, gnl)
         raw_data_subset = create_subset_from_data_and_mesh_list(df, gml)
+        
         _ = train_GR(main_path, res_params, raw_data_subset,
                       mesh_code, is_update=is_update)
-        print("{:.2f}".format(100 * index/len(Rlist)) + "% trained")
+        
+        rate = 100 * index/len(Rlist)
+        if sprit_printer(index,len(Rlist),sprit_num=25):
+            print("{:.2f}".format(rate) + "% done " + "{:.2f}".format(time.time() -start_time) + " s passed, this subset needs " + "{:.2f}".format(time.time() - subsection_time)
+                  + " s")
+        subsection_time = time.time()
     print("Train Data Saved")
     return
 
@@ -486,11 +497,17 @@ def create_local_area_trained_data(main_path, res_params, df, Smesh_list,is_upda
         print("make " + str(local_area_path))
 
     Rlist = get_R_list(dma, gmom, gnl)
+    start_time = time.time()
+    subsection_time = time.time()
     for index, mesh_code in enumerate(Rlist):
         gml = get_mesh_list(mesh_code, gmom, gnl)
         raw_data_subset = create_subset_from_data_and_mesh_list(df, gml)
         _ = train_GR(local_area_path, res_params, raw_data_subset,
                       mesh_code, is_update=is_update)
-        print("{:.2f}".format(100 * index/len(Rlist)) + "% trained")
+        rate = 100 * index/len(Rlist)
+        if sprit_printer(index,len(Rlist),sprit_num=25):
+            print("{:.2f}".format(rate) + "% done " + "{:.2f}".format(time.time() -start_time) + " s passed, this subset needs " + "{:.2f}".format(time.time() - subsection_time)
+                  + " s")
+        subsection_time = time.time()
     print("Train Data Saved")
     return
