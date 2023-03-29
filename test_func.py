@@ -246,7 +246,7 @@ def test_GR(main_path, res_params, Distance, Rlist_dict):
 #out: なし
 
 
-def test_NCoGR(main_path, res_params, Distance, Rlist_dict):
+def test_NCOGR(main_path, res_params, Distance, Rlist_dict):
     start_time = time.time()
     # trainを全てのセルで終えてる前提
     (expIndex, leakingRate, resSize, spectralRadius, inSize, outSize,
@@ -350,6 +350,6 @@ def create_nco_test_data(main_path, res_params, distance, df):
     
     print("Data mesh:" + str(len(dma)))
     print("Reservoir mesh:" + str(len(Rl)))
-    test_NCoGR(main_path, res_params, distance, grld)
+    test_NCOGR(main_path, res_params, distance, grld)
     return
 """TEST FUNC END"""
