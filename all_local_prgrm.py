@@ -35,6 +35,7 @@ if __name__ == '__main__':
     print("Start Train")
 
     create_local_area_trained_data(main_path,res_params,df,Smesh_list,is_update = is_up)
+    #create_local_area_trained_data_thread(main_path,res_params,df,Smesh_list,is_update = is_up)
 
     print("Save Train Data:"+ str(time.perf_counter() - start_time) + "s")
 
@@ -49,5 +50,6 @@ if __name__ == '__main__':
     print("Start NCO")
 
     create_local_nco_test_data(main_path, res_params, distance, df, Smesh_list)
+    #create_local_nco_test_data_thread(main_path, res_params, distance, df, Smesh_list)
 
     print("Save NCO Test Data:" + str(time.perf_counter() - start_time) + "s")

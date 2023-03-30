@@ -473,6 +473,7 @@ def train_thread_GR(main_path, res_params, raw_data_subset, mesh_code, trained_f
     trained_file = train_path + str(mesh_code)
     with trained_file_lock:
         
+        # if os.path.isfile(trained_file+".npz") and (not is_update):
         if os.path.isfile(trained_file+".npz") and (not is_update):
             trained_data = np.load(trained_file+".npz")
             (Win, W, X, Wout, x, Data) = (
