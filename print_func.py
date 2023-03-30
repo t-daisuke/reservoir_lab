@@ -20,9 +20,9 @@ from test_func import *
 """
 save file function
 """
-def get_current_date():
+def get_current_date(s=""):
     now = datetime.datetime.now()
-    return now.strftime("%Y%m%d")
+    return now.strftime(str(s) + "%Y%m%d")
 
 def save_file(title, s):
     filename = f"{title}-v1"  # 初期のファイル名

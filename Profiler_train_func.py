@@ -6,6 +6,8 @@ from line_profiler import LineProfiler
 #ref
 #https://qiita.com/aratana_tamutomo/items/aa3b723a3dd7a44e45d6
 
+from print_func import *
+
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -539,8 +541,35 @@ if __name__ == '__main__':
                   24*60, 3*24*60, 2*24*60-60+1,
                   1e-8, 2, 0.01)
     is_up = False
+    gmom = get_matrix_of_mesh()
+    gnl = get_n_list(res_params[4])  # inSize
+    dma = get_raw_mesh_array(df)
+
+    Rlist = get_R_list(dma, gmom, gnl)
+    mesh_code = Rlist[30]
+    gml = get_mesh_list(mesh_code, gmom, gnl)
+    raw_data_subset = create_subset_from_data_and_mesh_list(df, gml)
 
     prof = LineProfiler()
-    prof.add_function(create_trained_data)
-    prof.runcall(create_trained_data,main_path,res_params,df,is_up)
+    prof.add_function(train_GR)
+    prof.runcall(train_GR,main_path, res_params, raw_data_subset,
+                      mesh_code, is_up)
     prof.print_stats()
+    
+    profiler_path = "./profiler/train_profile"
+    date = get_current_date(profiler_path)
+    filename = f"{date}-v1"  # 初期のファイル名
+
+    # すでに同じ名前のファイルがある場合、新しいファイル名を作成する
+    if os.path.isfile(filename):
+        version = 1
+        while True:
+            version += 1
+            new_filename = f"{date}-v{version}"
+            if not os.path.isfile(new_filename):
+                filename = new_filename
+                break
+
+    # ファイルを保存する
+    with open(filename, "w") as f:
+        prof.print_stats(f)

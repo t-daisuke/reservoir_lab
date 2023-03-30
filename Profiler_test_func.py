@@ -18,6 +18,7 @@ import os
 import time
 
 from train_func import *
+from print_func import *
 
 """TEST FUNC"""
 
@@ -382,8 +383,34 @@ if __name__ == '__main__':
                   1e-8, 2, 0.01)
     distance = 30
     is_up = False
+    gmom = get_matrix_of_mesh()
+    gnl = get_n_list(res_params[4])
+    dma = get_raw_mesh_array(df)
+    Rl = get_R_list(dma, gmom, gnl)
+    grld = get_Rlist_dict(Rl,gmom,gnl)
+    print("Data mesh:" + str(len(dma)))
+    print("Reservoir mesh:" + str(len(Rl)))
+    
 
     prof = LineProfiler()
-    prof.add_function(create_nco_test_data)
-    prof.runcall(create_nco_test_data,main_path, res_params, distance, df)
+    prof.add_function(test_NCOGR)
+    prof.runcall(test_NCOGR,main_path, res_params, distance, grld)
     prof.print_stats()
+    
+    profiler_path = "./profiler/nco_profile"
+    date = get_current_date(profiler_path)
+    filename = f"{date}-v1"  # 初期のファイル名
+
+    # すでに同じ名前のファイルがある場合、新しいファイル名を作成する
+    if os.path.isfile(filename):
+        version = 1
+        while True:
+            version += 1
+            new_filename = f"{date}-v{version}"
+            if not os.path.isfile(new_filename):
+                filename = new_filename
+                break
+
+    # ファイルを保存する
+    with open(filename, "w") as f:
+        prof.print_stats(f)
