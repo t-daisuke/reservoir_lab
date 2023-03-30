@@ -290,7 +290,7 @@ def test_NCOGR(main_path, res_params, Distance, Rlist_dict):
                 u = np.dot(Wout, np.vstack((1, x)))
 
                 # 4D
-                XX[:, t*Distance+d_i] = np.vstack((x))[:, 0]
+                # XX[:, t*Distance+d_i] = np.vstack((x))[:, 0]
                 UU[:, t*Distance+d_i] = u[0:, 0]
 
                 # Self Organize

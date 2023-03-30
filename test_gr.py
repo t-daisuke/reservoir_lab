@@ -24,7 +24,7 @@ if __name__ == '__main__':
     #  reg, seed_num, conectivity) = res_params
     res_params = (-9.5, 1, 1000, 0.75, 9, 9,
                   24*60, 3*24*60, 2*24*60-60+1,
-                  1e-8, 2, 0.01)
+                  1e-8, 2, 0.001)
     distance = 30
     is_up = False
 

@@ -1,0 +1,76 @@
+Timer unit: 1e-07 s
+
+Total time: 58.7899 s
+File: C:\Users\tdais\Desktop\GRforM\Profiler_train_func.py
+Function: train_GR at line 399
+
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+   399                                           def train_GR(main_path, res_params, raw_data_subset, mesh_code, is_update=False):
+   400         1         16.0     16.0      0.0      (expIndex, leakingRate, resSize, spectralRadius, inSize, outSize,
+   401         1          5.0      5.0      0.0       initLen, trainLen, testLen,
+   402         2         28.0     14.0      0.0       reg, seed_num, conectivity) = res_params
+   403                                               
+   404         1         33.0     33.0      0.0      start_time = time.time()
+   405        48       5872.0    122.3      0.0      while(time.time() - start_time < 60):
+   406        47       6073.0    129.2      0.0          train_path = main_path + str(res_params[0])
+   407       564       8534.0     15.1      0.0          for prm_i in range(1,len(res_params)):
+   408       517      17030.0     32.9      0.0              train_path += "-" + str(res_params[prm_i])
+   409        47        709.0     15.1      0.0          train_path += "/"
+   410                                           
+   411        47     114997.0   2446.7      0.0          if not os.path.isdir(train_path):
+   412                                                       os.mkdir(train_path)
+   413        47       1085.0     23.1      0.0          train_path += "train/"
+   414        47      35464.0    754.6      0.0          if not os.path.isdir(train_path):
+   415                                                       os.mkdir(train_path)
+   416                                                       print("make " + str(train_path))
+   417                                           
+   418                                                   # mesh_codeのデータがある→読み出し
+   419        47       6596.0    140.3      0.0          trained_file = train_path + str(mesh_code)
+   420                                                   # if os.path.isfile(trained_file+".npz") and (not is_update):
+   421                                                   #     trained_data = np.load(trained_file+".npz")
+   422                                                   #     (Win, W, X, Wout, x, Data) = (
+   423                                                   #         trained_data["Win"], trained_data["W"], trained_data["X"], trained_data["Wout"],
+   424                                                   #         trained_data["x"], trained_data["Data"])
+   425                                                   #     return (Win, W, X, Wout, x, Data)
+   426                                           
+   427                                                   # Train
+   428        47      80659.0   1716.1      0.0          Data = raw_data_subset * 10**expIndex
+   429        47      91280.0   1942.1      0.0          Data = Data.astype(np.float64)
+   430                                                   # trainは1 timeずつ
+   431        47       3248.0     69.1      0.0          In = Data[0:inSize, 0:trainLen+testLen-1]  # 入力
+   432        47       1094.0     23.3      0.0          Out = Data[0:outSize, 1:trainLen+testLen]  # 出力
+   433        47        509.0     10.8      0.0          a = leakingRate
+   434        47      11167.0    237.6      0.0          np.random.seed(seed_num)
+   435        47      92657.0   1971.4      0.0          Win = (np.random.rand(resSize, 1+inSize) - 0.5) * 1  # -0.5~0.5の一様分布
+   436        47   26436954.0 562488.4      4.5          W = create_sparse_rand_matrix(resSize, resSize, conectivity)
+   437                                                   # rhoW = max(abs(linalg.eig(W)[0]))
+   438        47  108778379.0 2314433.6     18.5          rhoW = max(linalg.eigh(W)[0])
+   439        47     559512.0  11904.5      0.1          W *= spectralRadius / rhoW
+   440        47    1493757.0  31782.1      0.3          X = np.zeros((1+resSize, trainLen-initLen))
+   441        47       4131.0     87.9      0.0          Yt = Out[0:outSize, initLen:trainLen]  # init ~ train-1でtrain(train-init分)
+   442                                           
+   443                                                   
+   444                                                   # run the reservoir with the Data and collect X
+   445        47       4083.0     86.9      0.0          x = np.zeros((resSize, 1))
+   446                                                   # for t in range(trainLen):
+   447                                                   #     u = In[0:inSize, t:t+1]
+   448                                                   #     x = (1-a)*x + a*np.tanh(np.dot(Win, np.vstack((1, u))) + np.dot(W, x))  # 瞬間の値
+   449                                                   #     if t >= initLen:
+   450                                                   #         X[:, t-initLen] = np.vstack((1, x))[:, 0]
+   451                                                   # Wout = linalg.solve(np.dot(X, X.T) + reg *
+   452                                                   #                     np.eye(1+resSize), np.dot(X, Yt.T)).T
+   453    203087    3124039.0     15.4      0.5          for t in range(trainLen):
+   454    203040    6449354.0     31.8      1.1              u = In[0:inSize, t:t+1]
+   455    203040  319363676.0   1572.9     54.3              x = (1-a)*x + a*np.tanh(Win@np.vstack((1, u)) + W @ x)  # 瞬間の値
+   456    203040    4586465.0     22.6      0.8              if t >= initLen:
+   457    135360   85066403.0    628.4     14.5                  X[:, t-initLen] = np.vstack((1, x))[:, 0]
+   458       141   30079174.0 213327.5      5.1          Wout = linalg.solve(X @ X.T + reg *
+   459        94    1476032.0  15702.5      0.3                              np.eye(1+resSize), X @ Yt.T).T
+   460                                           
+   461                                                   # save
+   462                                                   # np.savez_compressed(trained_file, Win=Win, W=W, X=X,
+   463                                                   #                     Wout=Wout, x=x, Data=Data)
+   464                                           
+   465         1         22.0     22.0      0.0      return (Win, W, X, Wout, x, Data)
+
