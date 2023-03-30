@@ -434,7 +434,6 @@ def train_GR(main_path, res_params, raw_data_subset, mesh_code, is_update=False)
         np.random.seed(seed_num)
         Win = (np.random.rand(resSize, 1+inSize) - 0.5) * 1  # -0.5~0.5の一様分布
         W = create_sparse_rand_matrix(resSize, resSize, conectivity)
-        # rhoW = max(abs(linalg.eig(W)[0]))
         rhoW = max(linalg.eigh(W)[0])
         W *= spectralRadius / rhoW
         X = np.zeros((1+resSize, trainLen-initLen))
@@ -443,13 +442,6 @@ def train_GR(main_path, res_params, raw_data_subset, mesh_code, is_update=False)
         
         # run the reservoir with the Data and collect X
         x = np.zeros((resSize, 1))
-        # for t in range(trainLen):
-        #     u = In[0:inSize, t:t+1]
-        #     x = (1-a)*x + a*np.tanh(np.dot(Win, np.vstack((1, u))) + np.dot(W, x))  # 瞬間の値
-        #     if t >= initLen:
-        #         X[:, t-initLen] = np.vstack((1, x))[:, 0]
-        # Wout = linalg.solve(np.dot(X, X.T) + reg *
-        #                     np.eye(1+resSize), np.dot(X, Yt.T)).T
         for t in range(trainLen):
             u = In[0:inSize, t:t+1]
             x = (1-a)*x + a*np.tanh(Win@np.vstack((1, u)) + W @ x)  # 瞬間の値
