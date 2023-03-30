@@ -25,7 +25,7 @@ if __name__ == '__main__':
     res_params = (-9.5, 1, 1000, 0.75, 9, 9,
                   24*60, 3*24*60, 2*24*60-60+1,
                   1e-8, 2, 0.01)
-    is_up = False
+    is_up = True
     Smesh_list = [45]
 
 
@@ -33,6 +33,8 @@ if __name__ == '__main__':
     print("Start Train Local")
 
     create_local_area_trained_data_thread(main_path,res_params,df,Smesh_list,is_update = is_up)
+    # create_local_area_trained_data(main_path,res_params,df,Smesh_list,is_update = is_up)
+
 
     end_time = time.perf_counter() #End
     print("Save Train Data:"+ str(end_time - start_time) + "s")

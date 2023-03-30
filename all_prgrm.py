@@ -33,7 +33,8 @@ if __name__ == '__main__':
     start_time = time.perf_counter() #Start
     print("Start Train")
 
-    create_trained_data(main_path,res_params,df,is_update = is_up)
+    # create_trained_data_thread(main_path,res_params,df,is_update = True)
+    create_trained_data(main_path,res_params,df,is_update = True)
 
     print("Save Train Data:"+ str(time.perf_counter() - start_time) + "s")
 
