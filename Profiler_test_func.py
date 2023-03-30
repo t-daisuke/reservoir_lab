@@ -294,7 +294,7 @@ def test_NCOGR(main_path, res_params, Distance, Rlist_dict):
                 u = np.dot(Wout, np.vstack((1, x)))
 
                 # 4D
-                XX[:, t*Distance+d_i] = np.vstack((x))[:, 0]
+                # XX[:, t*Distance+d_i] = np.vstack((x))[:, 0]
                 UU[:, t*Distance+d_i] = u[0:, 0]
 
                 # Self Organize
@@ -327,7 +327,7 @@ def test_NCOGR(main_path, res_params, Distance, Rlist_dict):
                   + " s")
         subsection_time = time.time()
         
-        if (time.time() -start_time) > 60:
+        if (time.time() -start_time) > 60*3:
             print("Temporaly END")
             print("{:.2f}".format(rate) + "% done " + "{:.2f}".format(time.time() -start_time) + " s passed, this subset needs " + "{:.2f}".format(time.time() - subsection_time)
                   + " s")
