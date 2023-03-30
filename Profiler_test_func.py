@@ -157,9 +157,9 @@ def test_GR(main_path, res_params, Distance, Rlist_dict):
                 # XX = tmp_dict["XX"]
 
                 tmp1u = np.vstack((1, u))
-                x = (1-a)*x + a*np.tanh(np.dot(Win, tmp1u) + np.dot(W, x))
+                x = (1-a)*x + a*np.tanh(Win@tmp1u + W @ x)
                 tmp1x = np.vstack((1, x))
-                u = np.dot(Wout, tmp1x)
+                u = Wout@tmp1x
                 tmp_dict["x"] = x
                 tmp_dict["u"] = u
 
@@ -290,11 +290,11 @@ def test_NCOGR(main_path, res_params, Distance, Rlist_dict):
             for d_i in range(Distance):
                 # Compute
                 x = (1-a)*x + a * \
-                    np.tanh(np.dot(Win, np.vstack((1, u))) + np.dot(W, x))
-                u = np.dot(Wout, np.vstack((1, x)))
+                    np.tanh(Win@np.vstack((1, u)) + W @ x)
+                u = Wout@np.vstack((1, x))
 
                 # 4D
-                XX[:, t*Distance+d_i] = np.vstack((x))[:, 0]
+                # XX[:, t*Distance+d_i] = np.vstack((x))[:, 0]
                 UU[:, t*Distance+d_i] = u[0:, 0]
 
                 # Self Organize
@@ -327,7 +327,7 @@ def test_NCOGR(main_path, res_params, Distance, Rlist_dict):
                   + " s")
         subsection_time = time.time()
         
-        if (time.time() -start_time) > 60:
+        if (time.time() -start_time) > 60*3:
             print("Temporaly END")
             print("{:.2f}".format(rate) + "% done " + "{:.2f}".format(time.time() -start_time) + " s passed, this subset needs " + "{:.2f}".format(time.time() - subsection_time)
                   + " s")

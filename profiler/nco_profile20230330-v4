@@ -1,0 +1,95 @@
+Timer unit: 1e-07 s
+
+Total time: 174.104 s
+File: C:\Users\tdais\Desktop\GRforM\Profiler_test_func.py
+Function: test_NCOGR at line 253
+
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+   253                                           def test_NCOGR(main_path, res_params, Distance, Rlist_dict):
+   254         1         33.0     33.0      0.0      start_time = time.time()
+   255                                               # trainを全てのセルで終えてる前提
+   256         1          9.0      9.0      0.0      (expIndex, leakingRate, resSize, spectralRadius, inSize, outSize,
+   257         1          7.0      7.0      0.0       initLen, trainLen, testLen,
+   258         2         17.0      8.5      0.0       reg, seed_num, conectivity) = res_params
+   259                                           
+   260                                               #各testの時に学習するmeshのdict: Rlist_dict(input)
+   261                                           
+   262         1        152.0    152.0      0.0      Rlist = list(Rlist_dict.keys())  # Reservoir Mesh list
+   263                                           
+   264         3       2873.0    957.7      0.0      print(str((time.time() - start_time)//1) +
+   265         2         11.0      5.5      0.0            "s " + "NotCoopGeoReservoir Start...")
+   266                                               
+   267         1         18.0     18.0      0.0      subsection_time = time.time()
+   268       257       8172.0     31.8      0.0      for t_r, r in enumerate(Rlist):
+   269       257  458819015.0 1785288.0     26.4          tmp = load_trained_data(main_path, res_params, r)
+   270       257      12538.0     48.8      0.0          if type(tmp) != type({"A": 1}):
+   271                                                       print(tmp)
+   272                                                       return
+   273       257    4858574.0  18905.0      0.3          (Win, W, X, Wout, x, Data) = tmp["trained_data"]
+   274                                           
+   275       514     800161.0   1556.7      0.0          (In, Out) = dis_in_out(
+   276       257      10356.0     40.3      0.0              Data[0:, trainLen:trainLen+testLen], inSize, outSize, Distance)
+   277                                           
+   278       257       8593.0     33.4      0.0          trainO = Data[0:outSize, trainLen:trainLen+testLen]
+   279                                           
+   280       257       4473.0     17.4      0.0          u = In[0:inSize, 0:1]
+   281                                           
+   282       257      10660.0     41.5      0.0          Y = np.zeros((outSize, testLen//Distance))
+   283       257      29958.0    116.6      0.0          UU = np.zeros((outSize, testLen//Distance * Distance))
+   284       257      91943.0    357.8      0.0          XX = np.zeros((resSize, testLen//Distance * Distance))
+   285                                           
+   286       257       2618.0     10.2      0.0          a = leakingRate
+   287                                           
+   288                                                   # NoCop
+   289     24415     260075.0     10.7      0.0          for t in range(testLen//Distance):
+   290    748898    8782270.0     11.7      0.5              for d_i in range(Distance):
+   291                                                           # Compute
+   292   1449480   92100000.0     63.5      5.3                  x = (1-a)*x + a * \
+   293    724740  845765822.0   1167.0     48.6                      np.tanh(np.dot(Win, np.vstack((1, u))) + np.dot(W, x))
+   294    724740  278110148.0    383.7     16.0                  u = np.dot(Wout, np.vstack((1, x)))
+   295                                           
+   296                                                           # 4D
+   297                                                           # XX[:, t*Distance+d_i] = np.vstack((x))[:, 0]
+   298    724740   30103248.0     41.5      1.7                  UU[:, t*Distance+d_i] = u[0:, 0]
+   299                                           
+   300                                                           # Self Organize
+   301                                                           # なし
+   302                                           
+   303                                                           # set Y
+   304    724740   19593019.0     27.0      1.1                  Y[:, t] = u[0:, 0]
+   305                                           
+   306                                                       # for next time
+   307     24158     469920.0     19.5      0.0              if t+2 < In.shape[1]:
+   308     23644     546706.0     23.1      0.0                  u = In[0:inSize, t+1:t+2]
+   309                                                   
+   310       257      19781.0     77.0      0.0          test_path = main_path + str(res_params[0])
+   311      3084      37128.0     12.0      0.0          for prm_i in range(1,len(res_params)):
+   312      2827      79686.0     28.2      0.0              test_path += "-" + str(res_params[prm_i])
+   313       257       3099.0     12.1      0.0          test_path += "/"
+   314       257       5376.0     20.9      0.0          test_path += str(Distance)+"step-test-nco/"
+   315       257     419958.0   1634.1      0.0          if not os.path.isdir(test_path):
+   316                                                       os.mkdir(test_path)
+   317                                                       print("make " + str(test_path))
+   318                                                   
+   319       257      21265.0     82.7      0.0          test_file = test_path + str(r)
+   320                                                   
+   321                                                   # np.savez_compressed(test_file, Y=Y, UU=UU, XX=XX,
+   322                                                   #                     Out=Out, trainO=trainO)
+   323                                           
+   324       257       7233.0     28.1      0.0          rate = 100 * t_r/len(Rlist)
+   325       257      14172.0     55.1      0.0          if sprit_printer(t_r,len(Rlist),sprit_num=40):
+   326        10      15548.0   1554.8      0.0              print("{:.2f}".format(rate) + "% done " + "{:.2f}".format(time.time() -start_time) + " s passed, this subset needs " + "{:.2f}".format(time.time() - subsection_time)
+   327         5         50.0     10.0      0.0                    + " s")
+   328       257       8660.0     33.7      0.0          subsection_time = time.time()
+   329                                                   
+   330       257       6441.0     25.1      0.0          if (time.time() -start_time) > 60*3:
+   331         1       2570.0   2570.0      0.0              print("Temporaly END")
+   332         2       2817.0   1408.5      0.0              print("{:.2f}".format(rate) + "% done " + "{:.2f}".format(time.time() -start_time) + " s passed, this subset needs " + "{:.2f}".format(time.time() - subsection_time)
+   333         1         18.0     18.0      0.0                    + " s")
+   334         1         36.0     36.0      0.0              return
+   335                                           
+   336                                               print("All completed")
+   337                                               print("{:.2f}".format(time.time() -start_time) + " s passed")
+   338                                               return
+
