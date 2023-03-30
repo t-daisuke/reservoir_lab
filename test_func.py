@@ -123,7 +123,7 @@ def test_GR(main_path, res_params, Distance, Rlist_dict):
         All_R_dict[r] = tmp_dict
         
         rate = 100 * t/len(Rlist)
-        if sprit_printer(t,len(Rlist),sprit_num=10):
+        if sprit_printer(t,len(Rlist),sprit_num=5):
             print("{:.2f}".format(rate) + "% done " + "{:.2f}".format(time.time() -start_time) + " s passed, this subset needs " + "{:.2f}".format(time.time() - subsection_time)
                   + " s and this section time is " "{:.2f}".format(time.time() - sectiontime) + " s")
         subsection_time = time.time()
@@ -230,7 +230,7 @@ def test_GR(main_path, res_params, Distance, Rlist_dict):
                             Out=Out, trainO=trainO)
         
         rate = 100 * t/len(Rlist)
-        if sprit_printer(t,len(Rlist),sprit_num=10):
+        if sprit_printer(t,len(Rlist),sprit_num=5):
             print("{:.2f}".format(rate) + "% done " + "{:.2f}".format(time.time() -start_time) + " s passed, this subset needs " + "{:.2f}".format(time.time() - subsection_time)
                   + " s and this section time is " "{:.2f}".format(time.time() - sectiontime) + " s")
         subsection_time = time.time()
@@ -323,7 +323,7 @@ def test_NCOGR(main_path, res_params, Distance, Rlist_dict):
                             Out=Out, trainO=trainO)
 
         rate = 100 * t_r/len(Rlist)
-        if sprit_printer(t_r,len(Rlist),sprit_num=40):
+        if sprit_printer(t_r,len(Rlist),sprit_num=10):
             print("{:.2f}".format(rate) + "% done " + "{:.2f}".format(time.time() -start_time) + " s passed, this subset needs " + "{:.2f}".format(time.time() - subsection_time)
                   + " s")
         subsection_time = time.time()

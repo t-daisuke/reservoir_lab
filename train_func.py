@@ -477,7 +477,7 @@ def create_trained_data(main_path, res_params, df, is_update=False):
                       mesh_code, is_update=is_update)
         
         rate = 100 * index/len(Rlist)
-        if sprit_printer(index,len(Rlist),sprit_num=25):
+        if sprit_printer(index,len(Rlist),sprit_num=20):
             print("{:.2f}".format(rate) + "% done " + "{:.2f}".format(time.time() -start_time) + " s passed, this subset needs " + "{:.2f}".format(time.time() - subsection_time)
                   + " s")
         subsection_time = time.time()
@@ -509,7 +509,7 @@ def create_local_area_trained_data(main_path, res_params, df, Smesh_list,is_upda
         _ = train_GR(local_area_path, res_params, raw_data_subset,
                       mesh_code, is_update=is_update)
         rate = 100 * index/len(Rlist)
-        if sprit_printer(index,len(Rlist),sprit_num=25):
+        if sprit_printer(index,len(Rlist),sprit_num=20):
             print("{:.2f}".format(rate) + "% done " + "{:.2f}".format(time.time() -start_time) + " s passed, this subset needs " + "{:.2f}".format(time.time() - subsection_time)
                   + " s")
         subsection_time = time.time()
