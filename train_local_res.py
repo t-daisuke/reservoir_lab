@@ -32,7 +32,7 @@ if __name__ == '__main__':
     start_time = time.perf_counter() #Start
     print("Start Train Local")
 
-    create_local_area_trained_data(main_path,res_params,df,Smesh_list,is_update = is_up)
+    create_local_area_trained_data_thread(main_path,res_params,df,Smesh_list,is_update = is_up)
 
     end_time = time.perf_counter() #End
     print("Save Train Data:"+ str(end_time - start_time) + "s")

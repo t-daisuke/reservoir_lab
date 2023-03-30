@@ -526,7 +526,43 @@ def create_trained_data_thread(main_path, res_params, df, is_update=False):
     start_time = time.time()
     subsection_time = time.time()
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
+        futures = []
+        for index, mesh_code in enumerate(Rlist):
+            gml = get_mesh_list(mesh_code, gmom, gnl)
+            raw_data_subset = create_subset_from_data_and_mesh_list(df, gml)
+
+            future = executor.submit(train_GR, main_path, res_params, raw_data_subset, mesh_code, is_update=is_update)
+            futures.append(future)
+
+        for index, future in enumerate(concurrent.futures.as_completed(futures)):
+            rate = 100 * (index + 1) / len(Rlist)
+            if sprit_printer(index + 1, len(Rlist), sprit_num=20):
+                print("{:.2f}".format(rate) + "% done " + "{:.2f}".format(time.time() - start_time) + " s passed, this subset needs " + "{:.2f}".format(time.time() - subsection_time) + " s")
+            subsection_time = time.time()
+    print("Train Data Saved")
+    return
+
+def create_local_area_trained_data_thread(main_path, res_params, df, Smesh_list,is_update=False):
+    gmom = get_matrix_of_mesh()
+    gnl = get_n_list(res_params[4])  # inSize
+    print("Local area trained at " + str(Smesh_list))
+    all_dma = get_raw_mesh_array(df)
+    dma = cut_mlist(all_dma,Smesh_list)
+    
+    local_area_path = main_path + "smesh"
+    for smesh in Smesh_list:
+        local_area_path += "-" + str(smesh)
+    local_area_path += "/"
+    
+    if not os.path.isdir(local_area_path):
+        os.mkdir(local_area_path)
+        print("make " + str(local_area_path))
+
+    Rlist = get_R_list(dma, gmom, gnl)
+    start_time = time.time()
+    subsection_time = time.time()
+    with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
         futures = []
         for index, mesh_code in enumerate(Rlist):
             gml = get_mesh_list(mesh_code, gmom, gnl)
