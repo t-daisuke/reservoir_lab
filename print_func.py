@@ -83,7 +83,7 @@ def load_nco_test_data(main_path, res_params, Distance, mesh_code):
 GET MSE MAP FUNCTION
 """
 
-#1/Time * sigma(t in Time){(Y - Yt)**2 / Yt**2}
+#sqrt 1/Time * sigma(t in Time){(Y - Yt)/ Yt}**2
 def get_ave_MSE(teacher, output):
   se = np.zeros(len(output))
   for i in range(len(output)):
