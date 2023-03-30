@@ -480,7 +480,7 @@ def create_trained_data(main_path, res_params, df, is_update=False):
         if sprit_printer(index,len(Rlist),sprit_num=25):
             print("{:.2f}".format(rate) + "% done " + "{:.2f}".format(time.time() -start_time) + " s passed, this subset needs " + "{:.2f}".format(time.time() - subsection_time)
                   + " s")
-        if (time.time() -start_time) > 60*3:
+        if (time.time() -start_time) > 60:
             print("Temporaly END")
             print("{:.2f}".format(rate) + "% done " + "{:.2f}".format(time.time() -start_time) + " s passed, this subset needs " + "{:.2f}".format(time.time() - subsection_time)
                   + " s")
@@ -541,6 +541,6 @@ if __name__ == '__main__':
     is_up = False
 
     prof = LineProfiler()
-    prof.add_function(create_trained_data(main_path,res_params,df,is_update = is_up))
-    prof.runcall(create_trained_data(main_path,res_params,df,is_update = is_up))
+    prof.add_function(create_trained_data)
+    prof.runcall(create_trained_data,main_path,res_params,df,is_up)
     prof.print_stats()
