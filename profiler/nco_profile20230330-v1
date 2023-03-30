@@ -1,0 +1,21 @@
+Timer unit: 1e-07 s
+
+Total time: 64.2652 s
+File: C:\Users\tdais\Desktop\GRforM\Profiler_test_func.py
+Function: create_nco_test_data at line 353
+
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+   353                                           def create_nco_test_data(main_path, res_params, distance, df):
+   354         1     142844.0 142844.0      0.0      gmom = get_matrix_of_mesh()
+   355         1        334.0    334.0      0.0      gnl = get_n_list(res_params[4])
+   356         1     148020.0 148020.0      0.0      dma = get_raw_mesh_array(df) #‚·‚×‚Ä‚ÌƒƒbƒVƒ…
+   357                                               # dma = cut_mlist(dma,[45]) #Smesh == 45‚ÉŒÅ’è
+   358         1    2784016.0 2784016.0      0.4      Rl = get_R_list(dma, gmom, gnl)
+   359         1     415286.0 415286.0      0.1      grld = get_Rlist_dict(Rl,gmom,gnl)
+   360                                               
+   361         1       4405.0   4405.0      0.0      print("Data mesh:" + str(len(dma)))
+   362         1       3831.0   3831.0      0.0      print("Reservoir mesh:" + str(len(Rl)))
+   363         1  639153039.0 639153039.0     99.5      test_NCOGR(main_path, res_params, distance, grld)
+   364         1         29.0     29.0      0.0      return
+
