@@ -18,7 +18,7 @@ import time
 
 # Variable
 
-# df_path = "./KDDI/df/"
+# df_path = "./df/"
 # path = './KDDI/'
 
 # if os.path.isfile(df_path+"df.csv"):
@@ -528,7 +528,7 @@ def create_local_area_trained_data(main_path, res_params, df, Smesh_list,is_upda
 if __name__ == '__main__':
     # Variable
 
-    df_path = "./KDDI/df/"
+    df_path = "./df/"
     main_path = './'
 
     if os.path.isfile(df_path+"df.csv"):

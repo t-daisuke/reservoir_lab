@@ -12,7 +12,7 @@ from test_func import *
 if __name__ == '__main__':
     # Variable
 
-    df_path = "./KDDI/df/"
+    df_path = "./df/"
     main_path = './all_prgrm_output/'
 
     if os.path.isfile(df_path+"df.csv"):

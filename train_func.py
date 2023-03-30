@@ -12,7 +12,7 @@ import time
 
 # Variable
 
-# df_path = "./KDDI/df/"
+# df_path = "./df/"
 # path = './KDDI/'
 
 # if os.path.isfile(df_path+"df.csv"):

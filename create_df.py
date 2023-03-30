@@ -5,7 +5,7 @@ import os
 
 
 def main():
-    df_path = "./KDDI/df/"
+    df_path = "./df/"
     path = './KDDI/'
 
     if not os.path.isdir(df_path):

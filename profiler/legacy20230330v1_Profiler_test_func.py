@@ -367,7 +367,7 @@ def create_nco_test_data(main_path, res_params, distance, df):
 if __name__ == '__main__':
     # Variable
 
-    df_path = "./KDDI/df/"
+    df_path = "./df/"
     main_path = './'
 
     if os.path.isfile(df_path+"df.csv"):
