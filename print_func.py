@@ -18,6 +18,30 @@ from train_func import *
 from test_func import *
 
 """
+save file function
+"""
+def get_current_date():
+    now = datetime.datetime.now()
+    return now.strftime("%Y%m%d")
+
+def save_file(title, s):
+    filename = f"{title}-v1"  # 初期のファイル名
+
+    # すでに同じ名前のファイルがある場合、新しいファイル名を作成する
+    if os.path.isfile(filename):
+        version = 1
+        while True:
+            version += 1
+            new_filename = f"{title}-v{version}"
+            if not os.path.isfile(new_filename):
+                filename = new_filename
+                break
+
+    # ファイルを保存する
+    with open(filename, "w") as f:
+        f.write(s)
+
+"""
 LOAD FUNCTION
 """
 
