@@ -1,0 +1,82 @@
+(base) PS C:\Users\tdais\Desktop\GRforM> python .\all_local_prgrm.py
+Start Train
+Local area trained at [45]
+0.31% done 328.33 s passed
+5.25% done 328.33 s passed
+10.19% done 328.33 s passed
+15.12% done 328.33 s passed
+20.06% done 328.33 s passed
+25.00% done 328.35 s passed
+29.94% done 328.35 s passed
+34.88% done 354.86 s passed
+39.81% done 401.00 s passed
+44.75% done 447.57 s passed
+49.69% done 494.86 s passed
+54.63% done 540.72 s passed
+59.57% done 586.70 s passed
+64.51% done 632.88 s passed
+69.44% done 678.85 s passed
+74.38% done 725.00 s passed
+79.32% done 770.96 s passed
+84.26% done 817.45 s passed
+89.20% done 863.55 s passed
+94.14% done 909.38 s passed
+99.07% done 955.23 s passed
+Train Data Saved
+Save Train Data:964.7478763s
+Start GR
+Local area trained at [45]
+Data mesh:400
+Reservoir mesh:324
+0.0s LargeGeoReservoir Start...
+0.31% done 0.38 s passed, this subset needs 0.19 s and this section time is 0.38 s
+20.06% done 11.73 s passed, this subset needs 0.17 s and this section time is 11.73 s
+39.81% done 23.24 s passed, this subset needs 0.17 s and this section time is 23.24 s
+59.57% done 34.73 s passed, this subset needs 0.17 s and this section time is 34.73 s
+79.32% done 46.24 s passed, this subset needs 0.19 s and this section time is 46.24 s
+99.07% done 57.68 s passed, this subset needs 0.17 s and this section time is 57.68 s
+Load Ended
+58.05 s passed, this section 58.05 s
+Initialize and Compute Geo reservoir...
+1.06% done 63.79 s passed, this subset needs 2.84 s and this section time is 5.74 s
+5.32% done 75.09 s passed, this subset needs 2.94 s and this section time is 17.04 s
+9.57% done 86.12 s passed, this subset needs 2.73 s and this section time is 28.07 s
+13.83% done 97.30 s passed, this subset needs 2.80 s and this section time is 39.25 s
+18.09% done 108.55 s passed, this subset needs 2.80 s and this section time is 50.50 s
+22.34% done 119.78 s passed, this subset needs 2.81 s and this section time is 61.73 s
+26.60% done 131.23 s passed, this subset needs 2.84 s and this section time is 73.18 s
+30.85% done 142.58 s passed, this subset needs 2.87 s and this section time is 84.53 s
+35.11% done 153.98 s passed, this subset needs 2.75 s and this section time is 95.94 s
+39.36% done 165.29 s passed, this subset needs 2.81 s and this section time is 107.24 s
+43.62% done 176.59 s passed, this subset needs 2.80 s and this section time is 118.54 s
+47.87% done 187.65 s passed, this subset needs 2.78 s and this section time is 129.61 s
+52.13% done 198.88 s passed, this subset needs 2.83 s and this section time is 140.83 s
+56.38% done 210.18 s passed, this subset needs 2.84 s and this section time is 152.13 s
+60.64% done 221.38 s passed, this subset needs 2.90 s and this section time is 163.34 s
+64.89% done 232.63 s passed, this subset needs 2.76 s and this section time is 174.59 s
+69.15% done 243.80 s passed, this subset needs 2.71 s and this section time is 185.76 s
+73.40% done 254.97 s passed, this subset needs 2.89 s and this section time is 196.92 s
+77.66% done 266.26 s passed, this subset needs 2.86 s and this section time is 208.21 s
+81.91% done 277.88 s passed, this subset needs 2.87 s and this section time is 219.83 s
+86.17% done 289.44 s passed, this subset needs 2.89 s and this section time is 231.40 s
+90.43% done 300.57 s passed, this subset needs 2.69 s and this section time is 242.52 s
+94.68% done 311.67 s passed, this subset needs 2.79 s and this section time is 253.63 s
+98.94% done 322.90 s passed, this subset needs 2.76 s and this section time is 264.85 s
+Coputed !!
+322.90 s passed, this section 264.85 s
+Saving...
+0.31% done 323.23 s passed, this subset needs 0.16 s and this section time is 0.33 s
+20.06% done 333.01 s passed, this subset needs 0.14 s and this section time is 10.11 s
+39.81% done 342.59 s passed, this subset needs 0.17 s and this section time is 19.69 s
+99.07% done 371.35 s passed, this subset needs 0.17 s and this section time is 48.46 s
+All completed
+371.69 s passed, this section 48.80s
+Save GR Test Data:372.81041200000004s
+Local area trained at [45]
+Data mesh:400
+Reservoir mesh:324
+0.0s NotCoopGeoReservoir Start...
+All completed
+249.94 s passed
+Save NCO Test Data:250.01578859999995s
+All Time:1587.5751261s
