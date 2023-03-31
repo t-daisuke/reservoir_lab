@@ -25,16 +25,17 @@ if __name__ == '__main__':
     #  reg, seed_num, conectivity) = res_params
     res_params = (-9.5, 1, 1000, 0.75, 9, 9,
                   24*60, 3*24*60, 2*24*60-60+1,
-                  1e-8, 2, 0.1)
+                  1e-8, 2, 1.0)
     distance = 30
-    is_up = False
+    is_up = True
     Smesh_list = [45]
     
     all_program_start_time = time.perf_counter()
     start_time = time.perf_counter() #Start
     print("Start Train")
 
-    create_local_area_trained_data(main_path,res_params,df,Smesh_list,is_update = is_up)
+    # create_local_area_trained_data(main_path,res_params,df,Smesh_list,is_update = is_up)
+    create_local_area_trained_data_thread(main_path,res_params,df,Smesh_list,is_update = is_up)
 
     print("Save Train Data:"+ str(time.perf_counter() - start_time) + "s")
 
@@ -48,6 +49,9 @@ if __name__ == '__main__':
     start_time = time.perf_counter()  # Start
     print("Start NCO")
 
-    create_local_nco_test_data(main_path, res_params, distance, df, Smesh_list)
+    # create_local_nco_test_data(main_path, res_params, distance, df, Smesh_list)
+    create_local_nco_test_data_thread(main_path, res_params, distance, df, Smesh_list)
 
     print("Save NCO Test Data:" + str(time.perf_counter() - start_time) + "s")
+    
+    print("All Time:" + str(time.perf_counter() - all_program_start_time) + "s")
