@@ -347,7 +347,7 @@ def test_NCOGR_thread(main_path, res_params, Distance, Rlist_dict, is_update = T
     Rlist = list(Rlist_dict.keys())  # Reservoir Mesh list
 
     print(str((time.time() - start_time)//1) +
-          "s " + "NotCoopGeoReservoir Start...")
+          "s " + "Tread NotCoopGeoReservoir Start...")
     
     tested_file_lock = threading.Lock()
     with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
@@ -523,7 +523,7 @@ def create_local_nco_test_data_thread(main_path, res_params, distance, df, Smesh
     test_NCOGR_thread(main_path, res_params, distance, grld)
     return
 
-def create_nco_test_data_thread(main_path, res_params, distance, df):
+def create_nco_test_data_thread(main_path, res_params, distance, df, is_update):
     gmom = get_matrix_of_mesh()
     gnl = get_n_list(res_params[4])
     dma = get_raw_mesh_array(df)
@@ -532,6 +532,6 @@ def create_nco_test_data_thread(main_path, res_params, distance, df):
     
     print("Data mesh:" + str(len(dma)))
     print("Reservoir mesh:" + str(len(Rl)))
-    test_NCOGR_thread(main_path, res_params, distance, grld)
+    test_NCOGR_thread(main_path, res_params, distance, grld, is_update)
     return
 """TEST FUNC END"""
