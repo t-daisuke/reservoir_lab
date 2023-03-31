@@ -350,7 +350,7 @@ def test_NCOGR_thread(main_path, res_params, Distance, Rlist_dict, is_update = T
           "s " + "NotCoopGeoReservoir Start...")
     
     tested_file_lock = threading.Lock()
-    with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=16) as executor:
         
         for t_r, r in enumerate(Rlist):
             test_path = main_path + str(res_params[0])

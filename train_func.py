@@ -591,7 +591,7 @@ def create_local_area_trained_data(main_path, res_params, df, Smesh_list,is_upda
 #     Rlist = get_R_list(dma, gmom, gnl)
 #     start_time = time.time()
 
-#     with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
+#     with concurrent.futures.ThreadPoolExecutor(max_workers=16) as executor:
 #         futures = []
 #         for index, mesh_code in enumerate(Rlist):
 #             gml = get_mesh_list(mesh_code, gmom, gnl)
@@ -627,7 +627,7 @@ def create_local_area_trained_data_thread(main_path, res_params, df, Smesh_list,
     start_time = time.time()
     
     trained_file_lock = threading.Lock()
-    with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=16) as executor:
         futures = []
         for index, mesh_code in enumerate(Rlist):
             gml = get_mesh_list(mesh_code, gmom, gnl)
