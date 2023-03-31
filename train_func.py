@@ -583,30 +583,31 @@ def create_local_area_trained_data(main_path, res_params, df, Smesh_list,is_upda
     print("Train Data Saved")
     return
 
-# def create_trained_data_thread(main_path, res_params, df, is_update=False):
-#     gmom = get_matrix_of_mesh()
-#     gnl = get_n_list(res_params[4])  # inSize
-#     dma = get_raw_mesh_array(df)
+def create_trained_data_thread(main_path, res_params, df, is_update=False):
+    gmom = get_matrix_of_mesh()
+    gnl = get_n_list(res_params[4])  # inSize
+    dma = get_raw_mesh_array(df)
 
-#     Rlist = get_R_list(dma, gmom, gnl)
-    # start_time = time.time()
-    # print("thread")
+    Rlist = get_R_list(dma, gmom, gnl)
+    start_time = time.time()
+    print("thread")
 
-#     with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
-#         futures = []
-#         for index, mesh_code in enumerate(Rlist):
-#             gml = get_mesh_list(mesh_code, gmom, gnl)
-#             raw_data_subset = create_subset_from_data_and_mesh_list(df, gml)
+    trained_file_lock = threading.Lock()
+    with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
+        futures = []
+        for index, mesh_code in enumerate(Rlist):
+            gml = get_mesh_list(mesh_code, gmom, gnl)
+            raw_data_subset = create_subset_from_data_and_mesh_list(df, gml)
 
-#             future = executor.submit(train_GR, main_path, res_params, raw_data_subset, mesh_code, is_update=is_update)
-#             futures.append(future)
+            future = executor.submit(train_GR_thread, main_path, res_params, raw_data_subset, mesh_code, trained_file_lock, is_update=is_update)
+            futures.append(future)
 
-#         for index, future in enumerate(concurrent.futures.as_completed(futures)):
-#             rate = 100 * (index + 1) / len(Rlist)
-#             if sprit_printer(index + 1, len(Rlist), sprit_num=20):
-#                 print("{:.2f}".format(rate) + "% done " + "{:.2f}".format(time.time() - start_time) + " s passed")
-#     print("Train Data Saved")
-#     return
+        for index, future in enumerate(concurrent.futures.as_completed(futures)):
+            rate = 100 * (index + 1) / len(Rlist)
+            if sprit_printer(index + 1, len(Rlist), sprit_num=20):
+                print("{:.2f}".format(rate) + "% done " + "{:.2f}".format(time.time() - start_time) + " s passed")
+    print("Train Data Saved")
+    return
 
 def create_local_area_trained_data_thread(main_path, res_params, df, Smesh_list,is_update=False):
     gmom = get_matrix_of_mesh()
