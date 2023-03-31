@@ -501,7 +501,7 @@ def create_local_nco_test_data(main_path, res_params, distance, df, Smesh_list):
 def create_local_nco_test_data_thread(main_path, res_params, distance, df, Smesh_list):
     gmom = get_matrix_of_mesh()
     gnl = get_n_list(res_params[4])
-    print("Local area trained at " + str(Smesh_list))
+    print("Local area thread trained at " + str(Smesh_list))
     all_dma = get_raw_mesh_array(df)
     dma = cut_mlist(all_dma,Smesh_list)
     Rl = get_R_list(dma, gmom, gnl)

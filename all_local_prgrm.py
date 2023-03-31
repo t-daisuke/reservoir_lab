@@ -27,7 +27,7 @@ if __name__ == '__main__':
                   24*60, 3*24*60, 2*24*60-60+1,
                   1e-8, 2, 0.001)
     distance = 30
-    is_up = True
+    is_up = False
     Smesh_list = [45]
     
     all_program_start_time = time.perf_counter()

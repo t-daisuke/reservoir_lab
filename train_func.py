@@ -589,7 +589,8 @@ def create_local_area_trained_data(main_path, res_params, df, Smesh_list,is_upda
 #     dma = get_raw_mesh_array(df)
 
 #     Rlist = get_R_list(dma, gmom, gnl)
-#     start_time = time.time()
+    # start_time = time.time()
+    # print("thread")
 
 #     with concurrent.futures.ThreadPoolExecutor(max_workers=16) as executor:
 #         futures = []
@@ -610,7 +611,7 @@ def create_local_area_trained_data(main_path, res_params, df, Smesh_list,is_upda
 def create_local_area_trained_data_thread(main_path, res_params, df, Smesh_list,is_update=False):
     gmom = get_matrix_of_mesh()
     gnl = get_n_list(res_params[4])  # inSize
-    print("Local area trained at " + str(Smesh_list))
+    print("Local area thread trained at " + str(Smesh_list))
     all_dma = get_raw_mesh_array(df)
     dma = cut_mlist(all_dma,Smesh_list)
     
