@@ -102,7 +102,7 @@ def save_or_load_mse_map(name, main_path, res_params, distance, mse_map):
   mse_name = save_path + str(res_params[0])
   for prm_i in range(1,len(res_params)):
       mse_name += "-" + str(res_params[prm_i])
-  mse_name += "-" + distance + str(name)
+  mse_name += "-" + str(distance) + str(name)
 
   if os.path.isfile(mse_name+".npz"):
     print("Existed!" + str(save_path))
@@ -131,7 +131,7 @@ def load_mse_map(name, main_path, res_params, distance):
   mse_name = save_path + str(res_params[0])
   for prm_i in range(1,len(res_params)):
       mse_name += "-" + str(res_params[prm_i])
-  mse_name += "-" + distance + str(name)
+  mse_name += "-" + str(distance) + str(name)
 
   if os.path.isfile(mse_name+".npz"):
     Out_mse_map = np.load(mse_name+".npz")
@@ -230,7 +230,7 @@ def create_mse_maps(main_path, saved_test_path, res_params, distance, df, Smesh_
   gnl = get_n_list(res_params[4])
   dma = get_raw_mesh_array(df)
   
-  if Smesh_list.length != 0:
+  if len(Smesh_list) != 0:
     dma = cut_mlist(dma,Smesh_list)
     local_area_path = saved_test_path + "smesh"
     for smesh in Smesh_list:
