@@ -25,7 +25,7 @@ if __name__ == '__main__':
     #  reg, seed_num, conectivity) = res_params
     res_params = (-9.5, 1, 1000, 0.75, 9, 9,
                   24*60, 3*24*60, 2*24*60-60+1,
-                  1e-8, 2, 0.1)
+                  1e-8, 2, 1.0)
     distance = 30
     is_up = False
     Smesh_list = [45]
@@ -53,3 +53,5 @@ if __name__ == '__main__':
     #create_local_nco_test_data_thread(main_path, res_params, distance, df, Smesh_list)
 
     print("Save NCO Test Data:" + str(time.perf_counter() - start_time) + "s")
+    
+    print("All Time:" + str(time.perf_counter() - all_program_start_time) + "s")

@@ -50,3 +50,5 @@ if __name__ == '__main__':
     create_nco_test_data(main_path, res_params, distance, df)
 
     print("Save NCO Test Data:" + str(time.perf_counter() - start_time) + "s")
+    
+    print("All Time:" + str(time.perf_counter() - all_program_start_time) + "s")
