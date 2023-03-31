@@ -1,0 +1,97 @@
+(base) PS C:\Users\tdais\Desktop\GRforM> git checkout f/smesh_test
+Switched to a new branch 'f/smesh_test'
+Branch 'f/smesh_test' set up to track remote branch 'f/smesh_test' from 'origin'.
+(base) PS C:\Users\tdais\Desktop\GRforM> python .\all_local_prgrm.py
+Start Train
+Local area trained at [45]
+make ./all_prgrm_output/smesh-45/-9.5-1-1000-0.75-9-9-1440-4320-2821-1e-08-2-0.1/train/
+0.31% done 6.27 s passed, this subset needs 3.11 s
+5.25% done 56.79 s passed, this subset needs 3.14 s
+10.19% done 107.52 s passed, this subset needs 3.24 s
+15.12% done 157.85 s passed, this subset needs 3.16 s
+20.06% done 208.13 s passed, this subset needs 3.17 s
+25.00% done 258.47 s passed, this subset needs 3.16 s
+29.94% done 308.61 s passed, this subset needs 3.13 s
+34.88% done 358.65 s passed, this subset needs 3.17 s
+39.81% done 409.51 s passed, this subset needs 3.16 s
+44.75% done 460.84 s passed, this subset needs 3.21 s
+49.69% done 511.57 s passed, this subset needs 3.11 s
+54.63% done 562.56 s passed, this subset needs 3.17 s
+59.57% done 613.20 s passed, this subset needs 3.07 s
+64.51% done 663.62 s passed, this subset needs 3.12 s
+69.44% done 713.83 s passed, this subset needs 3.14 s
+74.38% done 764.08 s passed, this subset needs 3.14 s
+79.32% done 814.02 s passed, this subset needs 3.10 s
+84.26% done 864.37 s passed, this subset needs 3.11 s
+89.20% done 914.32 s passed, this subset needs 3.07 s
+94.14% done 964.31 s passed, this subset needs 3.08 s
+99.07% done 1014.45 s passed, this subset needs 3.13 s
+Train Data Saved
+Save Train Data:1020.8836732s
+Start GR
+Local area trained at [45]
+Data mesh:400
+Reservoir mesh:324
+0.0s LargeGeoReservoir Start...
+0.31% done 0.31 s passed, this subset needs 0.16 s and this section time is 0.31 s
+20.06% done 10.34 s passed, this subset needs 0.16 s and this section time is 10.34 s
+39.81% done 21.11 s passed, this subset needs 0.16 s and this section time is 21.11 s
+59.57% done 31.32 s passed, this subset needs 0.16 s and this section time is 31.32 s
+79.32% done 41.68 s passed, this subset needs 0.17 s and this section time is 41.68 s
+99.07% done 52.34 s passed, this subset needs 0.16 s and this section time is 52.34 s
+Load Ended
+52.68 s passed, this section 52.68 s
+Initialize and Compute Geo reservoir...
+1.06% done 58.34 s passed, this subset needs 2.79 s and this section time is 5.67 s
+5.32% done 69.66 s passed, this subset needs 2.77 s and this section time is 16.98 s
+9.57% done 81.00 s passed, this subset needs 2.84 s and this section time is 28.32 s
+13.83% done 92.36 s passed, this subset needs 2.79 s and this section time is 39.68 s
+18.09% done 103.64 s passed, this subset needs 2.79 s and this section time is 50.96 s
+22.34% done 115.05 s passed, this subset needs 2.89 s and this section time is 62.37 s
+26.60% done 126.42 s passed, this subset needs 2.85 s and this section time is 73.74 s
+30.85% done 137.69 s passed, this subset needs 2.83 s and this section time is 85.02 s
+35.11% done 148.97 s passed, this subset needs 2.80 s and this section time is 96.29 s
+39.36% done 160.40 s passed, this subset needs 2.83 s and this section time is 107.72 s
+43.62% done 171.66 s passed, this subset needs 2.80 s and this section time is 118.98 s
+47.87% done 183.05 s passed, this subset needs 2.85 s and this section time is 130.38 s
+52.13% done 194.34 s passed, this subset needs 2.82 s and this section time is 141.66 s
+56.38% done 205.65 s passed, this subset needs 2.76 s and this section time is 152.97 s
+60.64% done 217.14 s passed, this subset needs 2.84 s and this section time is 164.46 s
+64.89% done 228.56 s passed, this subset needs 2.82 s and this section time is 175.89 s
+69.15% done 239.96 s passed, this subset needs 2.86 s and this section time is 187.28 s
+73.40% done 251.26 s passed, this subset needs 2.80 s and this section time is 198.59 s
+77.66% done 262.75 s passed, this subset needs 2.91 s and this section time is 210.08 s
+81.91% done 274.15 s passed, this subset needs 2.82 s and this section time is 221.47 s
+86.17% done 285.53 s passed, this subset needs 2.87 s and this section time is 232.85 s
+90.43% done 297.00 s passed, this subset needs 2.94 s and this section time is 244.32 s
+94.68% done 308.41 s passed, this subset needs 2.84 s and this section time is 255.74 s
+98.94% done 319.73 s passed, this subset needs 2.80 s and this section time is 267.06 s
+Coputed !!
+319.73 s passed, this section 267.06 s
+Saving...
+0.31% done 320.08 s passed, this subset needs 0.16 s and this section time is 0.34 s
+20.06% done 330.34 s passed, this subset needs 0.16 s and this section time is 10.60 s
+39.81% done 340.55 s passed, this subset needs 0.19 s and this section time is 20.82 s
+59.57% done 350.90 s passed, this subset needs 0.16 s and this section time is 31.17 s
+79.32% done 361.11 s passed, this subset needs 0.16 s and this section time is 41.38 s
+99.07% done 371.36 s passed, this subset needs 0.16 s and this section time is 51.63 s
+All completed
+Save GR Test Data:373.39509340000006s
+Start NCO
+Data mesh:400
+Reservoir mesh:324
+0.0s NotCoopGeoReservoir Start...
+0.31% done 1.35 s passed, this subset needs 0.64 s
+10.19% done 22.46 s passed, this subset needs 0.66 s
+20.06% done 43.65 s passed, this subset needs 0.67 s
+29.94% done 65.08 s passed, this subset needs 0.72 s
+39.81% done 86.64 s passed, this subset needs 0.69 s
+49.69% done 108.25 s passed, this subset needs 0.73 s
+59.57% done 129.72 s passed, this subset needs 0.70 s
+69.44% done 151.60 s passed, this subset needs 0.69 s
+79.32% done 173.19 s passed, this subset needs 0.73 s
+89.20% done 194.71 s passed, this subset needs 0.69 s
+99.07% done 216.39 s passed, this subset needs 0.67 s
+All completed
+217.73 s passed
+Save NCO Test Data:217.82176430000004s
