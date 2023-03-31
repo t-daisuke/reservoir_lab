@@ -424,6 +424,10 @@ def test_NCOGR_thread(main_path, res_params, Distance, Rlist_dict, is_update = T
                 
                 np.savez_compressed(test_file, Y=Y, UU=UU, XX=XX,
                                     Out=Out, trainO=trainO)
+                
+                rate = 100 * t_r/len(Rlist)
+                if sprit_printer(t_r,len(Rlist),sprit_num=10):
+                    print("{:.2f}".format(rate) + "% done " + "{:.2f}".format(time.time() -start_time) + " s passed.")
 
     print("All completed")
     print("{:.2f}".format(time.time() -start_time) + " s passed")
@@ -513,6 +517,18 @@ def create_local_nco_test_data_thread(main_path, res_params, distance, df, Smesh
     if not os.path.isdir(local_area_path):
         print("path ERROR")
         return
+    
+    print("Data mesh:" + str(len(dma)))
+    print("Reservoir mesh:" + str(len(Rl)))
+    test_NCOGR_thread(main_path, res_params, distance, grld)
+    return
+
+def create_nco_test_data_thread(main_path, res_params, distance, df):
+    gmom = get_matrix_of_mesh()
+    gnl = get_n_list(res_params[4])
+    dma = get_raw_mesh_array(df)
+    Rl = get_R_list(dma, gmom, gnl)
+    grld = get_Rlist_dict(Rl,gmom,gnl)
     
     print("Data mesh:" + str(len(dma)))
     print("Reservoir mesh:" + str(len(Rl)))
