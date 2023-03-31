@@ -13,6 +13,9 @@ from scipy import linalg
 import os
 import time
 
+import concurrent.futures
+import threading
+
 from train_func import *
 
 """TEST FUNC"""
@@ -332,8 +335,6 @@ def test_NCOGR(main_path, res_params, Distance, Rlist_dict):
     print("{:.2f}".format(time.time() -start_time) + " s passed")
     return
 
-import concurrent.futures
-import threading
 def test_NCOGR_thread(main_path, res_params, Distance, Rlist_dict):
     start_time = time.time()
     # trainを全てのセルで終えてる前提

@@ -10,6 +10,9 @@ from scipy import linalg
 import os
 import time
 
+import concurrent.futures
+import threading
+
 # Variable
 
 # df_path = "./df/"
@@ -452,7 +455,7 @@ def train_GR(main_path, res_params, raw_data_subset, mesh_code, is_update=False)
 
     return (Win, W, X, Wout, x, Data)
 
-def train_thread_GR(main_path, res_params, raw_data_subset, mesh_code, trained_file_lock ,is_update=False):
+def train_GR_thread(main_path, res_params, raw_data_subset, mesh_code, trained_file_lock ,is_update=False):
     (expIndex, leakingRate, resSize, spectralRadius, inSize, outSize,
      initLen, trainLen, testLen,
      reg, seed_num, conectivity) = res_params
@@ -580,34 +583,31 @@ def create_local_area_trained_data(main_path, res_params, df, Smesh_list,is_upda
     print("Train Data Saved")
     return
 
-import concurrent.futures
-import threading
+# def create_trained_data_thread(main_path, res_params, df, is_update=False):
+#     gmom = get_matrix_of_mesh()
+#     gnl = get_n_list(res_params[4])  # inSize
+#     dma = get_raw_mesh_array(df)
 
-def create_trained_data_thread(main_path, res_params, df, is_update=False):
-    gmom = get_matrix_of_mesh()
-    gnl = get_n_list(res_params[4])  # inSize
-    dma = get_raw_mesh_array(df)
+#     Rlist = get_R_list(dma, gmom, gnl)
+#     start_time = time.time()
+#     subsection_time = time.time()
 
-    Rlist = get_R_list(dma, gmom, gnl)
-    start_time = time.time()
-    subsection_time = time.time()
+#     with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
+#         futures = []
+#         for index, mesh_code in enumerate(Rlist):
+#             gml = get_mesh_list(mesh_code, gmom, gnl)
+#             raw_data_subset = create_subset_from_data_and_mesh_list(df, gml)
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
-        futures = []
-        for index, mesh_code in enumerate(Rlist):
-            gml = get_mesh_list(mesh_code, gmom, gnl)
-            raw_data_subset = create_subset_from_data_and_mesh_list(df, gml)
+#             future = executor.submit(train_GR, main_path, res_params, raw_data_subset, mesh_code, is_update=is_update)
+#             futures.append(future)
 
-            future = executor.submit(train_GR, main_path, res_params, raw_data_subset, mesh_code, is_update=is_update)
-            futures.append(future)
-
-        for index, future in enumerate(concurrent.futures.as_completed(futures)):
-            rate = 100 * (index + 1) / len(Rlist)
-            if sprit_printer(index + 1, len(Rlist), sprit_num=20):
-                print("{:.2f}".format(rate) + "% done " + "{:.2f}".format(time.time() - start_time) + " s passed, this subset needs " + "{:.2f}".format(time.time() - subsection_time) + " s")
-            subsection_time = time.time()
-    print("Train Data Saved")
-    return
+#         for index, future in enumerate(concurrent.futures.as_completed(futures)):
+#             rate = 100 * (index + 1) / len(Rlist)
+#             if sprit_printer(index + 1, len(Rlist), sprit_num=20):
+#                 print("{:.2f}".format(rate) + "% done " + "{:.2f}".format(time.time() - start_time) + " s passed, this subset needs " + "{:.2f}".format(time.time() - subsection_time) + " s")
+#             subsection_time = time.time()
+#     print("Train Data Saved")
+#     return
 
 def create_local_area_trained_data_thread(main_path, res_params, df, Smesh_list,is_update=False):
     gmom = get_matrix_of_mesh()
@@ -636,7 +636,7 @@ def create_local_area_trained_data_thread(main_path, res_params, df, Smesh_list,
             gml = get_mesh_list(mesh_code, gmom, gnl)
             raw_data_subset = create_subset_from_data_and_mesh_list(df, gml)
 
-            future = executor.submit(train_GR, main_path, res_params, raw_data_subset, mesh_code, trained_file_lock ,is_update=is_update)
+            future = executor.submit(train_GR_thread, main_path, res_params, raw_data_subset, mesh_code, trained_file_lock ,is_update=is_update)
             futures.append(future)
 
         for index, future in enumerate(concurrent.futures.as_completed(futures)):
