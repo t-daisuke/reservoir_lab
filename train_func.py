@@ -590,7 +590,6 @@ def create_local_area_trained_data(main_path, res_params, df, Smesh_list,is_upda
 
 #     Rlist = get_R_list(dma, gmom, gnl)
 #     start_time = time.time()
-#     subsection_time = time.time()
 
 #     with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
 #         futures = []
@@ -604,8 +603,7 @@ def create_local_area_trained_data(main_path, res_params, df, Smesh_list,is_upda
 #         for index, future in enumerate(concurrent.futures.as_completed(futures)):
 #             rate = 100 * (index + 1) / len(Rlist)
 #             if sprit_printer(index + 1, len(Rlist), sprit_num=20):
-#                 print("{:.2f}".format(rate) + "% done " + "{:.2f}".format(time.time() - start_time) + " s passed, this subset needs " + "{:.2f}".format(time.time() - subsection_time) + " s")
-#             subsection_time = time.time()
+#                 print("{:.2f}".format(rate) + "% done " + "{:.2f}".format(time.time() - start_time) + " s passed")
 #     print("Train Data Saved")
 #     return
 
@@ -627,7 +625,6 @@ def create_local_area_trained_data_thread(main_path, res_params, df, Smesh_list,
 
     Rlist = get_R_list(dma, gmom, gnl)
     start_time = time.time()
-    subsection_time = time.time()
     
     trained_file_lock = threading.Lock()
     with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
@@ -642,7 +639,6 @@ def create_local_area_trained_data_thread(main_path, res_params, df, Smesh_list,
         for index, future in enumerate(concurrent.futures.as_completed(futures)):
             rate = 100 * (index + 1) / len(Rlist)
             if sprit_printer(index + 1, len(Rlist), sprit_num=20):
-                print("{:.2f}".format(rate) + "% done " + "{:.2f}".format(time.time() - start_time) + " s passed, this subset needs " + "{:.2f}".format(time.time() - subsection_time) + " s")
-            subsection_time = time.time()
+                print("{:.2f}".format(rate) + "% done " + "{:.2f}".format(time.time() - start_time) + " s passed")
     print("Train Data Saved")
     return

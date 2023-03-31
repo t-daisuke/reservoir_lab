@@ -335,7 +335,7 @@ def test_NCOGR(main_path, res_params, Distance, Rlist_dict):
     print("{:.2f}".format(time.time() -start_time) + " s passed")
     return
 
-def test_NCOGR_thread(main_path, res_params, Distance, Rlist_dict):
+def test_NCOGR_thread(main_path, res_params, Distance, Rlist_dict, is_update = True):
     start_time = time.time()
     # trainを全てのセルで終えてる前提
     (expIndex, leakingRate, resSize, spectralRadius, inSize, outSize,
@@ -348,8 +348,6 @@ def test_NCOGR_thread(main_path, res_params, Distance, Rlist_dict):
 
     print(str((time.time() - start_time)//1) +
           "s " + "NotCoopGeoReservoir Start...")
-    
-    subsection_time = time.time()
     
     tested_file_lock = threading.Lock()
     with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
@@ -366,7 +364,7 @@ def test_NCOGR_thread(main_path, res_params, Distance, Rlist_dict):
             
             test_file = test_path + str(r)
             with tested_file_lock:
-                if os.path.isfile(test_file+".npz"):
+                if os.path.isfile(test_file+".npz")and(not is_update):
                     continue
                 
                 tmp = load_trained_data(main_path, res_params, r)
