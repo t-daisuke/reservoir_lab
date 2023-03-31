@@ -25,7 +25,7 @@ if __name__ == '__main__':
     #  reg, seed_num, conectivity) = res_params
     res_params = (-9.5, 1, 1000, 0.75, 9, 9,
                   24*60, 3*24*60, 2*24*60-60+1,
-                  1e-8, 2, 0.1)
+                  1e-8, 2, 1.0)
     distance = 30
     is_up = False
     
@@ -33,7 +33,8 @@ if __name__ == '__main__':
     start_time = time.perf_counter() #Start
     print("Start Train")
 
-    create_trained_data(main_path,res_params,df,is_update = is_up)
+    # create_trained_data_thread(main_path,res_params,df,is_update = True)
+    create_trained_data(main_path,res_params,df,is_update = True)
 
     print("Save Train Data:"+ str(time.perf_counter() - start_time) + "s")
 
