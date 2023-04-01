@@ -32,8 +32,8 @@ if __name__ == '__main__':
     all_program_start_time = time.perf_counter()
     
     # [1.0, 0.1, 0.01, 0.001]
-    for cone in [1.0, 0.1]:
-        for sc in [-5, -7]:
+    for cone in [0.001, 0.01, 0.1]:
+        for sc in [-1, -3, -5]:
             res_params = (sc, 1, 1000, 0.75, 9, 9,
                   24*60, 3*24*60, 2*24*60-60+1,
                   1e-8, 2, cone)
@@ -43,7 +43,8 @@ if __name__ == '__main__':
             start_time = time.perf_counter() #Start
             print("Start Train")
 
-            create_trained_data_thread(main_path,res_params,df,is_update = is_up)
+            # create_trained_data_thread(main_path,res_params,df,is_update = is_up)
+            create_trained_data(main_path,res_params,df,is_update = is_up)
 
             print("Save Train Data:"+ str(time.perf_counter() - start_time) + "s")
 
@@ -57,7 +58,8 @@ if __name__ == '__main__':
             start_time = time.perf_counter()  # Start
             print("Start NCO")
 
-            create_nco_test_data_thread(main_path, res_params, distance, df,is_update = is_up)
+            #create_trained_data_thread(main_path,res_params,df,is_update = is_up)
+            create_nco_test_data(main_path, res_params, distance, df)
 
             print("Save NCO Test Data:" + str(time.perf_counter() - start_time) + "s")
             
