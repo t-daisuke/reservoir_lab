@@ -27,13 +27,13 @@ if __name__ == '__main__':
                   24*60, 3*24*60, 2*24*60-60+1,
                   1e-8, 2, 1.0)
     distance = 30
-    is_up = False
+    is_up = True
     
     all_program_start_time = time.perf_counter()
     
-    
-    for cone in [1.0, 0.1, 0.01, 0.001]:
-        for sc in [-1, -3, -5, -7]:
+    # [1.0, 0.1, 0.01, 0.001]
+    for cone in [1.0, 0.1]:
+        for sc in [-5, -7]:
             res_params = (sc, 1, 1000, 0.75, 9, 9,
                   24*60, 3*24*60, 2*24*60-60+1,
                   1e-8, 2, cone)

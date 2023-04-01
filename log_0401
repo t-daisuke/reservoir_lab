@@ -1,0 +1,247 @@
+(base) PS C:\Users\tdais\Desktop\GRforM> python .\all_prgrm_some_params.py
+Start Train
+thread
+make ./all_prgrm_output/-1-1-1000-0.75-9-9-1440-4320-2821-1e-08-2-1.0/train/
+0.05% done 2416.18 s passed
+5.02% done 2416.18 s passed 
+9.99% done 2416.18 s passed 
+14.96% done 2416.18 s passed
+19.93% done 2416.18 s passed
+24.91% done 2416.18 s passed
+29.88% done 2416.18 s passed
+34.85% done 2416.18 s passed
+39.82% done 2416.18 s passed
+44.79% done 2416.18 s passed
+49.77% done 2416.18 s passed
+54.74% done 2416.18 s passed
+59.71% done 2416.18 s passed
+64.68% done 2424.15 s passed
+69.65% done 2571.75 s passed
+74.62% done 2721.44 s passed
+79.60% done 2873.65 s passed
+84.57% done 3025.64 s passed
+89.54% done 3176.37 s passed
+94.51% done 3329.93 s passed
+99.48% done 3485.85 s passed
+Train Data Saved
+Save Train Data:3512.8600824s
+Start GR
+Data mesh:2492
+Reservoir mesh:2132
+0.0s LargeGeoReservoir Start...
+0.05% done 0.22 s passed, this subset needs 0.11 s and this section time is 0.22 s
+20.03% done 52.10 s passed, this subset needs 0.14 s and this section time is 52.10 s
+40.01% done 102.48 s passed, this subset needs 0.12 s and this section time is 102.48 s
+59.99% done 153.46 s passed, this subset needs 0.11 s and this section time is 153.46 s
+79.97% done 206.10 s passed, this subset needs 0.12 s and this section time is 206.10 s
+99.95% done 265.91 s passed, this subset needs 0.16 s and this section time is 265.91 s
+Load Ended
+265.91 s passed, this section 265.91 s 
+Initialize and Compute Geo reservoir...
+1.06% done 306.20 s passed, this subset needs 19.92 s and this section time is 40.29 s
+5.32% done 385.60 s passed, this subset needs 19.91 s and this section time is 119.69 s
+9.57% done 465.11 s passed, this subset needs 19.84 s and this section time is 199.20 s
+13.83% done 544.82 s passed, this subset needs 20.05 s and this section time is 278.91 s
+18.09% done 624.67 s passed, this subset needs 19.87 s and this section time is 358.77 s
+22.34% done 703.94 s passed, this subset needs 19.74 s and this section time is 438.03 s
+26.60% done 783.43 s passed, this subset needs 19.84 s and this section time is 517.52 s
+30.85% done 863.14 s passed, this subset needs 19.89 s and this section time is 597.23 s
+35.11% done 942.78 s passed, this subset needs 20.03 s and this section time is 676.87 s
+39.36% done 1022.38 s passed, this subset needs 20.00 s and this section time is 756.48 s
+43.62% done 1101.82 s passed, this subset needs 20.02 s and this section time is 835.91 s
+47.87% done 1181.35 s passed, this subset needs 19.87 s and this section time is 915.45 s
+52.13% done 1261.07 s passed, this subset needs 19.99 s and this section time is 995.16 s
+56.38% done 1340.70 s passed, this subset needs 19.83 s and this section time is 1074.79 s
+60.64% done 1420.16 s passed, this subset needs 19.74 s and this section time is 1154.26 s
+64.89% done 1499.72 s passed, this subset needs 19.91 s and this section time is 1233.81 s
+69.15% done 1579.64 s passed, this subset needs 19.83 s and this section time is 1313.74 s
+73.40% done 1659.25 s passed, this subset needs 19.76 s and this section time is 1393.34 s
+77.66% done 1738.67 s passed, this subset needs 19.74 s and this section time is 1472.76 s
+81.91% done 1818.17 s passed, this subset needs 19.87 s and this section time is 1552.26 s
+86.17% done 1897.54 s passed, this subset needs 19.84 s and this section time is 1631.63 s
+90.43% done 1976.99 s passed, this subset needs 19.88 s and this section time is 1711.09 s
+94.68% done 2056.45 s passed, this subset needs 19.95 s and this section time is 1790.54 s
+98.94% done 2136.31 s passed, this subset needs 19.90 s and this section time is 1870.40 s
+Coputed !!
+2136.31 s passed, this section 1870.40 s
+Saving...
+make ./all_prgrm_output/-1-1-1000-0.75-9-9-1440-4320-2821-1e-08-2-1.0/30step-test/
+0.05% done 2136.65 s passed, this subset needs 0.18 s and this section time is 0.33 s
+20.03% done 2217.14 s passed, this subset needs 0.21 s and this section time is 80.83 s
+40.01% done 2297.38 s passed, this subset needs 0.18 s and this section time is 161.07 s
+59.99% done 2379.79 s passed, this subset needs 0.19 s and this section time is 243.48 s
+79.97% done 2463.38 s passed, this subset needs 0.19 s and this section time is 327.07 s
+99.95% done 2547.42 s passed, this subset needs 0.20 s and this section time is 411.10 s
+All completed
+2547.42 s passed, this section 411.10s
+Save GR Test Data:2562.2436418s
+Start NCO
+Data mesh:2492
+Reservoir mesh:2132
+0.0s Tread NotCoopGeoReservoir Start...
+make ./all_prgrm_output/-1-1-1000-0.75-9-9-1440-4320-2821-1e-08-2-1.0/30step-test-nco/
+0.05% done 1.31 s passed.
+10.04% done 146.63 s passed.
+20.03% done 287.59 s passed.
+30.02% done 430.89 s passed.
+40.01% done 575.42 s passed.
+50.00% done 718.56 s passed.
+59.99% done 858.95 s passed.
+69.98% done 993.84 s passed.
+79.97% done 1128.86 s passed.
+89.96% done 1263.70 s passed.
+99.95% done 1398.70 s passed.
+All completed
+1398.70 s passed
+Save NCO Test Data:1398.9211496999997s
+for Time:7474.025501499999s
+Start Train
+thread
+make ./all_prgrm_output/-3-1-1000-0.75-9-9-1440-4320-2821-1e-08-2-1.0/train/
+0.05% done 2099.32 s passed
+5.02% done 2099.32 s passed
+9.99% done 2099.32 s passed
+14.96% done 2099.32 s passed
+19.93% done 2099.32 s passed
+24.91% done 2099.32 s passed
+29.88% done 2099.32 s passed
+34.85% done 2099.32 s passed
+39.82% done 2357.20 s passed
+44.79% done 2626.93 s passed
+49.77% done 2894.90 s passed
+54.74% done 3165.24 s passed
+59.71% done 3432.32 s passed
+64.68% done 3698.04 s passed
+69.65% done 3964.35 s passed
+74.62% done 4235.08 s passed
+79.60% done 4498.09 s passed
+84.57% done 4759.78 s passed
+89.54% done 5029.45 s passed
+94.51% done 5310.37 s passed
+99.48% done 5593.72 s passed
+Train Data Saved
+Save Train Data:5632.5335528s
+Start GR
+Data mesh:2492
+Reservoir mesh:2132
+0.0s LargeGeoReservoir Start...
+0.05% done 0.40 s passed, this subset needs 0.19 s and this section time is 0.40 s
+20.03% done 86.70 s passed, this subset needs 0.19 s and this section time is 86.70 s
+40.01% done 171.79 s passed, this subset needs 0.20 s and this section time is 171.79 s
+59.99% done 256.90 s passed, this subset needs 0.20 s and this section time is 256.90 s
+79.97% done 346.50 s passed, this subset needs 0.22 s and this section time is 346.50 s
+99.95% done 446.38 s passed, this subset needs 0.25 s and this section time is 446.38 s
+Load Ended
+446.38 s passed, this section 446.38 s
+Initialize and Compute Geo reservoir...
+1.06% done 487.35 s passed, this subset needs 20.20 s and this section time is 40.98 s
+5.32% done 568.65 s passed, this subset needs 20.24 s and this section time is 122.27 s
+9.57% done 649.79 s passed, this subset needs 20.30 s and this section time is 203.41 s
+13.83% done 730.79 s passed, this subset needs 20.23 s and this section time is 284.41 s
+18.09% done 812.10 s passed, this subset needs 20.36 s and this section time is 365.72 s
+22.34% done 893.32 s passed, this subset needs 20.44 s and this section time is 446.94 s
+26.60% done 974.77 s passed, this subset needs 20.30 s and this section time is 528.39 s
+30.85% done 1055.71 s passed, this subset needs 20.41 s and this section time is 609.33 s
+35.11% done 1136.70 s passed, this subset needs 20.31 s and this section time is 690.33 s
+39.36% done 1218.16 s passed, this subset needs 20.45 s and this section time is 771.79 s
+43.62% done 1299.19 s passed, this subset needs 20.28 s and this section time is 852.81 s
+47.87% done 1380.33 s passed, this subset needs 20.46 s and this section time is 933.95 s
+52.13% done 1461.36 s passed, this subset needs 20.29 s and this section time is 1014.98 s
+56.38% done 1542.07 s passed, this subset needs 20.21 s and this section time is 1095.70 s
+60.64% done 1623.75 s passed, this subset needs 20.69 s and this section time is 1177.37 s
+64.89% done 1705.24 s passed, this subset needs 20.34 s and this section time is 1258.86 s
+69.15% done 1786.40 s passed, this subset needs 20.39 s and this section time is 1340.03 s
+73.40% done 1867.42 s passed, this subset needs 20.21 s and this section time is 1421.04 s
+77.66% done 1948.75 s passed, this subset needs 20.39 s and this section time is 1502.38 s
+81.91% done 2030.18 s passed, this subset needs 20.26 s and this section time is 1583.80 s
+86.17% done 2111.60 s passed, this subset needs 20.45 s and this section time is 1665.23 s
+90.43% done 2193.22 s passed, this subset needs 20.32 s and this section time is 1746.84 s
+94.68% done 2274.52 s passed, this subset needs 20.39 s and this section time is 1828.15 s
+98.94% done 2355.59 s passed, this subset needs 20.28 s and this section time is 1909.21 s
+Coputed !!
+2355.59 s passed, this section 1909.21 s
+Saving...
+make ./all_prgrm_output/-3-1-1000-0.75-9-9-1440-4320-2821-1e-08-2-1.0/30step-test/
+0.05% done 2355.90 s passed, this subset needs 0.14 s and this section time is 0.31 s
+20.03% done 2435.49 s passed, this subset needs 0.19 s and this section time is 79.90 s
+40.01% done 2518.97 s passed, this subset needs 0.19 s and this section time is 163.38 s
+59.99% done 2601.08 s passed, this subset needs 0.19 s and this section time is 245.49 s
+79.97% done 2684.12 s passed, this subset needs 0.18 s and this section time is 328.53 s
+99.95% done 2768.61 s passed, this subset needs 0.21 s and this section time is 413.01 s
+All completed
+2768.61 s passed, this section 413.02s
+Save GR Test Data:2781.0075218s
+Start NCO
+Data mesh:2492
+Reservoir mesh:2132
+0.0s Tread NotCoopGeoReservoir Start...
+make ./all_prgrm_output/-3-1-1000-0.75-9-9-1440-4320-2821-1e-08-2-1.0/30step-test-nco/
+0.05% done 1.85 s passed.
+10.04% done 169.17 s passed.
+20.03% done 340.90 s passed.
+30.02% done 515.43 s passed.
+40.01% done 694.70 s passed.
+50.00% done 866.85 s passed.
+59.99% done 1039.78 s passed.
+69.98% done 1207.87 s passed.
+79.97% done 1384.77 s passed.
+89.96% done 1550.44 s passed.
+99.95% done 1712.98 s passed.
+All completed
+1712.98 s passed
+Save NCO Test Data:1713.2643119999993s
+for Time:10126.806406699998s
+Start Train
+thread
+make ./all_prgrm_output/-5-1-1000-0.75-9-9-1440-4320-2821-1e-08-2-1.0/train/
+0.05% done 2195.57 s passed
+5.02% done 2195.57 s passed
+9.99% done 2195.57 s passed
+14.96% done 2195.58 s passed
+19.93% done 2195.58 s passed
+24.91% done 2195.58 s passed
+29.88% done 2195.58 s passed
+34.85% done 2195.58 s passed
+39.82% done 2195.58 s passed
+44.79% done 2195.58 s passed
+49.77% done 2195.58 s passed
+54.74% done 2266.00 s passed
+59.71% done 2359.20 s passed
+64.68% done 2452.53 s passed
+69.65% done 2546.42 s passed
+74.62% done 2639.85 s passed
+79.60% done 2737.06 s passed
+84.57% done 2830.56 s passed
+89.54% done 2924.45 s passed
+94.51% done 3025.65 s passed
+99.48% done 3133.14 s passed
+Train Data Saved
+Save Train Data:3155.4287606000034s
+Start GR
+Data mesh:2492
+Reservoir mesh:2132
+0.0s LargeGeoReservoir Start...
+0.05% done 0.41 s passed, this subset needs 0.20 s and this section time is 0.41 s
+20.03% done 87.36 s passed, this subset needs 0.23 s and this section time is 87.36 s
+Traceback (most recent call last):
+  File "C:\Users\tdais\Desktop\GRforM\all_prgrm_some_params.py", line 53, in <module>
+    create_gr_test_data(main_path, res_params, distance, df)
+  File "C:\Users\tdais\Desktop\GRforM\test_func.py", line 447, in create_gr_test_data
+    test_GR(main_path, res_params, distance, grld)
+  File "C:\Users\tdais\Desktop\GRforM\test_func.py", line 98, in test_GR
+    tmp = load_trained_data(main_path, res_params, r)
+  File "C:\Users\tdais\Desktop\GRforM\test_func.py", line 46, in load_trained_data
+    trained_data["Win"], trained_data["W"], trained_data["X"], trained_data["Wout"],
+  File "C:\Users\tdais\anaconda3\lib\site-packages\numpy\lib\npyio.py", line 254, in __getitem__
+    return format.read_array(bytes,
+  File "C:\Users\tdais\anaconda3\lib\site-packages\numpy\lib\format.py", line 775, in read_array
+    data = _read_bytes(fp, read_size, "array data")
+  File "C:\Users\tdais\anaconda3\lib\site-packages\numpy\lib\format.py", line 904, in _read_bytes
+    r = fp.read(size - len(data))
+  File "C:\Users\tdais\anaconda3\lib\zipfile.py", line 922, in read
+    data = self._read1(n)
+  File "C:\Users\tdais\anaconda3\lib\zipfile.py", line 998, in _read1
+    data = self._decompressor.decompress(data, n)
+zlib.error: Error -3 while decompressing data: invalid block type
+(base) PS C:\Users\tdais\Desktop\GRforM>
+
