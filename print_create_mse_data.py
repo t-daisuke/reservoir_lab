@@ -5,15 +5,6 @@
 import pandas as pd
 import os
 import time
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import datetime
-from scipy import linalg
-
-import os
-import time
-
 from print_func import *
 
 if __name__ == '__main__':
