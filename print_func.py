@@ -106,7 +106,6 @@ def save_or_load_mse_map(name, main_path, res_params, distance, mse_map):
 
   if os.path.isfile(mse_name+".npz"):
     print("Existed!" + str(save_path))
-    Out_mse_map = np.load(mse_name+".npz")
     #作成日時を表示
     time = os.path.getmtime(mse_name+".npz")
     d_time = datetime.datetime.fromtimestamp(time)
