@@ -246,8 +246,8 @@ def create_mse_maps(main_path, saved_test_path, res_params, distance, df, Smesh_
         main_path += "-" + str(smesh)
     main_path += "/"
     if not os.path.isdir(main_path):
-        print("No path " + str(main_path))
-        return
+      os.mkdir(main_path)
+      print("make" + str(main_path))
     
   Rl = get_R_list(dma, gmom, gnl)
 
