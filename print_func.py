@@ -314,13 +314,21 @@ def get_copy_gr_data(main_path, saved_test_path, res_params, distance, mesh_list
     else:
       tmp_train_data = tmp_train_data["trained_data"]
     
+    (Win, W, X, Wout, x, Data) = tmp_train_data
+    
+    (Ygeo,UUgeo,XXgeo,Outgeo,trainOgeo) = tmp_geo_test_data
+    
+    (Ynco,UUnco,XXnco,Outnco,trainOnco) = tmp_nco_test_data
     
     gr_data_name = save_path + str(res_params[0])
     for prm_i in range(1,len(res_params)):
         gr_data_name += "-" + str(res_params[prm_i])
     gr_data_name += "-" + str(distance) + str(mesh_code)
-    
-    np.savez_compressed(gr_data_name,geo_test_data = tmp_geo_test_data, nco_test_data = tmp_nco_test_data, train_data = tmp_train_data)
+    # np.savez_compressed(gr_data_name,geo_test_data = tmp_geo_test_data, nco_test_data = tmp_nco_test_data, train_data = tmp_train_data)
+    np.savez_compressed(gr_data_name,
+                        Win=Win, W=W, X=X,Wout=Wout, x=x, Data=Data,
+                        Ygeo=Ygeo, UUgeo=UUgeo, XXgeo=XXgeo,Outgeo=Outgeo, trainOgeo=trainOgeo,
+                        Ynco=Ynco, UUnco=UUnco, XXnco=XXnco,Outnco=Outnco, trainOnco=trainOnco)
     print("Saved!" + str(gr_data_name))
     
 
