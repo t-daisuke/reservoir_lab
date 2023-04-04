@@ -164,8 +164,6 @@ def get_mse_map_GR(grl, gmom, main_path, saved_test_path, res_params, distance, 
   #Out_put_matrix
   gmom_mat = gmom["mat"]
   mse_mat = np.ones(gmom_mat.shape)
-  if len(Smesh_list) == 1:
-    mseh_mat = np.ones(20,20)
   #Reservoir
   set_grl = set(grl)
   
@@ -202,8 +200,6 @@ def get_mse_map_NCO(grl, gmom, main_path, saved_test_path, res_params, distance,
   #Out_put_matrix
   gmom_mat = gmom["mat"]
   mse_mat = np.ones(gmom_mat.shape)
-  if len(Smesh_list) == 1:
-    mseh_mat = np.ones(20,20)
   #Reservoir
   set_grl = set(grl)
   
@@ -239,8 +235,6 @@ def get_diff_map(grl, gmom,G_map, N_map, main_path, res_params, distance, Smesh_
   
   gmom_mat = gmom["mat"]
   mse_mat = np.ones(gmom_mat.shape)
-  if len(Smesh_list) == 1:
-    mseh_mat = np.ones(20,20)
   set_grl = set(grl)
   for y in range(gmom_mat.shape[0]):
     for x in range(gmom_mat.shape[1]):
@@ -250,6 +244,8 @@ def get_diff_map(grl, gmom,G_map, N_map, main_path, res_params, distance, Smesh_
 
 def create_mse_maps(main_path, saved_test_path, res_params, distance, df, Smesh_list=[]):
   gmom = get_matrix_of_mesh()
+  if len(Smesh_list) != 0:
+    gmom = get_matrix_of_mesh(Smesh_l=[Smesh_list])
   gnl = get_n_list(res_params[4])
   dma = get_raw_mesh_array(df)
   
