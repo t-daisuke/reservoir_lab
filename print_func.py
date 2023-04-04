@@ -268,7 +268,7 @@ def create_mse_maps(main_path, saved_test_path, res_params, distance, df, Smesh_
       os.mkdir(main_path)
       print("make" + str(main_path))
     
-  Rl = get_R_list(dma, gmom, gnl)
+  Rl = get_R_list(dma, get_matrix_of_mesh(), gnl)
 
   geo_mse_map = get_mse_map_GR(Rl, gmom, main_path, saved_test_path, res_params, distance, Smesh_list)
   save_or_load_mse_map("geo", main_path, res_params, distance, geo_mse_map)
