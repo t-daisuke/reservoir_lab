@@ -2,4 +2,5 @@ __pycache__/*
 *.pyc
 KDDI/*
 all_prgrm_output/*
-smesh-45/gr_data/*
+smesh-45/*
+0404smesh-45/*
