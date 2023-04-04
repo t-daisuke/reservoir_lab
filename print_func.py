@@ -157,13 +157,15 @@ def load_gr_data(mesh_code, main_path, res_params, distance):
     print("NOT existed")
     return False
 
-def get_mse_map_GR(grl, gmom, main_path, saved_test_path, res_params, distance):
+def get_mse_map_GR(grl, gmom, main_path, saved_test_path, res_params, distance, Smesh_list=[]):
   is_existed, mse = load_mse_map("geo", main_path, res_params, distance)
   if is_existed == True: return mse
   
   #Out_put_matrix
   gmom_mat = gmom["mat"]
   mse_mat = np.ones(gmom_mat.shape)
+  if len(Smesh_list) == 1:
+    mseh_mat = np.ones(20,20)
   #Reservoir
   set_grl = set(grl)
   
@@ -193,13 +195,15 @@ def get_mse_map_GR(grl, gmom, main_path, saved_test_path, res_params, distance):
   print("Complete!")
   return mse_mat
 
-def get_mse_map_NCO(grl, gmom, main_path, saved_test_path, res_params, distance):
+def get_mse_map_NCO(grl, gmom, main_path, saved_test_path, res_params, distance, Smesh_list=[]):
   is_existed, mse = load_mse_map("nco", main_path, res_params, distance)
   if is_existed == True: return mse
   
   #Out_put_matrix
   gmom_mat = gmom["mat"]
   mse_mat = np.ones(gmom_mat.shape)
+  if len(Smesh_list) == 1:
+    mseh_mat = np.ones(20,20)
   #Reservoir
   set_grl = set(grl)
   
@@ -229,12 +233,14 @@ def get_mse_map_NCO(grl, gmom, main_path, saved_test_path, res_params, distance)
   print("Complete!")
   return mse_mat
 
-def get_diff_map(grl, gmom,G_map, N_map, main_path, res_params, distance):
+def get_diff_map(grl, gmom,G_map, N_map, main_path, res_params, distance, Smesh_list=[]):
   is_existed, mse = load_mse_map("diff", main_path, res_params, distance)
   if is_existed == True: return mse
   
   gmom_mat = gmom["mat"]
   mse_mat = np.ones(gmom_mat.shape)
+  if len(Smesh_list) == 1:
+    mseh_mat = np.ones(20,20)
   set_grl = set(grl)
   for y in range(gmom_mat.shape[0]):
     for x in range(gmom_mat.shape[1]):
@@ -268,13 +274,13 @@ def create_mse_maps(main_path, saved_test_path, res_params, distance, df, Smesh_
     
   Rl = get_R_list(dma, gmom, gnl)
 
-  geo_mse_map = get_mse_map_GR(Rl, gmom, main_path, saved_test_path, res_params, distance)
+  geo_mse_map = get_mse_map_GR(Rl, gmom, main_path, saved_test_path, res_params, distance, Smesh_list)
   save_or_load_mse_map("geo", main_path, res_params, distance, geo_mse_map)
   
-  nco_mse_map = get_mse_map_NCO(Rl, gmom, main_path, saved_test_path, res_params, distance)
+  nco_mse_map = get_mse_map_NCO(Rl, gmom, main_path, saved_test_path, res_params, distance, Smesh_list)
   save_or_load_mse_map("nco", main_path, res_params, distance, nco_mse_map)
   
-  diff_map = get_diff_map(Rl, gmom, geo_mse_map, nco_mse_map, main_path, res_params, distance)
+  diff_map = get_diff_map(Rl, gmom, geo_mse_map, nco_mse_map, main_path, res_params, distance, Smesh_list)
   save_or_load_mse_map("diff", main_path, res_params, distance, diff_map)
   return
 
