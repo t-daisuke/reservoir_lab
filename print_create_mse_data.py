@@ -32,7 +32,8 @@ if __name__ == '__main__':
     print("Start Print")
     #create_mse_maps(main_path, saved_test_path, res_params, distance, df, Smesh_list)
     for cone in [0.001, 0.01, 0.1, 1.0]:
-        for sc in [-1, -3, -5, -7]:
+        for sc in [-9]:
+            # [-1, -3, -5, -7]
             res_params = (sc, 1, 1000, 0.75, 9, 9,
                   24*60, 3*24*60, 2*24*60-60+1,
                   1e-8, 2, cone)
