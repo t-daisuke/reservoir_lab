@@ -69,7 +69,9 @@ def train_GR_k(main_path, res_params, raw_data_subset, mesh_code, is_update=Fals
     transient = 100
     XX = XX[:, transient:]
     # compute Wout
+    print("mean"+str(teacherScaled[:, transient:].mean()))
     Wout = np.dot(np.arctanh(teacherScaled[:, transient:]), np.linalg.pinv(XX))
+    print(np.arctanh(teacherScaled[:, transient:]))
     
     # save
     X = allX
