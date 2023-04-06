@@ -159,7 +159,7 @@ def test_GR(main_path, res_params, Distance, Rlist_dict):
                 x = (1-a)*x + a*np.tanh(Win@tmp1u + W @ x)
                 tmp1x = np.vstack((1, x))
                 # u = np.dot(Wout, tmp1x)
-                u = Wout@tmp1x
+                u = np.tanh(Wout@tmp1x)
                 tmp_dict["x"] = x
                 tmp_dict["u"] = u
 
@@ -295,7 +295,7 @@ def test_NCOGR(main_path, res_params, Distance, Rlist_dict):
                 # u = np.dot(Wout, np.vstack((1, x)))
                 x = (1-a)*x + a * \
                     np.tanh(Win@np.vstack((1, u)) + W @ x)
-                u = Wout@np.vstack((1, x))
+                u = np.tanh(Wout@np.vstack((1, x)))
 
                 # 4D
                 # XX[:, t*Distance+d_i] = np.vstack((x))[:, 0]
@@ -335,103 +335,103 @@ def test_NCOGR(main_path, res_params, Distance, Rlist_dict):
     print("{:.2f}".format(time.time() -start_time) + " s passed")
     return
 
-def test_NCOGR_thread(main_path, res_params, Distance, Rlist_dict, is_update = True):
-    start_time = time.time()
-    # trainを全てのセルで終えてる前提
-    (expIndex, leakingRate, resSize, spectralRadius, inSize, outSize,
-     initLen, trainLen, testLen,
-     reg, seed_num, conectivity) = res_params
+# def test_NCOGR_thread(main_path, res_params, Distance, Rlist_dict, is_update = True):
+#     start_time = time.time()
+#     # trainを全てのセルで終えてる前提
+#     (expIndex, leakingRate, resSize, spectralRadius, inSize, outSize,
+#      initLen, trainLen, testLen,
+#      reg, seed_num, conectivity) = res_params
 
-    #各testの時に学習するmeshのdict: Rlist_dict(input)
+#     #各testの時に学習するmeshのdict: Rlist_dict(input)
 
-    Rlist = list(Rlist_dict.keys())  # Reservoir Mesh list
+#     Rlist = list(Rlist_dict.keys())  # Reservoir Mesh list
 
-    print(str((time.time() - start_time)//1) +
-          "s " + "Tread NotCoopGeoReservoir Start...")
+#     print(str((time.time() - start_time)//1) +
+#           "s " + "Tread NotCoopGeoReservoir Start...")
     
-    tested_file_lock = threading.Lock()
-    with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
+#     tested_file_lock = threading.Lock()
+#     with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
         
-        for t_r, r in enumerate(Rlist):
-            test_path = main_path + str(res_params[0])
-            for prm_i in range(1,len(res_params)):
-                test_path += "-" + str(res_params[prm_i])
-            test_path += "/"
-            test_path += str(Distance)+"step-test-nco/"
-            if not os.path.isdir(test_path):
-                os.mkdir(test_path)
-                print("make " + str(test_path))
+#         for t_r, r in enumerate(Rlist):
+#             test_path = main_path + str(res_params[0])
+#             for prm_i in range(1,len(res_params)):
+#                 test_path += "-" + str(res_params[prm_i])
+#             test_path += "/"
+#             test_path += str(Distance)+"step-test-nco/"
+#             if not os.path.isdir(test_path):
+#                 os.mkdir(test_path)
+#                 print("make " + str(test_path))
             
-            test_file = test_path + str(r)
-            with tested_file_lock:
-                if os.path.isfile(test_file+".npz")and(not is_update):
-                    continue
+#             test_file = test_path + str(r)
+#             with tested_file_lock:
+#                 if os.path.isfile(test_file+".npz")and(not is_update):
+#                     continue
                 
-                tmp = load_trained_data(main_path, res_params, r)
-                if type(tmp) != type({"A": 1}):
-                    print(tmp)
-                    return
-                (Win, W, X, Wout, x, Data) = tmp["trained_data"]
+#                 tmp = load_trained_data(main_path, res_params, r)
+#                 if type(tmp) != type({"A": 1}):
+#                     print(tmp)
+#                     return
+#                 (Win, W, X, Wout, x, Data) = tmp["trained_data"]
 
-                (In, Out) = dis_in_out(
-                    Data[0:, trainLen:trainLen+testLen], inSize, outSize, Distance)
+#                 (In, Out) = dis_in_out(
+#                     Data[0:, trainLen:trainLen+testLen], inSize, outSize, Distance)
 
-                trainO = Data[0:outSize, trainLen:trainLen+testLen]
+#                 trainO = Data[0:outSize, trainLen:trainLen+testLen]
 
-                u = In[0:inSize, 0:1]
+#                 u = In[0:inSize, 0:1]
 
-                Y = np.zeros((outSize, testLen//Distance))
-                UU = np.zeros((outSize, testLen//Distance * Distance))
-                XX = np.zeros((resSize, testLen//Distance * Distance))
+#                 Y = np.zeros((outSize, testLen//Distance))
+#                 UU = np.zeros((outSize, testLen//Distance * Distance))
+#                 XX = np.zeros((resSize, testLen//Distance * Distance))
 
-                a = leakingRate
+#                 a = leakingRate
 
-                # NoCop
-                for t in range(testLen//Distance):
-                    for d_i in range(Distance):
-                        # Compute
-                        # x = (1-a)*x + a * \
-                        #     np.tanh(np.dot(Win, np.vstack((1, u))) + np.dot(W, x))
-                        # u = np.dot(Wout, np.vstack((1, x)))
-                        x = (1-a)*x + a * \
-                            np.tanh(Win@np.vstack((1, u)) + W @ x)
-                        u = Wout@np.vstack((1, x))
+#                 # NoCop
+#                 for t in range(testLen//Distance):
+#                     for d_i in range(Distance):
+#                         # Compute
+#                         # x = (1-a)*x + a * \
+#                         #     np.tanh(np.dot(Win, np.vstack((1, u))) + np.dot(W, x))
+#                         # u = np.dot(Wout, np.vstack((1, x)))
+#                         x = (1-a)*x + a * \
+#                             np.tanh(Win@np.vstack((1, u)) + W @ x)
+#                         u = Wout@np.vstack((1, x))
 
-                        # 4D
-                        # XX[:, t*Distance+d_i] = np.vstack((x))[:, 0]
-                        UU[:, t*Distance+d_i] = u[0:, 0]
+#                         # 4D
+#                         # XX[:, t*Distance+d_i] = np.vstack((x))[:, 0]
+#                         UU[:, t*Distance+d_i] = u[0:, 0]
 
-                        # Self Organize
-                        # なし
+#                         # Self Organize
+#                         # なし
 
-                        # set Y
-                        Y[:, t] = u[0:, 0]
+#                         # set Y
+#                         Y[:, t] = u[0:, 0]
 
-                    # for next time
-                    if t+2 < In.shape[1]:
-                        u = In[0:inSize, t+1:t+2]
+#                     # for next time
+#                     if t+2 < In.shape[1]:
+#                         u = In[0:inSize, t+1:t+2]
                 
-                test_path = main_path + str(res_params[0])
-                for prm_i in range(1,len(res_params)):
-                    test_path += "-" + str(res_params[prm_i])
-                test_path += "/"
-                test_path += str(Distance)+"step-test-nco/"
-                if not os.path.isdir(test_path):
-                    os.mkdir(test_path)
-                    print("make " + str(test_path))
+#                 test_path = main_path + str(res_params[0])
+#                 for prm_i in range(1,len(res_params)):
+#                     test_path += "-" + str(res_params[prm_i])
+#                 test_path += "/"
+#                 test_path += str(Distance)+"step-test-nco/"
+#                 if not os.path.isdir(test_path):
+#                     os.mkdir(test_path)
+#                     print("make " + str(test_path))
                 
-                test_file = test_path + str(r)
+#                 test_file = test_path + str(r)
                 
-                np.savez_compressed(test_file, Y=Y, UU=UU, XX=XX,
-                                    Out=Out, trainO=trainO)
+#                 np.savez_compressed(test_file, Y=Y, UU=UU, XX=XX,
+#                                     Out=Out, trainO=trainO)
                 
-                rate = 100 * t_r/len(Rlist)
-                if sprit_printer(t_r,len(Rlist),sprit_num=10):
-                    print("{:.2f}".format(rate) + "% done " + "{:.2f}".format(time.time() -start_time) + " s passed.")
+#                 rate = 100 * t_r/len(Rlist)
+#                 if sprit_printer(t_r,len(Rlist),sprit_num=10):
+#                     print("{:.2f}".format(rate) + "% done " + "{:.2f}".format(time.time() -start_time) + " s passed.")
 
-    print("All completed")
-    print("{:.2f}".format(time.time() -start_time) + " s passed")
-    return
+#     print("All completed")
+#     print("{:.2f}".format(time.time() -start_time) + " s passed")
+#     return
 
 
 def create_gr_test_data(main_path, res_params, distance, df):
