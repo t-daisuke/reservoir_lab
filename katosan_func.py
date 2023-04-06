@@ -78,3 +78,35 @@ def train_GR_k(main_path, res_params, raw_data_subset, mesh_code, is_update=Fals
                         Wout=Wout, x=x, Data=Data)
 
     return (Win, W, X, Wout, x, Data)
+
+def create_local_area_trained_data_k(main_path, res_params, df, Smesh_list,is_update=False):
+    gmom = get_matrix_of_mesh()
+    gnl = get_n_list(res_params[4])  # inSize
+    print("Local area trained at " + str(Smesh_list))
+    all_dma = get_raw_mesh_array(df)
+    dma = cut_mlist(all_dma,Smesh_list)
+    
+    local_area_path = main_path + "smesh"
+    for smesh in Smesh_list:
+        local_area_path += "-" + str(smesh)
+    local_area_path += "/"
+    
+    if not os.path.isdir(local_area_path):
+        os.mkdir(local_area_path)
+        print("make " + str(local_area_path))
+
+    Rlist = get_R_list(dma, gmom, gnl)
+    start_time = time.time()
+    subsection_time = time.time()
+    for index, mesh_code in enumerate(Rlist):
+        gml = get_mesh_list(mesh_code, gmom, gnl)
+        raw_data_subset = create_subset_from_data_and_mesh_list(df, gml)
+        _ = train_GR_k(local_area_path, res_params, raw_data_subset,
+                      mesh_code, is_update=is_update)
+        rate = 100 * index/len(Rlist)
+        if sprit_printer(index,len(Rlist),sprit_num=20):
+            print("{:.2f}".format(rate) + "% done " + "{:.2f}".format(time.time() -start_time) + " s passed, this subset needs " + "{:.2f}".format(time.time() - subsection_time)
+                  + " s")
+        subsection_time = time.time()
+    print("Train Data Saved")
+    return
