@@ -363,6 +363,7 @@ def copy_gr_data(main_path, saved_test_path, res_params, distance, Smesh_list=[]
   mesh_list=[]
   for i in [-1, 0, 1]:
     for j in [-1, 0, 1]:
+      if i*j != 0: continue
       mesh_list.append(gmom["mat"][center_mesh_mat[0] + i, center_mesh_mat[1] + j])
 
   get_copy_gr_data(main_path, saved_test_path, res_params, distance, mesh_list)

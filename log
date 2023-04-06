@@ -1,0 +1,665 @@
+Save NCO Test Data:39.12458239999978s
+(-7, 1, 100, 0.75, 9, 9, 1440, 4320, 2821, 1e-08, 2, 1.0)for Time:465.07683070000166s
+Start Train
+Local area trained at [45]
+make ./all_prgrm_output/smesh-45/-9-1-100-0.75-9-9-1440-4320-2821-1e-08-2-1.0/train/
+0.31% done 2.38 s passed, this subset needs 1.13 s
+5.25% done 21.26 s passed, this subset needs 1.26 s
+10.19% done 39.97 s passed, this subset needs 1.12 s
+15.12% done 58.89 s passed, this subset needs 1.18 s
+20.06% done 77.79 s passed, this subset needs 1.19 s
+25.00% done 96.44 s passed, this subset needs 1.19 s
+29.94% done 115.00 s passed, this subset needs 1.18 s
+34.88% done 133.78 s passed, this subset needs 1.18 s
+39.81% done 152.58 s passed, this subset needs 1.19 s
+44.75% done 171.41 s passed, this subset needs 1.23 s
+49.69% done 190.18 s passed, this subset needs 1.18 s
+54.63% done 209.03 s passed, this subset needs 1.16 s
+59.57% done 227.75 s passed, this subset needs 1.17 s
+64.51% done 246.90 s passed, this subset needs 1.20 s
+69.44% done 265.80 s passed, this subset needs 1.21 s
+74.38% done 284.91 s passed, this subset needs 1.15 s
+79.32% done 303.69 s passed, this subset needs 1.13 s
+84.26% done 322.63 s passed, this subset needs 1.19 s
+89.20% done 341.31 s passed, this subset needs 1.20 s
+94.14% done 359.94 s passed, this subset needs 1.17 s
+99.07% done 378.87 s passed, this subset needs 1.20 s
+Train Data Saved
+Save Train Data:381.2026456000003s
+Start GR
+Local area trained at [45]
+Data mesh:400
+Reservoir mesh:324
+0.0s LargeGeoReservoir Start...
+0.31% done 0.08 s passed, this subset needs 0.03 s and this section time is 0.08 s
+20.06% done 1.87 s passed, this subset needs 0.03 s and this section time is 1.87 s
+39.81% done 3.82 s passed, this subset needs 0.03 s and this section time is 3.82 s
+59.57% done 5.70 s passed, this subset needs 0.03 s and this section time is 5.70 s
+79.32% done 7.54 s passed, this subset needs 0.03 s and this section time is 7.54 s
+99.07% done 9.41 s passed, this subset needs 0.03 s and this section time is 9.41 s
+Load Ended
+9.47 s passed, this section 9.47 s
+Initialize and Compute Geo reservoir...
+1.06% done 10.14 s passed, this subset needs 0.33 s and this section time is 0.67 s
+5.32% done 11.46 s passed, this subset needs 0.33 s and this section time is 2.00 s
+9.57% done 12.79 s passed, this subset needs 0.33 s and this section time is 3.32 s
+13.83% done 14.11 s passed, this subset needs 0.33 s and this section time is 4.64 s
+18.09% done 15.42 s passed, this subset needs 0.33 s and this section time is 5.96 s
+22.34% done 16.75 s passed, this subset needs 0.33 s and this section time is 7.28 s
+26.60% done 18.07 s passed, this subset needs 0.33 s and this section time is 8.61 s
+30.85% done 19.40 s passed, this subset needs 0.33 s and this section time is 9.93 s
+35.11% done 20.71 s passed, this subset needs 0.33 s and this section time is 11.25 s
+39.36% done 22.04 s passed, this subset needs 0.33 s and this section time is 12.57 s
+43.62% done 23.37 s passed, this subset needs 0.33 s and this section time is 13.90 s
+47.87% done 24.68 s passed, this subset needs 0.33 s and this section time is 15.22 s
+52.13% done 26.00 s passed, this subset needs 0.33 s and this section time is 16.54 s
+56.38% done 27.32 s passed, this subset needs 0.33 s and this section time is 17.86 s
+60.64% done 28.65 s passed, this subset needs 0.33 s and this section time is 19.18 s
+64.89% done 29.97 s passed, this subset needs 0.33 s and this section time is 20.51 s
+69.15% done 31.29 s passed, this subset needs 0.33 s and this section time is 21.82 s
+73.40% done 32.61 s passed, this subset needs 0.33 s and this section time is 23.14 s
+77.66% done 34.09 s passed, this subset needs 0.40 s and this section time is 24.63 s
+81.91% done 35.44 s passed, this subset needs 0.33 s and this section time is 25.97 s
+86.17% done 36.86 s passed, this subset needs 0.42 s and this section time is 27.39 s
+90.43% done 38.20 s passed, this subset needs 0.34 s and this section time is 28.74 s
+94.68% done 39.53 s passed, this subset needs 0.33 s and this section time is 30.06 s
+98.94% done 40.85 s passed, this subset needs 0.33 s and this section time is 31.39 s
+Coputed !!
+40.85 s passed, this section 31.39 s
+Saving...
+make ./all_prgrm_output/smesh-45/-9-1-100-0.75-9-9-1440-4320-2821-1e-08-2-1.0/30step-test/
+0.31% done 40.93 s passed, this subset needs 0.04 s and this section time is 0.07 s
+20.06% done 43.27 s passed, this subset needs 0.04 s and this section time is 2.41 s
+39.81% done 45.55 s passed, this subset needs 0.04 s and this section time is 4.69 s
+59.57% done 47.84 s passed, this subset needs 0.04 s and this section time is 6.99 s
+79.32% done 50.11 s passed, this subset needs 0.03 s and this section time is 9.26 s
+99.07% done 52.39 s passed, this subset needs 0.04 s and this section time is 11.54 s
+All completed
+52.46 s passed, this section 11.61s
+Save GR Test Data:52.62619959999938s
+Start NCO
+Local area trained at [45]
+Data mesh:400
+Reservoir mesh:324
+0.0s NotCoopGeoReservoir Start...
+0.31% done 0.26 s passed, this subset needs 0.13 s
+10.19% done 4.29 s passed, this subset needs 0.12 s
+20.06% done 8.30 s passed, this subset needs 0.12 s
+29.94% done 12.41 s passed, this subset needs 0.14 s
+39.81% done 16.35 s passed, this subset needs 0.12 s
+49.69% done 20.29 s passed, this subset needs 0.12 s
+59.57% done 24.24 s passed, this subset needs 0.12 s
+69.44% done 28.40 s passed, this subset needs 0.12 s
+79.32% done 32.34 s passed, this subset needs 0.12 s
+89.20% done 36.61 s passed, this subset needs 0.13 s
+99.07% done 40.54 s passed, this subset needs 0.12 s
+All completed
+40.79 s passed
+Save NCO Test Data:40.84335530000135s
+(-9, 1, 100, 0.75, 9, 9, 1440, 4320, 2821, 1e-08, 2, 1.0)for Time:474.6731856999995s
+All Time:9171.3627194s
+(base) PS C:\Users\tdais\Desktop\GRforM> python .\print_create_mse_data.py      
+Start Print
+make./smesh-45/
+make ./smesh-45/mse_map/
+NOT existed
+5.00% done 0.33 s passed. in GR
+15.00% done 1.03 s passed. in GR
+25.00% done 1.82 s passed. in GR
+35.00% done 2.63 s passed. in GR
+45.00% done 3.37 s passed. in GR
+55.00% done 4.06 s passed. in GR
+65.00% done 4.70 s passed. in GR
+75.00% done 5.40 s passed. in GR
+85.00% done 6.07 s passed. in GR
+95.00% done 6.44 s passed. in GR
+Complete!
+Saved!./smesh-45/mse_map/
+NOT existed
+5.00% done 0.29 s passed. in NCO
+15.00% done 1.00 s passed. in NCO
+25.00% done 1.77 s passed. in NCO
+35.00% done 2.48 s passed. in NCO
+45.00% done 3.18 s passed. in NCO
+55.00% done 3.82 s passed. in NCO
+65.00% done 4.45 s passed. in NCO
+75.00% done 5.19 s passed. in NCO
+85.00% done 5.86 s passed. in NCO
+95.00% done 6.15 s passed. in NCO
+Complete!
+Saved!./smesh-45/mse_map/
+NOT existed
+Saved!./smesh-45/mse_map/
+NOT existed
+5.00% done 0.32 s passed. in GR
+15.00% done 0.92 s passed. in GR
+25.00% done 1.73 s passed. in GR
+35.00% done 2.38 s passed. in GR
+45.00% done 3.19 s passed. in GR
+55.00% done 3.98 s passed. in GR
+65.00% done 4.66 s passed. in GR
+75.00% done 5.41 s passed. in GR
+85.00% done 6.04 s passed. in GR
+95.00% done 6.42 s passed. in GR
+Complete!
+Saved!./smesh-45/mse_map/
+NOT existed
+5.00% done 0.41 s passed. in NCO
+15.00% done 1.07 s passed. in NCO
+25.00% done 1.85 s passed. in NCO
+35.00% done 2.58 s passed. in NCO
+45.00% done 3.35 s passed. in NCO
+55.00% done 4.05 s passed. in NCO
+65.00% done 4.75 s passed. in NCO
+75.00% done 5.35 s passed. in NCO
+85.00% done 6.00 s passed. in NCO
+95.00% done 6.30 s passed. in NCO
+Complete!
+Saved!./smesh-45/mse_map/
+NOT existed
+Saved!./smesh-45/mse_map/
+NOT existed
+5.00% done 0.34 s passed. in GR
+15.00% done 0.97 s passed. in GR
+25.00% done 1.74 s passed. in GR
+35.00% done 2.40 s passed. in GR
+45.00% done 3.07 s passed. in GR
+55.00% done 3.86 s passed. in GR
+65.00% done 4.49 s passed. in GR
+75.00% done 5.18 s passed. in GR
+85.00% done 5.89 s passed. in GR
+95.00% done 6.25 s passed. in GR
+Complete!
+Saved!./smesh-45/mse_map/
+NOT existed
+5.00% done 0.39 s passed. in NCO
+15.00% done 1.02 s passed. in NCO
+25.00% done 1.70 s passed. in NCO
+35.00% done 2.34 s passed. in NCO
+45.00% done 3.18 s passed. in NCO
+55.00% done 3.96 s passed. in NCO
+65.00% done 4.67 s passed. in NCO
+75.00% done 5.33 s passed. in NCO
+85.00% done 5.97 s passed. in NCO
+95.00% done 6.33 s passed. in NCO
+Complete!
+Saved!./smesh-45/mse_map/
+NOT existed
+Saved!./smesh-45/mse_map/
+NOT existed
+5.00% done 0.34 s passed. in GR
+15.00% done 1.01 s passed. in GR
+25.00% done 1.73 s passed. in GR
+35.00% done 2.35 s passed. in GR
+45.00% done 3.03 s passed. in GR
+55.00% done 3.73 s passed. in GR
+65.00% done 4.39 s passed. in GR
+75.00% done 5.13 s passed. in GR
+85.00% done 5.77 s passed. in GR
+95.00% done 6.25 s passed. in GR
+Complete!
+Saved!./smesh-45/mse_map/
+NOT existed
+5.00% done 0.37 s passed. in NCO
+15.00% done 1.08 s passed. in NCO
+25.00% done 1.78 s passed. in NCO
+35.00% done 2.40 s passed. in NCO
+45.00% done 3.10 s passed. in NCO
+55.00% done 3.93 s passed. in NCO
+65.00% done 4.62 s passed. in NCO
+75.00% done 5.32 s passed. in NCO
+85.00% done 6.14 s passed. in NCO
+95.00% done 6.53 s passed. in NCO
+Complete!
+Saved!./smesh-45/mse_map/
+NOT existed
+Saved!./smesh-45/mse_map/
+NOT existed
+5.00% done 0.38 s passed. in GR
+15.00% done 1.16 s passed. in GR
+25.00% done 1.90 s passed. in GR
+35.00% done 2.72 s passed. in GR
+45.00% done 3.47 s passed. in GR
+55.00% done 4.26 s passed. in GR
+65.00% done 4.95 s passed. in GR
+75.00% done 5.70 s passed. in GR
+85.00% done 6.38 s passed. in GR
+95.00% done 6.75 s passed. in GR
+Complete!
+Saved!./smesh-45/mse_map/
+NOT existed
+5.00% done 0.43 s passed. in NCO
+15.00% done 1.11 s passed. in NCO
+25.00% done 1.85 s passed. in NCO
+35.00% done 2.61 s passed. in NCO
+45.00% done 3.35 s passed. in NCO
+55.00% done 4.04 s passed. in NCO
+65.00% done 4.78 s passed. in NCO
+75.00% done 5.54 s passed. in NCO
+85.00% done 6.30 s passed. in NCO
+95.00% done 6.68 s passed. in NCO
+Complete!
+Saved!./smesh-45/mse_map/
+NOT existed
+Saved!./smesh-45/mse_map/
+NOT existed
+5.00% done 0.37 s passed. in GR
+15.00% done 0.99 s passed. in GR
+25.00% done 1.80 s passed. in GR
+35.00% done 2.43 s passed. in GR
+45.00% done 3.14 s passed. in GR
+55.00% done 3.85 s passed. in GR
+65.00% done 4.51 s passed. in GR
+75.00% done 5.32 s passed. in GR
+85.00% done 5.97 s passed. in GR
+95.00% done 6.27 s passed. in GR
+Complete!
+Saved!./smesh-45/mse_map/
+NOT existed
+5.00% done 0.35 s passed. in NCO
+15.00% done 1.01 s passed. in NCO
+25.00% done 1.73 s passed. in NCO
+35.00% done 2.43 s passed. in NCO
+45.00% done 3.16 s passed. in NCO
+55.00% done 3.90 s passed. in NCO
+65.00% done 4.64 s passed. in NCO
+75.00% done 5.28 s passed. in NCO
+85.00% done 5.89 s passed. in NCO
+95.00% done 6.22 s passed. in NCO
+Complete!
+Saved!./smesh-45/mse_map/
+NOT existed
+Saved!./smesh-45/mse_map/
+NOT existed
+5.00% done 0.40 s passed. in GR
+15.00% done 1.03 s passed. in GR
+25.00% done 1.81 s passed. in GR
+35.00% done 2.58 s passed. in GR
+45.00% done 3.38 s passed. in GR
+55.00% done 3.99 s passed. in GR
+65.00% done 4.65 s passed. in GR
+75.00% done 5.31 s passed. in GR
+85.00% done 5.91 s passed. in GR
+95.00% done 6.38 s passed. in GR
+Complete!
+Saved!./smesh-45/mse_map/
+NOT existed
+5.00% done 0.33 s passed. in NCO
+15.00% done 0.94 s passed. in NCO
+25.00% done 1.75 s passed. in NCO
+35.00% done 2.44 s passed. in NCO
+45.00% done 3.16 s passed. in NCO
+55.00% done 3.78 s passed. in NCO
+65.00% done 4.39 s passed. in NCO
+75.00% done 4.99 s passed. in NCO
+85.00% done 5.69 s passed. in NCO
+95.00% done 6.02 s passed. in NCO
+Complete!
+Saved!./smesh-45/mse_map/
+NOT existed
+Saved!./smesh-45/mse_map/
+NOT existed
+5.00% done 0.35 s passed. in GR
+15.00% done 1.02 s passed. in GR
+25.00% done 1.66 s passed. in GR
+35.00% done 2.30 s passed. in GR
+45.00% done 2.92 s passed. in GR
+55.00% done 3.66 s passed. in GR
+65.00% done 4.35 s passed. in GR
+75.00% done 5.04 s passed. in GR
+85.00% done 5.72 s passed. in GR
+95.00% done 6.05 s passed. in GR
+Complete!
+Saved!./smesh-45/mse_map/
+NOT existed
+5.00% done 0.33 s passed. in NCO
+15.00% done 1.07 s passed. in NCO
+25.00% done 1.79 s passed. in NCO
+35.00% done 2.58 s passed. in NCO
+45.00% done 3.34 s passed. in NCO
+55.00% done 4.18 s passed. in NCO
+65.00% done 4.93 s passed. in NCO
+75.00% done 5.60 s passed. in NCO
+85.00% done 6.23 s passed. in NCO
+95.00% done 6.54 s passed. in NCO
+Complete!
+Saved!./smesh-45/mse_map/
+NOT existed
+Saved!./smesh-45/mse_map/
+NOT existed
+5.00% done 0.42 s passed. in GR
+15.00% done 1.07 s passed. in GR
+25.00% done 1.83 s passed. in GR
+35.00% done 2.70 s passed. in GR
+45.00% done 3.45 s passed. in GR
+55.00% done 4.27 s passed. in GR
+65.00% done 4.98 s passed. in GR
+75.00% done 5.65 s passed. in GR
+85.00% done 6.35 s passed. in GR
+95.00% done 6.69 s passed. in GR
+Complete!
+Saved!./smesh-45/mse_map/
+NOT existed
+5.00% done 0.36 s passed. in NCO
+15.00% done 0.99 s passed. in NCO
+25.00% done 1.70 s passed. in NCO
+35.00% done 2.38 s passed. in NCO
+45.00% done 3.08 s passed. in NCO
+55.00% done 3.82 s passed. in NCO
+65.00% done 4.44 s passed. in NCO
+75.00% done 5.17 s passed. in NCO
+85.00% done 5.93 s passed. in NCO
+95.00% done 6.26 s passed. in NCO
+Complete!
+Saved!./smesh-45/mse_map/
+NOT existed
+Saved!./smesh-45/mse_map/
+NOT existed
+5.00% done 0.35 s passed. in GR
+15.00% done 0.96 s passed. in GR
+25.00% done 1.67 s passed. in GR
+35.00% done 2.41 s passed. in GR
+45.00% done 3.11 s passed. in GR
+55.00% done 3.83 s passed. in GR
+65.00% done 4.50 s passed. in GR
+75.00% done 5.12 s passed. in GR
+85.00% done 5.75 s passed. in GR
+95.00% done 6.07 s passed. in GR
+Complete!
+Saved!./smesh-45/mse_map/
+NOT existed
+5.00% done 0.32 s passed. in NCO
+15.00% done 0.96 s passed. in NCO
+25.00% done 1.63 s passed. in NCO
+35.00% done 2.34 s passed. in NCO
+45.00% done 2.99 s passed. in NCO
+55.00% done 3.62 s passed. in NCO
+65.00% done 4.27 s passed. in NCO
+75.00% done 4.93 s passed. in NCO
+85.00% done 5.60 s passed. in NCO
+95.00% done 5.96 s passed. in NCO
+Complete!
+Saved!./smesh-45/mse_map/
+NOT existed
+Saved!./smesh-45/mse_map/
+NOT existed
+5.00% done 0.39 s passed. in GR
+15.00% done 1.06 s passed. in GR
+25.00% done 1.80 s passed. in GR
+35.00% done 2.57 s passed. in GR
+45.00% done 3.36 s passed. in GR
+55.00% done 4.06 s passed. in GR
+65.00% done 4.73 s passed. in GR
+75.00% done 5.36 s passed. in GR
+85.00% done 6.10 s passed. in GR
+95.00% done 6.44 s passed. in GR
+Complete!
+Saved!./smesh-45/mse_map/
+NOT existed
+5.00% done 0.33 s passed. in NCO
+15.00% done 0.98 s passed. in NCO
+25.00% done 1.74 s passed. in NCO
+35.00% done 2.39 s passed. in NCO
+45.00% done 3.04 s passed. in NCO
+55.00% done 3.71 s passed. in NCO
+65.00% done 4.41 s passed. in NCO
+75.00% done 5.00 s passed. in NCO
+85.00% done 5.62 s passed. in NCO
+95.00% done 5.95 s passed. in NCO
+Complete!
+Saved!./smesh-45/mse_map/
+NOT existed
+Saved!./smesh-45/mse_map/
+NOT existed
+5.00% done 0.46 s passed. in GR
+15.00% done 1.20 s passed. in GR
+25.00% done 1.88 s passed. in GR
+35.00% done 2.56 s passed. in GR
+45.00% done 3.36 s passed. in GR
+55.00% done 4.09 s passed. in GR
+65.00% done 4.84 s passed. in GR
+75.00% done 5.49 s passed. in GR
+85.00% done 6.23 s passed. in GR
+95.00% done 6.56 s passed. in GR
+Complete!
+Saved!./smesh-45/mse_map/
+NOT existed
+5.00% done 0.31 s passed. in NCO
+15.00% done 0.91 s passed. in NCO
+25.00% done 1.64 s passed. in NCO
+35.00% done 2.26 s passed. in NCO
+45.00% done 2.90 s passed. in NCO
+55.00% done 3.52 s passed. in NCO
+65.00% done 4.12 s passed. in NCO
+75.00% done 4.79 s passed. in NCO
+85.00% done 5.42 s passed. in NCO
+95.00% done 5.84 s passed. in NCO
+Complete!
+Saved!./smesh-45/mse_map/
+NOT existed
+Saved!./smesh-45/mse_map/
+NOT existed
+5.00% done 0.34 s passed. in GR
+15.00% done 1.08 s passed. in GR
+25.00% done 1.92 s passed. in GR
+35.00% done 2.74 s passed. in GR
+45.00% done 3.51 s passed. in GR
+55.00% done 4.23 s passed. in GR
+65.00% done 4.85 s passed. in GR
+75.00% done 5.47 s passed. in GR
+85.00% done 6.15 s passed. in GR
+95.00% done 6.50 s passed. in GR
+Complete!
+Saved!./smesh-45/mse_map/
+NOT existed
+5.00% done 0.33 s passed. in NCO
+15.00% done 1.04 s passed. in NCO
+25.00% done 1.81 s passed. in NCO
+35.00% done 2.50 s passed. in NCO
+45.00% done 3.20 s passed. in NCO
+55.00% done 3.87 s passed. in NCO
+65.00% done 4.62 s passed. in NCO
+75.00% done 5.35 s passed. in NCO
+85.00% done 6.03 s passed. in NCO
+95.00% done 6.39 s passed. in NCO
+Complete!
+Saved!./smesh-45/mse_map/
+NOT existed
+Saved!./smesh-45/mse_map/
+NOT existed
+5.00% done 0.41 s passed. in GR
+15.00% done 1.10 s passed. in GR
+25.00% done 1.87 s passed. in GR
+35.00% done 2.62 s passed. in GR
+45.00% done 3.34 s passed. in GR
+55.00% done 3.97 s passed. in GR
+65.00% done 4.59 s passed. in GR
+75.00% done 5.35 s passed. in GR
+85.00% done 5.99 s passed. in GR
+95.00% done 6.30 s passed. in GR
+Complete!
+Saved!./smesh-45/mse_map/
+NOT existed
+5.00% done 0.35 s passed. in NCO
+15.00% done 0.98 s passed. in NCO
+25.00% done 1.77 s passed. in NCO
+35.00% done 2.44 s passed. in NCO
+45.00% done 3.06 s passed. in NCO
+55.00% done 3.69 s passed. in NCO
+65.00% done 4.39 s passed. in NCO
+75.00% done 5.12 s passed. in NCO
+85.00% done 5.83 s passed. in NCO
+95.00% done 6.18 s passed. in NCO
+Complete!
+Saved!./smesh-45/mse_map/
+NOT existed
+Saved!./smesh-45/mse_map/
+NOT existed
+5.00% done 0.39 s passed. in GR
+15.00% done 1.09 s passed. in GR
+25.00% done 1.78 s passed. in GR
+35.00% done 2.52 s passed. in GR
+45.00% done 3.20 s passed. in GR
+55.00% done 3.81 s passed. in GR
+65.00% done 4.42 s passed. in GR
+75.00% done 5.15 s passed. in GR
+85.00% done 5.78 s passed. in GR
+95.00% done 6.22 s passed. in GR
+Complete!
+Saved!./smesh-45/mse_map/
+NOT existed
+5.00% done 0.40 s passed. in NCO
+15.00% done 1.13 s passed. in NCO
+25.00% done 1.87 s passed. in NCO
+35.00% done 2.52 s passed. in NCO
+45.00% done 3.13 s passed. in NCO
+55.00% done 3.79 s passed. in NCO
+65.00% done 4.55 s passed. in NCO
+75.00% done 5.18 s passed. in NCO
+85.00% done 5.85 s passed. in NCO
+95.00% done 6.23 s passed. in NCO
+Complete!
+Saved!./smesh-45/mse_map/
+NOT existed
+Saved!./smesh-45/mse_map/
+NOT existed
+5.00% done 0.30 s passed. in GR
+15.00% done 0.97 s passed. in GR
+25.00% done 1.74 s passed. in GR
+35.00% done 2.38 s passed. in GR
+45.00% done 3.00 s passed. in GR
+55.00% done 3.64 s passed. in GR
+65.00% done 4.33 s passed. in GR
+75.00% done 5.07 s passed. in GR
+85.00% done 5.72 s passed. in GR
+95.00% done 6.02 s passed. in GR
+Complete!
+Saved!./smesh-45/mse_map/
+NOT existed
+5.00% done 0.32 s passed. in NCO
+15.00% done 1.02 s passed. in NCO
+25.00% done 1.67 s passed. in NCO
+35.00% done 2.35 s passed. in NCO
+45.00% done 3.01 s passed. in NCO
+55.00% done 3.66 s passed. in NCO
+65.00% done 4.31 s passed. in NCO
+75.00% done 4.93 s passed. in NCO
+85.00% done 5.72 s passed. in NCO
+95.00% done 6.11 s passed. in NCO
+Complete!
+Saved!./smesh-45/mse_map/
+NOT existed
+Saved!./smesh-45/mse_map/
+NOT existed
+5.00% done 0.35 s passed. in GR
+15.00% done 1.06 s passed. in GR
+25.00% done 1.70 s passed. in GR
+35.00% done 2.35 s passed. in GR
+45.00% done 2.95 s passed. in GR
+55.00% done 3.58 s passed. in GR
+65.00% done 4.19 s passed. in GR
+75.00% done 4.83 s passed. in GR
+85.00% done 5.45 s passed. in GR
+95.00% done 5.82 s passed. in GR
+Complete!
+Saved!./smesh-45/mse_map/
+NOT existed
+5.00% done 0.30 s passed. in NCO
+15.00% done 0.99 s passed. in NCO
+25.00% done 1.82 s passed. in NCO
+35.00% done 2.44 s passed. in NCO
+45.00% done 3.23 s passed. in NCO
+55.00% done 3.90 s passed. in NCO
+65.00% done 4.55 s passed. in NCO
+75.00% done 5.26 s passed. in NCO
+85.00% done 5.95 s passed. in NCO
+95.00% done 6.28 s passed. in NCO
+Complete!
+Saved!./smesh-45/mse_map/
+NOT existed
+Saved!./smesh-45/mse_map/
+NOT existed
+5.00% done 0.50 s passed. in GR
+15.00% done 1.18 s passed. in GR
+25.00% done 1.88 s passed. in GR
+35.00% done 2.53 s passed. in GR
+45.00% done 3.28 s passed. in GR
+55.00% done 4.00 s passed. in GR
+65.00% done 4.69 s passed. in GR
+75.00% done 5.39 s passed. in GR
+85.00% done 6.09 s passed. in GR
+95.00% done 6.47 s passed. in GR
+Complete!
+Saved!./smesh-45/mse_map/
+NOT existed
+5.00% done 0.40 s passed. in NCO
+15.00% done 1.09 s passed. in NCO
+25.00% done 1.92 s passed. in NCO
+35.00% done 2.75 s passed. in NCO
+45.00% done 3.49 s passed. in NCO
+55.00% done 4.28 s passed. in NCO
+65.00% done 4.92 s passed. in NCO
+75.00% done 5.57 s passed. in NCO
+85.00% done 6.18 s passed. in NCO
+95.00% done 6.61 s passed. in NCO
+Complete!
+Saved!./smesh-45/mse_map/
+NOT existed
+Saved!./smesh-45/mse_map/
+NOT existed
+5.00% done 0.39 s passed. in GR
+15.00% done 1.27 s passed. in GR
+25.00% done 2.08 s passed. in GR
+35.00% done 2.80 s passed. in GR
+45.00% done 3.43 s passed. in GR
+55.00% done 4.15 s passed. in GR
+65.00% done 4.77 s passed. in GR
+75.00% done 5.46 s passed. in GR
+85.00% done 6.15 s passed. in GR
+95.00% done 6.45 s passed. in GR
+Complete!
+Saved!./smesh-45/mse_map/
+NOT existed
+5.00% done 0.46 s passed. in NCO
+15.00% done 1.27 s passed. in NCO
+25.00% done 1.97 s passed. in NCO
+35.00% done 2.71 s passed. in NCO
+45.00% done 3.53 s passed. in NCO
+55.00% done 4.14 s passed. in NCO
+65.00% done 4.83 s passed. in NCO
+75.00% done 5.45 s passed. in NCO
+85.00% done 6.11 s passed. in NCO
+95.00% done 6.50 s passed. in NCO
+Complete!
+Saved!./smesh-45/mse_map/
+NOT existed
+Saved!./smesh-45/mse_map/
+NOT existed
+5.00% done 0.47 s passed. in GR
+15.00% done 1.22 s passed. in GR
+25.00% done 1.91 s passed. in GR
+35.00% done 2.61 s passed. in GR
+45.00% done 3.36 s passed. in GR
+55.00% done 3.99 s passed. in GR
+65.00% done 4.73 s passed. in GR
+75.00% done 5.49 s passed. in GR
+85.00% done 6.34 s passed. in GR
+95.00% done 6.73 s passed. in GR
+Complete!
+Saved!./smesh-45/mse_map/
+NOT existed
+5.00% done 0.36 s passed. in NCO
+15.00% done 1.09 s passed. in NCO
+25.00% done 1.87 s passed. in NCO
+35.00% done 2.56 s passed. in NCO
+45.00% done 3.23 s passed. in NCO
+55.00% done 3.93 s passed. in NCO
+65.00% done 4.58 s passed. in NCO
+75.00% done 5.24 s passed. in NCO
+85.00% done 6.01 s passed. in NCO
+95.00% done 6.38 s passed. in NCO
+Complete!
+Saved!./smesh-45/mse_map/
+NOT existed
+Saved!./smesh-45/mse_map/
+Saved Print:253.9302873s
