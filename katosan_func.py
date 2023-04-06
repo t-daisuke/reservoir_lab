@@ -74,6 +74,7 @@ def train_GR_k(main_path, res_params, raw_data_subset, mesh_code, is_update=Fals
     # save
     X = allX
     x = XX
+    return
     np.savez_compressed(trained_file, Win=Win, W=W, X=X,
                         Wout=Wout, x=x, Data=Data)
 
@@ -103,6 +104,7 @@ def create_local_area_trained_data_k(main_path, res_params, df, Smesh_list,is_up
         raw_data_subset = create_subset_from_data_and_mesh_list(df, gml)
         _ = train_GR_k(local_area_path, res_params, raw_data_subset,
                       mesh_code, is_update=is_update)
+        return
         rate = 100 * index/len(Rlist)
         if sprit_printer(index,len(Rlist),sprit_num=20):
             print("{:.2f}".format(rate) + "% done " + "{:.2f}".format(time.time() -start_time) + " s passed, this subset needs " + "{:.2f}".format(time.time() - subsection_time)
