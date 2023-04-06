@@ -427,7 +427,7 @@ def train_GR(main_path, res_params, raw_data_subset, mesh_code, is_update=False)
     Out = Data[0:outSize, 1:trainLen+testLen]  # 出力
     a = leakingRate
     np.random.seed(seed_num)
-    Win = (np.random.rand(resSize, 1+inSize) - 0.5) * 1  # -0.5~0.5の一様分布
+    Win = (np.random.rand(resSize, 1+inSize) - 0.5) * 2  # -1~1の一様分布
     W = create_sparse_rand_matrix(resSize, resSize, conectivity)
     # rhoW = max(abs(linalg.eig(W)[0]))
     rhoW = max(linalg.eigh(W)[0])
