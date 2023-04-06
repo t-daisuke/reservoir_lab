@@ -85,5 +85,7 @@ if __name__ == '__main__':
             copy_gr_data(main_path, saved_test_path, res_params, distance, Smesh_list, center_mesh_mat)
             
             print("Save copy gr data Test Data:" + str(time.perf_counter() - start_time) + "s")
+            
+            print(str(res_params) + "for Time:" + str(time.perf_counter() - for_time) + "s")
     
     print("All Time:" + str(time.perf_counter() - all_program_start_time) + "s")
