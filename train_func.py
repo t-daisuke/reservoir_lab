@@ -446,8 +446,10 @@ def train_GR(main_path, res_params, raw_data_subset, mesh_code, is_update=False)
             X[:, t-initLen] = np.vstack((1, x))[:, 0]
     # Wout = linalg.solve(np.dot(X, X.T) + reg *
     #                     np.eye(1+resSize), np.dot(X, Yt.T)).T
-    Wout = linalg.solve(X @ X.T + reg *
-                            np.eye(1+resSize), X @ Yt.T).T
+    # Wout = linalg.solve(X @ X.T + reg *
+    #                         np.eye(1+resSize), X @ Yt.T).T
+    Wout = np.tanh(Yt)@(np.linalg.inv(X.T @ X + reg *
+                            np.eye(1+resSize))@ X.T)
 
     # save
     np.savez_compressed(trained_file, Win=Win, W=W, X=X,
