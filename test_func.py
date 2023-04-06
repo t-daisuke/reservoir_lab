@@ -158,8 +158,8 @@ def test_GR(main_path, res_params, Distance, Rlist_dict):
                 # x = (1-a)*x + a*np.tanh(np.dot(Win, tmp1u) + np.dot(W, x))
                 x = (1-a)*x + a*np.tanh(Win@tmp1u + W @ x)
                 tmp1x = np.vstack((1, x))
-                # u = np.dot(Wout, tmp1x)
-                u = np.tanh(Wout@tmp1x)
+                u = Wout@tmp1x
+                # u = np.tanh(Wout@tmp1x)
                 tmp_dict["x"] = x
                 tmp_dict["u"] = u
 
@@ -295,7 +295,8 @@ def test_NCOGR(main_path, res_params, Distance, Rlist_dict):
                 # u = np.dot(Wout, np.vstack((1, x)))
                 x = (1-a)*x + a * \
                     np.tanh(Win@np.vstack((1, u)) + W @ x)
-                u = np.tanh(Wout@np.vstack((1, x)))
+                # u = np.tanh(Wout@np.vstack((1, x)))
+                u = Wout@np.vstack((1, x))
 
                 # 4D
                 # XX[:, t*Distance+d_i] = np.vstack((x))[:, 0]

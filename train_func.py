@@ -450,8 +450,10 @@ def train_GR(main_path, res_params, raw_data_subset, mesh_code, is_update=False)
     #                         np.eye(1+resSize), X @ Yt.T).T
     # Wout = np.tanh(Yt)@(np.linalg.inv(X.T @ X + reg *
     #                         np.eye(1+resSize))@ X.T)
-    Wout = linalg.solve(X @ X.T + reg *
-                             np.eye(1+resSize), X @ np.arctanh(Yt.T)).T
+    # Wout = linalg.solve(X @ X.T + reg *
+    #                          np.eye(1+resSize), X @ np.arctanh(Yt.T)).T
+    Wout = Yt @ X.T @ linalg.inv(X @ X.T + reg *
+                            np.eye(1+resSize))
 
     # save
     np.savez_compressed(trained_file, Win=Win, W=W, X=X,
