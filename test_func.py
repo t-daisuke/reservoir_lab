@@ -503,36 +503,36 @@ def create_local_nco_test_data(main_path, res_params, distance, df, Smesh_list):
     test_NCOGR(local_area_path, res_params, distance, grld)
     return
 
-def create_local_nco_test_data_thread(main_path, res_params, distance, df, Smesh_list):
-    gmom = get_matrix_of_mesh()
-    gnl = get_n_list(res_params[4])
-    print("Local area thread trained at " + str(Smesh_list))
-    all_dma = get_raw_mesh_array(df)
-    dma = cut_mlist(all_dma,Smesh_list)
-    Rl = get_R_list(dma, gmom, gnl)
-    grld = get_Rlist_dict(Rl,gmom,gnl)
-    local_area_path = main_path + "smesh"
-    for smesh in Smesh_list:
-        local_area_path += "-" + str(smesh)
-    local_area_path += "/"
-    if not os.path.isdir(local_area_path):
-        print("path ERROR")
-        return
+# def create_local_nco_test_data_thread(main_path, res_params, distance, df, Smesh_list):
+#     gmom = get_matrix_of_mesh()
+#     gnl = get_n_list(res_params[4])
+#     print("Local area thread trained at " + str(Smesh_list))
+#     all_dma = get_raw_mesh_array(df)
+#     dma = cut_mlist(all_dma,Smesh_list)
+#     Rl = get_R_list(dma, gmom, gnl)
+#     grld = get_Rlist_dict(Rl,gmom,gnl)
+#     local_area_path = main_path + "smesh"
+#     for smesh in Smesh_list:
+#         local_area_path += "-" + str(smesh)
+#     local_area_path += "/"
+#     if not os.path.isdir(local_area_path):
+#         print("path ERROR")
+#         return
     
-    print("Data mesh:" + str(len(dma)))
-    print("Reservoir mesh:" + str(len(Rl)))
-    test_NCOGR_thread(local_area_path, res_params, distance, grld)
-    return
+#     print("Data mesh:" + str(len(dma)))
+#     print("Reservoir mesh:" + str(len(Rl)))
+#     test_NCOGR_thread(local_area_path, res_params, distance, grld)
+#     return
 
-def create_nco_test_data_thread(main_path, res_params, distance, df, is_update):
-    gmom = get_matrix_of_mesh()
-    gnl = get_n_list(res_params[4])
-    dma = get_raw_mesh_array(df)
-    Rl = get_R_list(dma, gmom, gnl)
-    grld = get_Rlist_dict(Rl,gmom,gnl)
+# def create_nco_test_data_thread(main_path, res_params, distance, df, is_update):
+#     gmom = get_matrix_of_mesh()
+#     gnl = get_n_list(res_params[4])
+#     dma = get_raw_mesh_array(df)
+#     Rl = get_R_list(dma, gmom, gnl)
+#     grld = get_Rlist_dict(Rl,gmom,gnl)
     
-    print("Data mesh:" + str(len(dma)))
-    print("Reservoir mesh:" + str(len(Rl)))
-    test_NCOGR_thread(main_path, res_params, distance, grld, is_update)
-    return
+#     print("Data mesh:" + str(len(dma)))
+#     print("Reservoir mesh:" + str(len(Rl)))
+#     test_NCOGR_thread(main_path, res_params, distance, grld, is_update)
+#     return
 """TEST FUNC END"""
