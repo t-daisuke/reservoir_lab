@@ -30,7 +30,7 @@ if __name__ == '__main__':
                   24*60, 3*24*60, 2*24*60-60+1,
                   1e-8, 2, 1.0)
     distance = 30
-    is_up = False
+    is_up = True
     Smesh_list = [45]
     center_mesh_mat = (24,35) #ikebukuro 533945774 9*9
     
