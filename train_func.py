@@ -452,11 +452,11 @@ def train_GR(main_path, res_params, raw_data_subset, mesh_code, is_update=False)
     #                         np.eye(1+resSize))@ X.T)
     # Wout = linalg.solve(X @ X.T + reg *
     #                          np.eye(1+resSize), X @ np.arctanh(Yt.T)).T
-    # Wout = Yt @ X.T @ linalg.inv(X @ X.T + reg *
-    #                         np.eye(1+resSize))
-    limit = 0.999
-    Yt_for_arctanh = np.clip(Yt,-1*limit,limit)
-    Wout = np.arctanh(Yt_for_arctanh) @ np.linalg.pinv(X)
+    Wout = Yt @ X.T @ linalg.inv(X @ X.T + reg *
+                            np.eye(1+resSize))
+    # limit = 0.999
+    # Yt_for_arctanh = np.clip(Yt,-1*limit,limit)
+    # Wout = np.arctanh(Yt_for_arctanh) @ np.linalg.pinv(X)
 
     # save
     np.savez_compressed(trained_file, Win=Win, W=W, X=X,
