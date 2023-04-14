@@ -2,11 +2,9 @@
 # Ver0324
 
 # import
-import pandas as pd
 import os
 import time
 import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
 import datetime
 from scipy import linalg
