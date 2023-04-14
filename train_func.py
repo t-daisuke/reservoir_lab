@@ -427,7 +427,7 @@ def train_GR(main_path, res_params, raw_data_subset, mesh_code, is_update=False)
     Out = Data[0:outSize, 1:trainLen+testLen]  # 出力
     a = leakingRate
     np.random.seed(seed_num)
-    Win = (np.random.rand(resSize, 1+inSize) - 0.5) * 1  # -0.5~0.5の一様分布
+    Win = (np.random.rand(resSize, 1+inSize) - 0.5) * 2  # -1~1の一様分布
     W = create_sparse_rand_matrix(resSize, resSize, conectivity)
     # rhoW = max(abs(linalg.eig(W)[0]))
     rhoW = max(linalg.eigh(W)[0])
@@ -446,8 +446,14 @@ def train_GR(main_path, res_params, raw_data_subset, mesh_code, is_update=False)
             X[:, t-initLen] = np.vstack((1, x))[:, 0]
     # Wout = linalg.solve(np.dot(X, X.T) + reg *
     #                     np.eye(1+resSize), np.dot(X, Yt.T)).T
-    Wout = linalg.solve(X @ X.T + reg *
-                            np.eye(1+resSize), X @ Yt.T).T
+    # Wout = linalg.solve(X @ X.T + reg *
+    #                         np.eye(1+resSize), X @ Yt.T).T
+    # Wout = np.tanh(Yt)@(np.linalg.inv(X.T @ X + reg *
+    #                         np.eye(1+resSize))@ X.T)
+    # Wout = linalg.solve(X @ X.T + reg *
+    #                          np.eye(1+resSize), X @ np.arctanh(Yt.T)).T
+    Wout = Yt @ X.T @ linalg.inv(X @ X.T + reg *
+                            np.eye(1+resSize))
 
     # save
     np.savez_compressed(trained_file, Win=Win, W=W, X=X,
