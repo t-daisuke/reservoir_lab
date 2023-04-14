@@ -49,7 +49,9 @@ if __name__ == '__main__':
             start_time = time.perf_counter() #Start
             print("Start Train")
 
-            create_local_area_trained_data(main_path,res_params,df,Smesh_list,is_update = is_up)
+            # create_local_area_trained_data(main_path,res_params,df,Smesh_list,is_update = is_up)
+            #TODO repeat_numはファイル名やres_paramsに含めていません。
+            create_local_area_trained_data_with_repeated_real_data(main_path,res_params,df,Smesh_list,repeat_num=60,is_update = is_up)
 
             print("Save Train Data:"+ str(time.perf_counter() - start_time) + "s")
 
