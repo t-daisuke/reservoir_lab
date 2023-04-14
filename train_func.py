@@ -385,6 +385,106 @@ def sprit_printer(i,M,sprit_num=20):
     subset_size = M//sprit_num
     return (i % subset_size == 1)
 
+####Normalize
+def normalize_data_list(data_list,max_abs=0.999):
+    mvlist=[]
+
+    tmp_data=np.array(data_list[0])
+    m=tmp_data.mean()
+    tmp_data = tmp_data - m
+    v=np.max(np.abs(tmp_data))
+    tmp_data = tmp_data/v * max_abs
+    mvlist.append([m,v])
+    
+    all_data = tmp_data
+
+    for i in range(1,len(data_list)):
+      tmp_data=np.array(data_list[i])
+      m=tmp_data.mean()
+      tmp_data = tmp_data - m
+      v=np.max(np.abs(tmp_data))
+      tmp_data = tmp_data/v * max_abs
+      mvlist.append([m,v])
+
+      all_data = np.vstack((all_data, tmp_data))
+    
+    return all_data, np.array(mvlist)
+
+#mesh_listからTraining用のraw_dataをつくる
+def create_normalized_data_from_mesh_list(df,mesh_list):
+  test = df.sort_values(['mesh_code','yyyymm','hour','holiday_flg','gender'])
+  data_list = [] #np.array
+  test_list = [] #df
+  #中央、上、下、？、_
+  for tmp_mesh_code in mesh_list:
+    #gender,holidayを全て足し合わせて、/2にした
+    test_mesh = test[test['mesh_code'] == tmp_mesh_code]
+    if len(test_mesh) == 0: print("mesh_code_ERROR")
+
+    tmp_dic = dict(sum_id = [i for i in range(len(test_mesh)//4)])
+    df_sum = pd.DataFrame(data=tmp_dic)
+
+    n=0
+    mesh_array=test_mesh['mesh_code'].to_numpy()
+    sum_array=test_mesh['sum_population'].to_numpy()
+    hour_array=test_mesh['hour'].to_numpy()
+    day_array=test_mesh['yyyymm'].to_numpy()
+
+    meshcode_list=[]
+    sum_list=[]
+    hour_list=[]
+    day_list=[]
+    for i in df_sum['sum_id'].to_numpy():
+      n=4*i
+      meshcode_list.append(mesh_array[n])
+      sum_list.append(sum_array[n])
+      day_list.append(day_array[n])
+      hour_list.append(hour_array[n])
+      for j in [1,2,3]:
+        n = 4*i + j
+        sum_list[-1] = sum_list[-1] + sum_array[n]
+      sum_list[-1] = sum_list[-1]/2
+
+    df_sum['mesh_code'] = np.array(meshcode_list)
+    df_sum['sum_population'] = np.array(sum_list)
+    df_sum['hour'] = np.array(hour_list)
+    df_sum['day'] = np.array(day_list)
+
+    min = [i for _ in range(len(df_sum)-1) for i in range(60)]
+    min.append(0) #201901/0:00~2019/06/23:00 (最後は終点がないから補填できない)
+    tmp_dic = dict(minutes = min) 
+    df_linear = pd.DataFrame(data=tmp_dic)
+
+    l_mesh_list=[]
+    l_hour_list=[]
+    l_day_list=[]
+    l_sum_list=[]
+
+    for df_sum_i in range(len(df_sum)-1):
+      tmp = complement_linear(sum_list[df_sum_i],sum_list[df_sum_i+1],60)
+      for i in range(60):
+        l_mesh_list.append(meshcode_list[df_sum_i])
+        l_hour_list.append(hour_list[df_sum_i])
+        l_day_list.append(day_list[df_sum_i])
+
+        l_sum_list.append(tmp[i])
+      
+    l_mesh_list.append(mesh_list[-1])
+    l_hour_list.append(hour_list[-1])
+    l_day_list.append(day_list[-1])
+    l_sum_list.append(sum_list[-1])
+
+    df_linear['mesh_code'] = np.array(l_mesh_list)
+    df_linear['sum_population'] = np.array(l_sum_list)
+    df_linear['hour'] = np.array(l_hour_list)
+    df_linear['day'] = np.array(l_day_list)
+
+    test_list.append(df_linear)
+    data_list.append(l_sum_list)
+
+  data, mvlist = normalize_data_list(data_list)
+  return data, mvlist
+
 """### train_GR
 
 途中でやめると、途中のデータを読み出してエラーになることがある。そのときはファイルを消してください
