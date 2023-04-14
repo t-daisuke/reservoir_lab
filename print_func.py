@@ -368,3 +368,12 @@ def copy_gr_data(main_path, saved_test_path, res_params, distance, Smesh_list=[]
 
   get_copy_gr_data(main_path, saved_test_path, res_params, distance, mesh_list)
   return
+
+def show_print_array(X,name="no_name",figsize=(40,20),fontsize=30):
+  plt.rcParams["font.size"] =fontsize
+  fig = plt.figure(figsize=figsize)
+  ax = fig.add_subplot(111, title=name)
+
+  ax.plot(X)
+  
+  fig.show()

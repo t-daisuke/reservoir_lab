@@ -485,6 +485,16 @@ def create_normalized_data_from_mesh_list(df,mesh_list):
   data, mvlist = normalize_data_list(data_list)
   return data, mvlist
 
+####get raw data from Liniear interploted data
+
+def extract_data_every_n(raw_data,n=60):
+    raw_n_data = np.hstack([raw_data[:, 0::n], raw_data[:, -1].reshape(-1, 1)])
+    return raw_n_data
+
+def repeat_data_columns(raw_data, n):
+    repeated_data = np.tile(raw_data, n)
+    return repeated_data
+
 """### train_GR
 
 途中でやめると、途中のデータを読み出してエラーになることがある。そのときはファイルを消してください
