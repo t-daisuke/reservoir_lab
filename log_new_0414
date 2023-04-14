@@ -1,0 +1,143 @@
+(base) PS C:\Users\tdais\Desktop\GRforM> python .\all_and_print_local_prgrm_some_params.py        
+Start Train
+Local area trained at [45]
+make ./all_prgrm_output/smesh-45/
+make ./all_prgrm_output/smesh-45/-1-1-100-0.75-9-9-1440-4320-2821-1e-08-2-0.001/train/
+0.31% done 2.27 s passed, this subset needs 0.99 s
+5.25% done 18.46 s passed, this subset needs 0.94 s
+10.19% done 34.57 s passed, this subset needs 1.01 s
+15.12% done 51.02 s passed, this subset needs 1.09 s
+20.06% done 66.80 s passed, this subset needs 0.99 s
+25.00% done 82.66 s passed, this subset needs 1.04 s
+29.94% done 98.53 s passed, this subset needs 1.01 s
+34.88% done 114.70 s passed, this subset needs 1.02 s
+39.81% done 130.89 s passed, this subset needs 1.11 s
+44.75% done 147.01 s passed, this subset needs 1.04 s
+49.69% done 163.13 s passed, this subset needs 1.13 s
+54.63% done 179.69 s passed, this subset needs 0.97 s
+59.57% done 195.52 s passed, this subset needs 0.98 s
+64.51% done 211.69 s passed, this subset needs 1.06 s
+69.44% done 227.64 s passed, this subset needs 1.07 s
+74.38% done 243.62 s passed, this subset needs 1.00 s
+79.32% done 259.74 s passed, this subset needs 0.96 s
+84.26% done 275.72 s passed, this subset needs 1.01 s
+89.20% done 292.09 s passed, this subset needs 0.99 s
+94.14% done 308.19 s passed, this subset needs 0.95 s
+99.07% done 324.25 s passed, this subset needs 1.01 s
+Train Data Saved
+Save Train Data:326.3370192s
+Start GR
+Local area trained at [45]  
+Data mesh:400
+Reservoir mesh:324
+0.0s LargeGeoReservoir Start...
+0.31% done 0.04 s passed, this subset needs 0.02 s and this section time is 0.04 s
+20.06% done 0.94 s passed, this subset needs 0.01 s and this section time is 0.94 s
+39.81% done 1.91 s passed, this subset needs 0.01 s and this section time is 1.91 s
+59.57% done 2.81 s passed, this subset needs 0.02 s and this section time is 2.81 s
+79.32% done 3.77 s passed, this subset needs 0.01 s and this section time is 3.77 s
+99.07% done 4.66 s passed, this subset needs 0.01 s and this section time is 4.66 s
+Load Ended
+4.70 s passed, this section 4.70 s     
+Initialize and Compute Geo reservoir...
+1.06% done 5.38 s passed, this subset needs 0.34 s and this section time is 0.69 s
+5.32% done 6.74 s passed, this subset needs 0.34 s and this section time is 2.05 s
+9.57% done 8.06 s passed, this subset needs 0.33 s and this section time is 3.37 s
+13.83% done 9.36 s passed, this subset needs 0.32 s and this section time is 4.67 s
+18.09% done 10.74 s passed, this subset needs 0.34 s and this section time is 6.05 s
+22.34% done 12.13 s passed, this subset needs 0.35 s and this section time is 7.44 s
+26.60% done 13.66 s passed, this subset needs 0.39 s and this section time is 8.97 s
+30.85% done 15.09 s passed, this subset needs 0.37 s and this section time is 10.39 s
+35.11% done 16.72 s passed, this subset needs 0.44 s and this section time is 12.03 s
+39.36% done 18.16 s passed, this subset needs 0.33 s and this section time is 13.47 s
+43.62% done 19.48 s passed, this subset needs 0.33 s and this section time is 14.79 s
+47.87% done 20.79 s passed, this subset needs 0.33 s and this section time is 16.10 s
+52.13% done 22.11 s passed, this subset needs 0.33 s and this section time is 17.41 s
+56.38% done 23.45 s passed, this subset needs 0.36 s and this section time is 18.76 s
+60.64% done 25.09 s passed, this subset needs 0.39 s and this section time is 20.40 s
+64.89% done 26.49 s passed, this subset needs 0.33 s and this section time is 21.79 s
+69.15% done 27.88 s passed, this subset needs 0.35 s and this section time is 23.19 s
+73.40% done 29.27 s passed, this subset needs 0.33 s and this section time is 24.58 s
+77.66% done 30.62 s passed, this subset needs 0.35 s and this section time is 25.93 s
+81.91% done 32.01 s passed, this subset needs 0.34 s and this section time is 27.32 s
+86.17% done 33.37 s passed, this subset needs 0.33 s and this section time is 28.68 s
+90.43% done 34.79 s passed, this subset needs 0.38 s and this section time is 30.10 s
+94.68% done 36.28 s passed, this subset needs 0.38 s and this section time is 31.59 s
+98.94% done 37.76 s passed, this subset needs 0.36 s and this section time is 33.06 s
+Coputed !!
+37.76 s passed, this section 33.06 s
+Saving...
+make ./all_prgrm_output/smesh-45/-1-1-100-0.75-9-9-1440-4320-2821-1e-08-2-0.001/30step-test/      
+0.31% done 37.80 s passed, this subset needs 0.02 s and this section time is 0.05 s
+20.06% done 38.96 s passed, this subset needs 0.02 s and this section time is 1.20 s
+39.81% done 40.10 s passed, this subset needs 0.02 s and this section time is 2.35 s
+59.57% done 41.26 s passed, this subset needs 0.02 s and this section time is 3.50 s
+79.32% done 42.51 s passed, this subset needs 0.03 s and this section time is 4.76 s
+99.07% done 43.70 s passed, this subset needs 0.02 s and this section time is 5.94 s
+All completed
+43.73 s passed, this section 5.98s
+Save GR Test Data:43.89779979999997s
+Start NCO
+Local area trained at [45]
+Data mesh:400
+Reservoir mesh:324
+0.0s NotCoopGeoReservoir Start...
+make ./all_prgrm_output/smesh-45/-1-1-100-0.75-9-9-1440-4320-2821-1e-08-2-0.001/30step-test-nco/
+0.31% done 0.28 s passed, this subset needs 0.17 s
+10.19% done 3.61 s passed, this subset needs 0.09 s
+20.06% done 6.72 s passed, this subset needs 0.09 s
+29.94% done 9.79 s passed, this subset needs 0.09 s
+39.81% done 12.95 s passed, this subset needs 0.10 s
+49.69% done 16.00 s passed, this subset needs 0.10 s
+59.57% done 19.01 s passed, this subset needs 0.09 s
+69.44% done 22.00 s passed, this subset needs 0.09 s
+79.32% done 25.08 s passed, this subset needs 0.09 s
+89.20% done 28.11 s passed, this subset needs 0.10 s
+99.07% done 31.43 s passed, this subset needs 0.09 s
+All completed
+31.63 s passed
+Save NCO Test Data:31.68096250000002s
+(-1, 1, 100, 0.75, 9, 9, 1440, 4320, 2821, 1e-08, 2, 0.001)for Time:401.91654159999996s
+Start mse create
+make./smesh-45/
+make ./smesh-45/mse_map/
+NOT existed
+5.00% done 0.28 s passed. in GR
+15.00% done 0.82 s passed. in GR
+25.00% done 1.44 s passed. in GR
+35.00% done 1.98 s passed. in GR
+45.00% done 2.53 s passed. in GR
+55.00% done 3.08 s passed. in GR
+65.00% done 3.64 s passed. in GR
+75.00% done 4.20 s passed. in GR
+85.00% done 4.75 s passed. in GR
+95.00% done 5.06 s passed. in GR
+Complete!
+Saved!./smesh-45/mse_map/
+NOT existed
+5.00% done 0.27 s passed. in NCO
+15.00% done 0.89 s passed. in NCO
+25.00% done 1.45 s passed. in NCO
+35.00% done 2.05 s passed. in NCO
+45.00% done 2.60 s passed. in NCO
+55.00% done 3.19 s passed. in NCO
+65.00% done 3.88 s passed. in NCO
+75.00% done 4.50 s passed. in NCO
+85.00% done 5.03 s passed. in NCO
+95.00% done 5.29 s passed. in NCO
+Complete!
+Saved!./smesh-45/mse_map/
+NOT existed
+Saved!./smesh-45/mse_map/
+Save mse create Test Data:10.408596099999954s
+Start copy gr data
+make ./smesh-45/gr_data/
+NOT existed
+Saved!./smesh-45/gr_data/-1-1-100-0.75-9-9-1440-4320-2821-1e-08-2-0.001-30533945872
+Saved!./smesh-45/gr_data/-1-1-100-0.75-9-9-1440-4320-2821-1e-08-2-0.001-30533945773
+Saved!./smesh-45/gr_data/-1-1-100-0.75-9-9-1440-4320-2821-1e-08-2-0.001-30533945774
+Saved!./smesh-45/gr_data/-1-1-100-0.75-9-9-1440-4320-2821-1e-08-2-0.001-30533945783
+Saved!./smesh-45/gr_data/-1-1-100-0.75-9-9-1440-4320-2821-1e-08-2-0.001-30533945772
+Copy Data Complete!
+Save copy gr data Test Data:0.4241036999999892s
+(-1, 1, 100, 0.75, 9, 9, 1440, 4320, 2821, 1e-08, 2, 0.001)for Time:412.74998919999996s
