@@ -26,18 +26,18 @@ if __name__ == '__main__':
     # (expIndex, leakingRate, resSize, spectralRadius, inSize, outSize,
     #  initLen, trainLen, testLen,
     #  reg, seed_num, conectivity) = res_params
-    res_params = (-9.5, 1, 1000, 0.75, 9, 9,
+    res_params = (-9.5, 1, 100, 0.75, 9, 9,
                   24*60, 3*24*60, 2*24*60-60+1,
                   1e-8, 2, 1.0)
     distance = 30
-    is_up = False
+    is_up = True
     Smesh_list = [45]
     center_mesh_mat = (24,35) #ikebukuro 533945774 9*9
     
     all_program_start_time = time.perf_counter()
     
     for cone in [0.001, 0.01, 0.1, 1.0]:
-        for sc in [-1, -3, -5, -7, -9]:
+        for sc in [-10,-11,-12,-13]:
             # [-1, -3, -5, -7, -9]
             res_params = (sc, 1, 100, 0.75, 9, 9,
                   24*60, 3*24*60, 2*24*60-60+1,
