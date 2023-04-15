@@ -85,6 +85,10 @@ GET MSE MAP FUNCTION
 def get_ave_MSE(teacher, output):
   se = np.zeros(len(output))
   for i in range(len(output)):
+    if i == len(teacher):
+      #TODO (-1, 1, 100, 0.75, 9, 9, 1440, 4320, 2821, 1e-08, 2, 0.001), d=1でエラー
+      print(str(i)+": (Yt, Yout) = "+str((len(teacher),len(output))))
+      break
     se[i] =  np.square( (output[i] - teacher[i]) / teacher[i])
 
   mse = np.sqrt(se.sum()/len(se))
