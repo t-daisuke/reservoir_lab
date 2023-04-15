@@ -15,6 +15,12 @@ import time
 from train_func import *
 from test_func import *
 
+def display_time(t):
+    t = float(t)
+    hours = int(t // 3600)
+    minutes = int((t % 3600) // 60)
+    seconds = round((t % 60), 1)
+
 """
 save file function
 """

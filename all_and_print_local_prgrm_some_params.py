@@ -61,7 +61,8 @@ if __name__ == '__main__':
                 #TODO repeat_numはファイル名やres_paramsに含めていません。
                 create_local_area_trained_data_with_repeated_real_data(main_path,res_params,df,Smesh_list,repeat_num=60,is_update = is_up)
 
-                print("Save Train Data:"+ str(time.perf_counter() - start_time) + "s")
+                print("Save Train Data:")
+                display_time(time.perf_counter() - start_time)
 
                 start_time = time.perf_counter()  # Start
                 print("Start GR")
@@ -70,14 +71,16 @@ if __name__ == '__main__':
 
                 create_local_gr_test_data(main_path, res_params, distance, df, Smesh_list)
 
-                print("Save GR Test Data:" + str(time.perf_counter() - start_time) + "s")
+                print("Save GR Test Data:" )
+                display_time(time.perf_counter() - start_time)
 
                 start_time = time.perf_counter()  # Start
                 print("Start NCO")
 
                 create_local_nco_test_data(main_path, res_params, distance, df, Smesh_list)
 
-                print("Save NCO Test Data:" + str(time.perf_counter() - start_time) + "s")
+                print("Save NCO Test Data:" )
+                display_time(time.perf_counter() - start_time)
                 
                 
                 #####################Print
@@ -88,14 +91,16 @@ if __name__ == '__main__':
                 
                 create_mse_maps(main_path, saved_test_path, res_params, distance, df, Smesh_list)
                 
-                print("Save mse create Test Data:" + str(time.perf_counter() - start_time) + "s")
+                print("Save mse create Test Data:" )
+                display_time(time.perf_counter() - start_time)
                 
                 start_time = time.perf_counter()  # Start
                 print("Start copy gr data")
                 
                 copy_gr_data(main_path, saved_test_path, res_params, distance, Smesh_list, center_mesh_mat)
                 
-                print("Save copy gr data Test Data:" + str(time.perf_counter() - start_time) + "s")
+                print("Save copy gr data Test Data:" )
+                display_time(time.perf_counter() - start_time)
                 
                 print("For Time:" + str(time.perf_counter() - for_time) + "s")
                 print(str(res_params) + "d:" + str(distance)) 
