@@ -44,7 +44,7 @@ if __name__ == '__main__':
     for d in d_list:       
         for cone in cnct_list:
             for sc in sc_list:
-                res_params = (sc, 1, 100, 0.75, 9, 9,
+                res_params = (sc, 1, 1000, 0.75, 9, 9,
                     24*60, 3*24*60, 2*24*60-60+1,
                     1e-8, 2, cone)
                 distance = d
@@ -78,7 +78,6 @@ if __name__ == '__main__':
 
                 print("Save NCO Test Data:" + str(time.perf_counter() - start_time) + "s")
                 
-                print(str(res_params) + "for Time:" + str(time.perf_counter() - for_time) + "s")
                 
                 #####################Print
                 main_path = './'
@@ -97,6 +96,8 @@ if __name__ == '__main__':
                 
                 print("Save copy gr data Test Data:" + str(time.perf_counter() - start_time) + "s")
                 
-                print(str(res_params) + "for Time:" + str(time.perf_counter() - for_time) + "s")
+                print("For Time:" + str(time.perf_counter() - for_time) + "s")
+                print(str(res_params) + "d:" + str(distance)) 
+                print()
     
     print("All Time:" + str(time.perf_counter() - all_program_start_time) + "s")
