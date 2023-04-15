@@ -64,6 +64,8 @@ if __name__ == '__main__':
 
                 start_time = time.perf_counter()  # Start
                 print("Start GR")
+                print(str(res_params) + "d:" + str(distance)) 
+                print()
 
                 create_local_gr_test_data(main_path, res_params, distance, df, Smesh_list)
 
