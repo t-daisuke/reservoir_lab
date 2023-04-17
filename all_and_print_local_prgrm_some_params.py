@@ -102,8 +102,10 @@ if __name__ == '__main__':
                 print("Save copy gr data Test Data:" )
                 display_time(time.perf_counter() - start_time)
                 
-                print("For Time:" + str(time.perf_counter() - for_time) + "s")
+                print("For Time:")
+                display_time(time.perf_counter() - for_time)
                 print(str(res_params) + "d:" + str(distance)) 
                 print()
     
-    print("All Time:" + str(time.perf_counter() - all_program_start_time) + "s")
+    print("All Time:")
+    display_time(time.perf_counter() - all_program_start_time)
