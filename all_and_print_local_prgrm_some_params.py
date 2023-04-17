@@ -35,7 +35,7 @@ if __name__ == '__main__':
     
     
     # d_list=[2,4,8,16,32,64]
-    d_list=[2,4,8]
+    d_list=[16,32,64]
     is_up = False
     cnct_list = [0.001, 0.01, 0.1, 1.0]
     sc_list = [-1, -3, -5, -7, -9, -11, -13]
@@ -54,15 +54,15 @@ if __name__ == '__main__':
                 ###################Reservoir
                 for_time = time.perf_counter()
                 
-                start_time = time.perf_counter() #Start
-                print("Start Train")
+                # start_time = time.perf_counter() #Start
+                # print("Start Train")
 
-                # create_local_area_trained_data(main_path,res_params,df,Smesh_list,is_update = is_up)
-                #TODO repeat_numはファイル名やres_paramsに含めていません。
-                create_local_area_trained_data_with_repeated_real_data(main_path,res_params,df,Smesh_list,repeat_num=60,is_update = is_up)
+                # # create_local_area_trained_data(main_path,res_params,df,Smesh_list,is_update = is_up)
+                # #TODO repeat_numはファイル名やres_paramsに含めていません。
+                # create_local_area_trained_data_with_repeated_real_data(main_path,res_params,df,Smesh_list,repeat_num=60,is_update = is_up)
 
-                print("Save Train Data:")
-                display_time(time.perf_counter() - start_time)
+                # print("Save Train Data:")
+                # display_time(time.perf_counter() - start_time)
 
                 start_time = time.perf_counter()  # Start
                 print("Start GR")
@@ -102,8 +102,10 @@ if __name__ == '__main__':
                 print("Save copy gr data Test Data:" )
                 display_time(time.perf_counter() - start_time)
                 
-                print("For Time:" + str(time.perf_counter() - for_time) + "s")
+                print("For Time:")
+                display_time(time.perf_counter() - for_time)
                 print(str(res_params) + "d:" + str(distance)) 
                 print()
     
-    print("All Time:" + str(time.perf_counter() - all_program_start_time) + "s")
+    print("All Time:")
+    display_time(time.perf_counter() - all_program_start_time)
