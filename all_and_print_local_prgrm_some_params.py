@@ -35,17 +35,18 @@ if __name__ == '__main__':
     
     
     # d_list=[2,4,8,16,32,64]
-    d_list=[16,32,64]
+    d_list=[32]
     is_up = False
     cnct_list = [0.001, 0.01, 0.1, 1.0]
     sc_list = [-1, -3, -5, -7, -9, -11, -13]
+    neuro = 100
     
     all_program_start_time = time.perf_counter()
     
     for d in d_list:       
         for cone in cnct_list:
             for sc in sc_list:
-                res_params = (sc, 1, 1000, 0.75, 9, 9,
+                res_params = (sc, 1, neuro, 0.75, 9, 9,
                     24*60, 3*24*60, 2*24*60-60+1,
                     1e-8, 2, cone)
                 distance = d
@@ -59,7 +60,7 @@ if __name__ == '__main__':
 
                 # # create_local_area_trained_data(main_path,res_params,df,Smesh_list,is_update = is_up)
                 # #TODO repeat_numはファイル名やres_paramsに含めていません。
-                # create_local_area_trained_data_with_repeated_real_data(main_path,res_params,df,Smesh_list,repeat_num=60,is_update = is_up)
+                create_local_area_trained_data_with_repeated_real_data(main_path,res_params,df,Smesh_list,repeat_num=60,is_update = is_up)
 
                 # print("Save Train Data:")
                 # display_time(time.perf_counter() - start_time)
