@@ -149,7 +149,7 @@ def load_mse_map(name, main_path, res_params, distance):
     return False, 0
 
 #読み込む
-def load_gr_data(mesh_code, main_path, res_params, distance):
+def check_gr_data_existed(mesh_code, main_path, res_params, distance):
   # write into main_path/gr_data
   save_path = main_path + "gr_data/"
   if not os.path.isdir(save_path):
@@ -165,6 +165,39 @@ def load_gr_data(mesh_code, main_path, res_params, distance):
   else:
     print("NOT existed")
     return False
+
+def load_gr_data(main_path, res_params, distance, mesh_code):
+    gr_data_name = main_path + "gr_data/" + str(res_params[0])
+    for prm_i in range(1,len(res_params)):
+        gr_data_name += "-" + str(res_params[prm_i])
+    gr_data_name += "-" + str(distance) + str(mesh_code) + ".npz"
+
+    try:
+        npzfile = np.load(gr_data_name)
+
+        Win = npzfile['Win']
+        W = npzfile['W']
+        X = npzfile['X']
+        Wout = npzfile['Wout']
+        x = npzfile['x']
+        Data = npzfile['Data']
+        Ygeo = npzfile['Ygeo']
+        UUgeo = npzfile['UUgeo']
+        XXgeo = npzfile['XXgeo']
+        Outgeo = npzfile['Outgeo']
+        trainOgeo = npzfile['trainOgeo']
+        Ynco = npzfile['Ynco']
+        UUnco = npzfile['UUnco']
+        XXnco = npzfile['XXnco']
+        Outnco = npzfile['Outnco']
+        trainOnco = npzfile['trainOnco']
+        
+        return (Win, W, X, Wout, x, Data, Ygeo, UUgeo, XXgeo, Outgeo, trainOgeo, Ynco, UUnco, XXnco, Outnco, trainOnco)
+        
+    except IOError:
+        print("File not found.")
+        print(gr_data_name)
+        return None
 
 def get_mse_map_GR(grl, gmom, main_path, saved_test_path, res_params, distance, Smesh_list=[]):
   is_existed, mse = load_mse_map("geo", main_path, res_params, distance)
@@ -292,7 +325,7 @@ def create_mse_maps(main_path, saved_test_path, res_params, distance, df, Smesh_
 def get_copy_gr_data(main_path, saved_test_path, res_params, distance, mesh_list):
   is_existed = True
   for m in mesh_list:
-    is_existed = is_existed and load_gr_data(m, main_path, res_params, distance)
+    is_existed = is_existed and check_gr_data_existed(m, main_path, res_params, distance)
   if is_existed:
     print("Existed:" + str(mesh_list))
     print(str(res_params))
