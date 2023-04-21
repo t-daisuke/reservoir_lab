@@ -53,6 +53,7 @@ def load_trained_data(main_path, res_params, mesh_code):
 
 
 def dis_in_out(Data, inSize, outSize, dis):
+    #TODO
     W = int(np.ceil(Data.shape[1]/dis))-1  # In,Outの横の長さ
     In = np.zeros((inSize, W))  # Dataの横の長さをdis分割してお尻だけ削る
     Out = np.zeros((outSize, W))  # 頭だけ削る
