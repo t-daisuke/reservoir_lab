@@ -422,3 +422,40 @@ def show_print_array(X,name="no_name",figure_number=None,figsize=(10,5),fontsize
   
   if figure_number==None:plt.show()
   else: return
+
+#######
+# For Analysis
+#######
+
+def set_graph_params():
+  plt.rcParams["font.size"] = 15
+  figsize = (20, 5)
+  cmap_mse = plt.cm.Blues
+  cmap_mse.set_bad(color='Green')
+  cmap = plt.cm.bwr
+  cmap.set_bad(color='Green')
+  return figsize, cmap_mse, cmap
+
+def plot_graph(ax, hoge_map2, cmap_mse, j, i, scaling_list, cnct_list, res_params, distance, name):
+    im = ax.imshow(hoge_map2, cmap=cmap_mse)
+
+    if j == len(scaling_list) - 1:
+        ax.set_xlabel("cnct 10^-" + str(cnct_list[i]), fontsize=30)
+
+    if i == 0:
+        ax.set_ylabel("scale 10^" + str(scaling_list[j]), fontsize=30)
+
+    if i == 2: ax.set_title(name + str(res_params) + "dis:" + str(distance), fontsize=30)
+
+    major_ticks = np.arange(0, ax.get_xlim()[1], 20)
+    minor_ticks = np.arange(0, ax.get_xlim()[1], 10)
+    ax.set_xticks(major_ticks)
+    ax.set_xticks(minor_ticks, minor=True)
+    ax.set_yticks(major_ticks)
+    ax.set_yticks(minor_ticks, minor=True)
+    ax.grid(which='minor', color="white", linestyle="--")
+    ax.grid(which='major', color="yellow")
+
+    im.set_clim(0, 0.5)  # limits
+
+    return im

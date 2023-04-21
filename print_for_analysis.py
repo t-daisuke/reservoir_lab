@@ -4,42 +4,38 @@ import os
 from train_func import *
 from print_func import *
 
-if __name__ == '__main__':
-    # Variable
+def main():
+    saved_folder = "./"
+    cnct_list = [0, 1, 2, 3]
+    scaling_list = [-1, -3, -5, -7, -9, -11, -13]
+    distance = 32
+    names = ["diff", "geo", "nco"]
+    res_params = [-9, 1, 100, 0.75, 9, 9,
+                  24 * 60, 3 * 24 * 60, 2 * 24 * 60 - 60 + 1,
+                  1e-8, 2, 10 ** (-1.0 * 3)]
 
-    df_path = "./df/"
-    path = './KDDI/'
+    figsize, cmap_mse, cmap = set_graph_params()
 
-    if os.path.isfile(df_path+"df.csv"):
-        df = pd.read_csv(df_path+"df.csv")
-    else:
-        print("NO DF FILE")
-    
-    gmom = get_matrix_of_mesh()
-    gnl = get_n_list(9) #たぶんinSize
-    dma = get_raw_mesh_array(df) #おおすぎた
-    Rlist = get_R_list(dma,gmom,gnl)
-    mesh_code = 533945774
-    gml = get_mesh_list(mesh_code, gmom, gnl)
-    
-    ###Figure Print
-    
-    raw_data = create_subset_from_data_and_mesh_list(df,gml)
-    show_print_array(raw_data[0:9,0:].T,"raw_data",1)
-    
-    # normed_raw_data, mvlist = create_normalized_data_from_mesh_list(df,gml)
-    # show_print_array(normed_raw_data[0:9,0:].T,"normalized_data",2)
-    
-    # show_print_array(raw_data[0:9,0:144].T,":144 data",3)
-    
-    real_data = extract_data_every_n(raw_data,60)
-    show_print_array(real_data.T,"real data",4)
-    
-    repeated_data = repeat_data_columns(real_data,60)
-    show_print_array(repeated_data.T,"repeated data",5, figsize=(100,5))
-    
-    show_print_array(repeated_data[0:,0:144*3].T,"subset of repeated data",6)
-    
+    fig, axs = plt.subplots(len(scaling_list), len(cnct_list), figsize=(figsize[0], figsize[1] * len(scaling_list)))
+    fig.subplots_adjust(bottom=0.2, wspace=0.3, hspace=0.3)
+
+    for j, s in enumerate(scaling_list):
+        for i, c in enumerate(cnct_list):
+            res_params[0] = s
+            res_params[11] = 10 ** (-1.0 * c)
+
+            _, map = load_mse_map(names[1], saved_folder, res_params, distance)
+
+            ax = axs[j][i]
+            im = plot_graph(ax, map, cmap_mse, j, i, scaling_list, cnct_list, res_params, distance, name=names[1])
+
+    cax = fig.add_axes([0.2, 0.1, 0.6, 0.05])
+    fig.colorbar(im, cax=cax, orientation='horizontal')
+
     plt.show()
+
+if __name__ == '__main__':
+    main()
+
     
     
