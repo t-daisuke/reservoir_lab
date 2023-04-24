@@ -436,8 +436,8 @@ def set_graph_params():
   cmap.set_bad(color='Green')
   return figsize, cmap_mse, cmap
 
-def plot_graph(ax, hoge_map2, cmap_mse, j, i, scaling_list, cnct_list, res_params, distance, name):
-    im = ax.imshow(hoge_map2, cmap=cmap_mse)
+def plot_graph(ax, hoge_map2, cmap_mse, j, i, scaling_list, cnct_list, res_params, distance, name, figure_number=None):
+    im = ax.imshow(hoge_map2, cmap=cmap_mse,num=figure_number)
 
     if j == len(scaling_list) - 1:
         ax.set_xlabel("cnct 10^-" + str(cnct_list[i]), fontsize=30)
@@ -459,3 +459,30 @@ def plot_graph(ax, hoge_map2, cmap_mse, j, i, scaling_list, cnct_list, res_param
     im.set_clim(0, 0.5)  # limits
 
     return im
+  
+def print_mse(name_num,saved_folder,scaling_list, cnct_list, res_params, distance, figure_number=None):
+    names = ["diff", "geo", "nco"]
+    
+    figsize, cmap_mse, cmap = set_graph_params()
+
+    fig, axs = plt.subplots(len(scaling_list), len(cnct_list), figsize=(figsize[0], figsize[1] * len(scaling_list)))
+    fig.subplots_adjust(bottom=0.2, wspace=0.3, hspace=0.3)
+
+    for j, s in enumerate(scaling_list):
+        for i, c in enumerate(cnct_list):
+            res_params[0] = s
+            res_params[11] = 10 ** (-1.0 * c)
+
+            _, map = load_mse_map(names[name_num], saved_folder, res_params, distance)
+
+            ax = axs[j][i]
+            if name_num == 0:im = plot_graph(ax, map, cmap, j, i, scaling_list, cnct_list,
+                                             res_params, distance, name=names[name_num],figure_number=figure_number)
+            else: im = plot_graph(ax, map, cmap_mse, j, i, scaling_list, cnct_list,
+                                  res_params, distance, name=names[name_num],figure_number=figure_number)
+
+    cax = fig.add_axes([0.2, 0.1, 0.6, 0.05])
+    fig.colorbar(im, cax=cax, orientation='horizontal')
+
+    if figure_number==None:plt.show()
+    else: return
