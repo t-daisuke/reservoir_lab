@@ -540,10 +540,11 @@ def train_GR(main_path, res_params, raw_data_subset, mesh_code, is_update=False)
     a = leakingRate
     np.random.seed(seed_num)
     Win = (np.random.rand(resSize, 1+inSize) - 0.5) * 2  # -1~1の一様分布
-    W = create_sparse_rand_matrix(resSize, resSize, conectivity)
+    # W = create_sparse_rand_matrix(resSize, resSize, conectivity)
     # rhoW = max(abs(linalg.eig(W)[0]))
-    rhoW = max(linalg.eigh(W)[0])
-    W *= spectralRadius / rhoW
+    # rhoW = max(linalg.eigh(W)[0])
+    # W *= spectralRadius / rhoW
+    W=np.zeros(resSize)
     X = np.zeros((1+resSize, trainLen-initLen))
     Yt = Out[0:outSize, initLen:trainLen]  # init ~ train-1でtrain(train-init分)
 
