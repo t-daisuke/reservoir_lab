@@ -524,7 +524,7 @@ def train_GR(main_path, res_params, raw_data_subset, mesh_code, is_update=False)
 
     # mesh_codeのデータがある→読み出し
     trained_file = train_path + str(mesh_code)
-    if os.path.isfile(trained_file+".npz") and (not is_update):
+    if (not is_update) and os.path.isfile(trained_file+".npz"):
         trained_data = np.load(trained_file+".npz")
         (Win, W, X, Wout, x, Data) = (
             trained_data["Win"], trained_data["W"], trained_data["X"], trained_data["Wout"],
@@ -539,7 +539,8 @@ def train_GR(main_path, res_params, raw_data_subset, mesh_code, is_update=False)
     Out = Data[0:outSize, 1:trainLen+testLen]  # 出力
     a = leakingRate
     np.random.seed(seed_num)
-    Win = (np.random.rand(resSize, 1+inSize) - 0.5) * 2  # -1~1の一様分布
+    # Win = (np.random.rand(resSize, 1+inSize) - 0.5) * 2  # -1~1の一様分布
+    Win = np.zeros(resSize, 1+inSize)
     # W = create_sparse_rand_matrix(resSize, resSize, conectivity)
     # rhoW = max(abs(linalg.eig(W)[0]))
     # rhoW = max(linalg.eigh(W)[0])
@@ -599,7 +600,7 @@ def train_GR_thread(main_path, res_params, raw_data_subset, mesh_code, trained_f
     with trained_file_lock:
         
         # if os.path.isfile(trained_file+".npz") and (not is_update):
-        if os.path.isfile(trained_file+".npz") and (not is_update):
+        if (not is_update) and os.path.isfile(trained_file+".npz"):
             trained_data = np.load(trained_file+".npz")
             (Win, W, X, Wout, x, Data) = (
                 trained_data["Win"], trained_data["W"], trained_data["X"], trained_data["Wout"],
