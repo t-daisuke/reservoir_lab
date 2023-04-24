@@ -375,8 +375,8 @@ def create_sparse_rand_matrix(m, n, density):
     num_nonzeros = round(m * n * density)
     indices = np.random.choice(m * n, size=num_nonzeros, replace=False)
     # values = np.random.random(num_nonzeros) - 0.5
-    # values をすべて1.0に設定
-    values = np.ones(num_nonzeros)
+    # values をすべて1.0ちかくに設定
+    values = np.ones(num_nonzeros)*0.999
     
     matrix = np.zeros([m, n])
     matrix.flat[indices] = values
