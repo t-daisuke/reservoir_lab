@@ -37,8 +37,8 @@ if __name__ == '__main__':
     # d_list=[2,4,8,16,32,64]
     d_list=[32]
     is_up = True
-    cnct_list = [0.001, 0.01, 0.1, 1.0]
-    sc_list = [-1, -3, -5, -7, -9, -11, -13]
+    cnct_list = [0.001,1.0]
+    sc_list = [-1,-5,-9, -13]
     neuro = 100
     
     all_program_start_time = time.perf_counter()
