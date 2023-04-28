@@ -557,10 +557,23 @@ def train_GR(main_path, res_params, raw_data_subset, mesh_code, is_update=False)
     x = np.zeros((resSize, 1))
     for t in range(trainLen):
         u = In[0:inSize, t:t+1]
-        # x = (1-a)*x + a*np.tanh(np.dot(Win, np.vstack((1, u))) + np.dot(W, x))  # 瞬間の値
         x = (1-a)*x + a*np.tanh(Win@np.vstack((1, u)) + W @ x)
         if t >= initLen:
-            X[:, t-initLen] = np.vstack((1, x))[:, 0]
+            # X[:, t-initLen] = np.vstack((1, x))[:, 0]
+            X[:, t-initLen] = np.vstack((0, x))[:, 0]
+        # # 各変数の値と形状を表示
+        # if t % 100 == 0:  # 例: 100ステップごとに表示
+        #     print(f"timestep: {t}")
+        #     print(f"Win shape: {Win.shape}")
+        #     print(f"W shape: {W.shape}")
+        #     print(f"u shape: {u.shape}")
+        #     print(f"x shape: {x.shape}")
+        #     print(f"X shape: {X.shape}")
+        #     print(f"Non-zero elements in Win: {np.count_nonzero(Win)}")
+        #     print(f"Non-zero elements in W: {np.count_nonzero(W)}")
+        #     print(f"Non-zero elements in u: {np.count_nonzero(u)}")
+        #     print(f"Non-zero elements in x: {np.count_nonzero(x)}")
+        #     print(f"Non-zero elements in X: {np.count_nonzero(X)}")
     Wout = linalg.solve(np.dot(X, X.T) + reg *
                         np.eye(1+resSize), np.dot(X, Yt.T)).T
     # Wout = linalg.solve(X @ X.T + reg *
