@@ -31,31 +31,6 @@ if __name__ == '__main__':
     Smesh_list = [45]
     is_up = False
     
-    # all_program_start_time = time.perf_counter()
-    # start_time = time.perf_counter() #Start
-    # print("Start Train")
-
-    # # create_trained_data_thread(main_path,res_params,df,is_update = True)
-    # create_trained_data(main_path,res_params,df,is_update = True)
-
-    # print("Save Train Data:"+ str(time.perf_counter() - start_time) + "s")
-
-    # start_time = time.perf_counter()  # Start
-    # print("Start GR")
-
-    # create_gr_test_data(main_path, res_params, distance, df)
-
-    # print("Save GR Test Data:" + str(time.perf_counter() - start_time) + "s")
-
-    # start_time = time.perf_counter()  # Start
-    # print("Start NCO")
-
-    # create_nco_test_data(main_path, res_params, distance, df)
-
-    # print("Save NCO Test Data:" + str(time.perf_counter() - start_time) + "s")
-    
-    # print("All Time:" + str(time.perf_counter() - all_program_start_time) + "s")
-    
     for_time = time.perf_counter()
     
     start_time = time.perf_counter() #Start
