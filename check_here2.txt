@@ -1,0 +1,181 @@
+(t,d) = (13, 0)
+増大していく
+(t,d) = (13, 2)
+最大
+(t,d) = (13, 9)
+マイナスに
+
+
+
+
+(t,d) = (12, 31)
+u before update: 
+[[-5.65848428e+07]
+
+
+
+
+x before update: -0.05670697464447132
+u after update: 
+[[-6.06326424e+07]
+
+
+
+
+x after update: -0.05473237050159547
+(t,d) = (13, 0)
+u before update: 
+[[ 6020.
+
+
+x before update: -0.05473237050159547
+u after update: 
+[[18272661.67939829]
+
+
+ [
+
+
+x after update: -0.07464682765927248
+(t,d) = (13, 1)
+u before update: 
+[[ 1.82726617e+07]
+
+
+
+
+x before update: -0.07464682765927248
+u after update: 
+[[1.92450743e+07]
+
+
+
+x after update: -0.08367607561083341
+(t,d) = (13, 2)
+u before update: 
+[[ 1.92450743e+07]
+
+
+
+
+x before update: -0.08367607561083341
+u after update: 
+[[2.59931375e+07]
+
+
+
+x after update: -0.0865348980337458
+(t,d) = (13, 3)
+u before update: 
+[[ 2.59931375e+07]
+
+
+
+
+x before update: -0.0865348980337458
+u after update: 
+[[2.43542775e+07]
+
+
+
+x after update: -0.08862906063178849
+(t,d) = (13, 4)
+u before update: 
+[[ 2.43542775e+07]
+
+
+
+
+x before update: -0.08862906063178849
+u after update: 
+[[ 2.09828751e+07]
+
+
+
+
+x after update: -0.08931961661828652
+(t,d) = (13, 5)
+u before update: 
+[[ 2.09828751e+07]
+
+
+
+
+x before update: -0.08931961661828652
+u after update: 
+[[ 1.71648509e+07]
+
+
+
+
+x after update: -0.0891126504388152
+(t,d) = (13, 6)
+u before update: 
+[[ 1.71648509e+07]
+
+
+
+
+x before update: -0.0891126504388152
+u after update: 
+[[ 1.23643954e+07]
+
+
+
+
+x after update: -0.08843263906389712
+(t,d) = (13, 7)
+u before update: 
+[[ 1.23643954e+07]
+
+
+
+
+x before update: -0.08843263906389712
+u after update: 
+[[ 7.30524975e+06]
+
+
+
+
+x after update: -0.08729248490739343
+(t,d) = (13, 8)
+u before update: 
+[[ 7.30524975e+06]
+
+
+
+
+x before update: -0.08729248490739343
+u after update: 
+[[ 1796534.01831196]
+
+
+ [
+
+
+x after update: -0.08570603569248572
+(t,d) = (13, 9)
+u before update: 
+[[  1796534.01831196]
+
+
+-
+
+
+x before update: -0.08570603569248572
+u after update: 
+[[ -3795603.24974049]
+
+
+-
+
+
+x after update: -0.08368530555781983
+(t,d) = (13, 10)
+u before update: 
+[[ -3795603.24974049]
+
+
+-
+
