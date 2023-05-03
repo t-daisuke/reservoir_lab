@@ -144,7 +144,7 @@ def test_GR(main_path, res_params, Distance, Rlist_dict):
             # Compute Each
 
             for r in Rlist:
-                if False and r == 533945774 and d_i == 29:
+                if r == 533945774 and d_i == 29:
                     print("Debugging for r =", r)
                     print("Debugging for (t,d) =", (t,d_i))
                 tmp_dict = All_R_dict[r]  # params
@@ -157,7 +157,7 @@ def test_GR(main_path, res_params, Distance, Rlist_dict):
                 x = tmp_dict["x"]
                 UU = tmp_dict["UU"]
                 # XX = tmp_dict["XX"]
-                if False and r == 533945774 and d_i == 29:
+                if r == 533945774 and d_i == 29:
                     print("u before update:", u/(10**expIndex))
                     print("x before update:", np.mean(x))
                 tmp1u = np.vstack((1, u))
@@ -165,7 +165,7 @@ def test_GR(main_path, res_params, Distance, Rlist_dict):
                 tmp1x = np.vstack((1, x))
                 u = Wout@tmp1x
                 # u = np.tanh(Wout@tmp1x)
-                if False and r == 533945774 and d_i == 29:
+                if r == 533945774 and d_i == 29:
                     print("u after update:", u/(10**expIndex))
                     print("x after update:", np.mean(x))
                 tmp_dict["x"] = x
