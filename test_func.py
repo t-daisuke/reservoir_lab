@@ -165,7 +165,7 @@ def test_GR(main_path, res_params, Distance, Rlist_dict):
                 if r == 533945774 and t in (15,16):
                     # print("u after update:", u/(10**expIndex))
                     # print("x after update:", np.mean(x))
-                    plot_matrices(d_i, t, x, Win, W, Wout, tmp_dict["u"], u, save_folder='./debug_fig/')
+                    plot_matrices(d_i, t, x, Win, W, Wout, tmp_dict["u"]/(10**expIndex), u/(10**expIndex), save_folder='./debug_fig/')
                     if (t,d_i) == (13, 29): return
                 tmp_dict["x"] = x
                 tmp_dict["u"] = u
