@@ -33,31 +33,25 @@ if __name__ == '__main__':
     
     for_time = time.perf_counter()
     
-    start_time = time.perf_counter() #Start
+    # start_time = time.perf_counter() #Start
     # print("Start Train")
-    
     # create_local_area_trained_data_with_repeated_real_data(main_path,res_params,df,Smesh_list,repeat_num=60,is_update = is_up)
-
     # print("Save Train Data:")
-    display_time(time.perf_counter() - start_time)
+    # display_time(time.perf_counter() - start_time)
 
     start_time = time.perf_counter()  # Start
     print("Start GR")
     print(str(res_params) + "d:" + str(distance)) 
     print()
-
     create_local_gr_test_data(main_path, res_params, distance, df, Smesh_list)
-
     print("Save GR Test Data:" )
     display_time(time.perf_counter() - start_time)
 
-    start_time = time.perf_counter()  # Start
-    print("Start NCO")
-
-    create_local_nco_test_data(main_path, res_params, distance, df, Smesh_list)
-
-    print("Save NCO Test Data:" )
-    display_time(time.perf_counter() - start_time)
+    # start_time = time.perf_counter()  # Start
+    # print("Start NCO")
+    # create_local_nco_test_data(main_path, res_params, distance, df, Smesh_list)
+    # print("Save NCO Test Data:" )
+    # display_time(time.perf_counter() - start_time)
     
     print("For Time:")
     display_time(time.perf_counter() - for_time)
