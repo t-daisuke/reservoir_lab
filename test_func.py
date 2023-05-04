@@ -17,6 +17,7 @@ import concurrent.futures
 import threading
 
 from train_func import *
+from print_func import plot_matrices
 
 """TEST FUNC"""
 
@@ -145,8 +146,7 @@ def test_GR(main_path, res_params, Distance, Rlist_dict):
 
             for r in Rlist:
                 
-                if r == 533945774:
-                    print("Debugging for r =", r)
+                if r == 533945774 or t in (15,16):
                     print("Debugging for (t,d) =", (t,d_i)) #(13, 29)
                 tmp_dict = All_R_dict[r]  # params
 
@@ -157,18 +157,15 @@ def test_GR(main_path, res_params, Distance, Rlist_dict):
                 u = tmp_dict["u"]
                 x = tmp_dict["x"]
                 UU = tmp_dict["UU"]
-                # XX = tmp_dict["XX"]
-                if r == 533945774:
-                    print("u before update:", u/(10**expIndex))
-                    print("x before update:", np.mean(x))
                 tmp1u = np.vstack((1, u))
                 x = (1-a)*x + a*np.tanh(Win@tmp1u + W @ x)
                 tmp1x = np.vstack((1, x))
                 u = Wout@tmp1x
                 # u = np.tanh(Wout@tmp1x)
-                if r == 533945774:
+                if r == 533945774 or t in (15,16):
                     print("u after update:", u/(10**expIndex))
                     print("x after update:", np.mean(x))
+                    plot_matrices(d_i, t, x, Win, W, Wout, tmp_dict["u"], u, save_folder='./debug_fig/')
                     if (t,d_i) == (13, 29): return
                 tmp_dict["x"] = x
                 tmp_dict["u"] = u
