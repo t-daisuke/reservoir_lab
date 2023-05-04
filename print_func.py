@@ -389,3 +389,115 @@ def show_print_array(X,name="no_name",figure_number=None,figsize=(10,5),fontsize
   
   if figure_number==None:plt.show()
   else: return
+
+def show_plot_matrices(d, t, x, Win, W, Wout, u, y):
+    fig, axs = plt.subplots(2, 3, figsize=(18, 12))
+
+    fig.suptitle(f'(d: {d}, t: {t})', fontsize=16)
+
+    # x
+    im1 = axs[0, 0].imshow(x, cmap='viridis', aspect='auto')
+    axs[0, 0].set_title('x (Neurons: 100)')
+    axs[0, 0].set_ylabel('Neurons')
+    cb1 = fig.colorbar(im1, ax=axs[0, 0])
+    cb1.set_label("Min: {:.2f}, Max: {:.2f}".format(np.min(x), np.max(x)))
+
+    # Win
+    im2 = axs[0, 1].imshow(Win, cmap='viridis', aspect='auto')
+    axs[0, 1].set_title('Win (9 x 100)')
+    axs[0, 1].set_xlabel('Neurons')
+    axs[0, 1].set_ylabel('Input Nodes')
+    cb2 = fig.colorbar(im2, ax=axs[0, 1])
+    cb2.set_label("Min: {:.2f}, Max: {:.2f}".format(np.min(Win), np.max(Win)))
+
+    # W
+    im3 = axs[0, 2].imshow(W, cmap='viridis', aspect='auto')
+    axs[0, 2].set_title('W (100 x 100)')
+    axs[0, 2].set_xlabel('Neurons')
+    axs[0, 2].set_ylabel('Neurons')
+    cb3 = fig.colorbar(im3, ax=axs[0, 2])
+    cb3.set_label("Min: {:.2f}, Max: {:.2f}".format(np.min(W), np.max(W)))
+
+    # Wout
+    im4 = axs[1, 0].imshow(Wout, cmap='viridis', aspect='auto')
+    axs[1, 0].set_title('Wout (100 x 9)')
+    axs[1, 0].set_xlabel('Output Nodes')
+    axs[1, 0].set_ylabel('Neurons')
+    cb4 = fig.colorbar(im4, ax=axs[1, 0])
+    cb4.set_label("Min: {:.2f}, Max: {:.2f}".format(np.min(Wout), np.max(Wout)))
+
+    # u
+    im5 = axs[1, 1].imshow(u, cmap='viridis', aspect='auto')
+    axs[1, 1].set_title('u (9 x 1)')
+    axs[1, 1].set_ylabel('Input Nodes')
+    cb5 = fig.colorbar(im5, ax=axs[1, 1])
+    cb5.set_label("Min: {:.2f}, Max: {:.2f}".format(np.min(u), np.max(u)))
+
+    # y
+    im6 = axs[1, 2].imshow(y, cmap='viridis', aspect='auto')
+    axs[1, 2].set_title('y (9 x 1)')
+    axs[1, 2].set_ylabel('Output Nodes')
+    cb6 = fig.colorbar(im6, ax=axs[1, 2])
+    cb6.set_label("Min: {:.2f}, Max: {:.2f}".format(np.min(y), np.max(y)))
+
+    plt.tight_layout()
+    plt.show()
+
+def plot_matrices(d, t, x, Win, W, Wout, u, y, save_folder='./debug_fig/'):
+    fig, axs = plt.subplots(2, 3, figsize=(18, 12))
+    fig.suptitle(f'(d: {d}, t: {t})', fontsize=16)
+
+    # x
+    im1 = axs[0, 0].imshow(x, cmap='viridis', aspect='auto')
+    axs[0, 0].set_title('x (Neurons: 100)')
+    axs[0, 0].set_ylabel('Neurons')
+    cb1 = fig.colorbar(im1, ax=axs[0, 0])
+    cb1.set_label("Min: {:.2f}, Max: {:.2f}".format(np.min(x), np.max(x)))
+
+    # Win
+    im2 = axs[0, 1].imshow(Win, cmap='viridis', aspect='auto')
+    axs[0, 1].set_title('Win (9 x 100)')
+    axs[0, 1].set_xlabel('Neurons')
+    axs[0, 1].set_ylabel('Input Nodes')
+    cb2 = fig.colorbar(im2, ax=axs[0, 1])
+    cb2.set_label("Min: {:.2f}, Max: {:.2f}".format(np.min(Win), np.max(Win)))
+
+    # W
+    im3 = axs[0, 2].imshow(W, cmap='viridis', aspect='auto')
+    axs[0, 2].set_title('W (100 x 100)')
+    axs[0, 2].set_xlabel('Neurons')
+    axs[0, 2].set_ylabel('Neurons')
+    cb3 = fig.colorbar(im3, ax=axs[0, 2])
+    cb3.set_label("Min: {:.2f}, Max: {:.2f}".format(np.min(W), np.max(W)))
+
+    # Wout
+    im4 = axs[1, 0].imshow(Wout, cmap='viridis', aspect='auto')
+    axs[1, 0].set_title('Wout (100 x 9)')
+    axs[1, 0].set_xlabel('Output Nodes')
+    axs[1, 0].set_ylabel('Neurons')
+    cb4 = fig.colorbar(im4, ax=axs[1, 0])
+    cb4.set_label("Min: {:.2f}, Max: {:.2f}".format(np.min(Wout), np.max(Wout)))
+
+    # u
+    im5 = axs[1, 1].imshow(u, cmap='viridis', aspect='auto')
+    axs[1, 1].set_title('u (9 x 1)')
+    axs[1, 1].set_ylabel('Input Nodes')
+    cb5 = fig.colorbar(im5, ax=axs[1, 1])
+    cb5.set_label("Min: {:.2f}, Max: {:.2f}".format(np.min(u), np.max(u)))
+
+    # y
+    im6 = axs[1, 2].imshow(y, cmap='viridis', aspect='auto')
+    axs[1, 2].set_title('y (9 x 1)')
+    axs[1, 2].set_ylabel('Output Nodes')
+    cb6 = fig.colorbar(im6, ax=axs[1, 2])
+    cb6.set_label("Min: {:.2f}, Max: {:.2f}".format(np.min(y), np.max(y)))
+
+    plt.tight_layout()
+
+    # Check if the folder exists, if not, create it.
+    if not os.path.exists(save_folder):
+        os.makedirs(save_folder)
+
+    # Save the figure
+    fig.savefig(os.path.join(save_folder, f'd_{d}_t_{t}.png'))
+    plt.close(fig)  # Close the figure to free up memory
