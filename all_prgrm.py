@@ -24,7 +24,7 @@ if __name__ == '__main__':
     # (expIndex, leakingRate, resSize, spectralRadius, inSize, outSize,
     #  initLen, trainLen, testLen,
     #  reg, seed_num, conectivity) = res_params
-    res_params = (-13, 1, 100, 0.75, 9, 9,
+    res_params = (-9, 1, 100, 0.75, 9, 9,
                   24*60, 3*24*60, 2*24*60-60+1,
                   1e-8, 2, 10**(-3))
     distance = 32
