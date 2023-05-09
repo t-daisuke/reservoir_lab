@@ -167,7 +167,10 @@ def test_GR(main_path, res_params, Distance, Rlist_dict):
                     # print("x after update:", np.mean(x))
                     plot_matrices_in_computing(d_i, t, tmp_dict["x"], Win, W, x, tmp_dict["u"]/(10**expIndex), u/(10**expIndex), save_folder='./debug_fig2/')
                     #plot_matrices(d_i, t, x, Win, W, Wout, tmp_dict["u"]/(10**expIndex), u/(10**expIndex), save_folder='./debug_fig/')
-                    if (t,d_i) == (13, 29): return
+                    if (t,d_i) == (16, 31):
+                        print((t,d_i))
+                        print("end")
+                        return
                 tmp_dict["x"] = x
                 tmp_dict["u"] = u
                 # 4D
