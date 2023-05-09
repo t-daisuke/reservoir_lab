@@ -165,9 +165,9 @@ def test_GR(main_path, res_params, Distance, Rlist_dict):
                 if r == 533945774 and t in (15,16):
                     # print("u after update:", u/(10**expIndex))
                     # print("x after update:", np.mean(x))
-                    plot_matrices_in_computing(d_i, t, tmp_dict["x"], Win, W, x, tmp_dict["u"], u, 1/(10**expIndex), save_folder='./debug_fig2/')
+                    plot_matrices_in_computing(d_i, t, tmp_dict["x"], Win, W, x, tmp_dict["u"], u, 1/(10**expIndex), save_folder='./debug_fig13/')
                     #plot_matrices(d_i, t, x, Win, W, Wout, tmp_dict["u"]/(10**expIndex), u/(10**expIndex), save_folder='./debug_fig/')
-                    if (t,d_i) == (16, 31):
+                    if (t,d_i) == (15, 11):
                         print((t,d_i))
                         print("end")
                         return
