@@ -17,7 +17,7 @@ import concurrent.futures
 import threading
 
 from train_func import *
-from print_func import plot_matrices
+from print_func import plot_matrices,plot_matrices_in_computing
 
 """TEST FUNC"""
 
@@ -165,7 +165,8 @@ def test_GR(main_path, res_params, Distance, Rlist_dict):
                 if r == 533945774 and t in (15,16):
                     # print("u after update:", u/(10**expIndex))
                     # print("x after update:", np.mean(x))
-                    plot_matrices(d_i, t, x, Win, W, Wout, tmp_dict["u"]/(10**expIndex), u/(10**expIndex), save_folder='./debug_fig/')
+                    plot_matrices_in_computing(d_i, t, tmp_dict["x"], Win, W, x, tmp_dict["u"]/(10**expIndex), u/(10**expIndex), save_folder='./debug_fig2/')
+                    #plot_matrices(d_i, t, x, Win, W, Wout, tmp_dict["u"]/(10**expIndex), u/(10**expIndex), save_folder='./debug_fig/')
                     if (t,d_i) == (13, 29): return
                 tmp_dict["x"] = x
                 tmp_dict["u"] = u
