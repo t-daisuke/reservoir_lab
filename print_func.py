@@ -502,12 +502,12 @@ def plot_matrices(d, t, x, Win, W, Wout, u, y, save_folder='./debug_fig/'):
     fig.savefig(os.path.join(save_folder, f'd_{d}_t_{t}.png'))
     plt.close(fig)  # Close the figure to free up memory
     
-def plot_matrices_in_computing(d, t, x, Win, W, new_x, u, y, save_folder='./debug_fig2/'):
+def plot_matrices_in_computing(d, t, x, Win, W, new_x, u, y, scaling,save_folder='./debug_fig2/'):
     fig, axs = plt.subplots(2, 3, figsize=(18, 12))
     fig.suptitle(f'(d: {d}, t: {t})', fontsize=16)
 
     # u
-    im1 = axs[0, 0].imshow(u, cmap='viridis', aspect='auto')
+    im1 = axs[0, 0].imshow(u*scaling, cmap='viridis', aspect='auto')
     axs[0, 0].set_title('u (9 x 1)')
     axs[0, 0].set_ylabel('Input Nodes')
     cb1 = fig.colorbar(im1, ax=axs[0, 0])
@@ -545,7 +545,7 @@ def plot_matrices_in_computing(d, t, x, Win, W, new_x, u, y, save_folder='./debu
 
 
     # y
-    im6 = axs[1, 2].imshow(y, cmap='viridis', aspect='auto')
+    im6 = axs[1, 2].imshow(y*scaling, cmap='viridis', aspect='auto')
     axs[1,2].set_title('y (9 x 1)')
     axs[1, 2].set_ylabel('Output Nodes')
     cb6 = fig.colorbar(im6, ax=axs[1, 2])
