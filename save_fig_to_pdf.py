@@ -39,7 +39,7 @@ def main():
     # 保存された図をPDFにまとめる
     t = 16
     distance = 32  # distance の値を適切な値に変更してください
-    save_folder = './debug_fig/'
+    save_folder = './debug_fig2/'
     pdf_filename = f't{t}_d{distance}figures.pdf'
     save_figures_to_pdf(t, distance, save_folder, pdf_filename)
     
