@@ -24,7 +24,7 @@ if __name__ == '__main__':
     # (expIndex, leakingRate, resSize, spectralRadius, inSize, outSize,
     #  initLen, trainLen, testLen,
     #  reg, seed_num, conectivity) = res_params
-    res_params = (-9, 1, 100, 0.75, 9, 9,
+    res_params = (-9, 0.2, 100, 0.75, 9, 9,
                   24*60, 3*24*60, 2*24*60-60+1,
                   1e-8, 2, 10**(-3))
     distance = 32
@@ -33,11 +33,11 @@ if __name__ == '__main__':
     
     for_time = time.perf_counter()
     
-    # start_time = time.perf_counter() #Start
-    # print("Start Train")
-    # create_local_area_trained_data_with_repeated_real_data(main_path,res_params,df,Smesh_list,repeat_num=60,is_update = is_up)
-    # print("Save Train Data:")
-    # display_time(time.perf_counter() - start_time)
+    start_time = time.perf_counter() #Start
+    print("Start Train")
+    create_local_area_trained_data_with_repeated_real_data(main_path,res_params,df,Smesh_list,repeat_num=60,is_update = is_up)
+    print("Save Train Data:")
+    display_time(time.perf_counter() - start_time)
 
     start_time = time.perf_counter()  # Start
     print("Start GR")

@@ -146,7 +146,7 @@ def test_GR(main_path, res_params, Distance, Rlist_dict):
 
             for r in Rlist:
                 
-                if r == 533945774 and t in (15,16):
+                if r == 1533945774 and t in (15,16):
                     print("Debugging for (t,d) =", (t,d_i)) #(13, 29)
                 tmp_dict = All_R_dict[r]  # params
 
@@ -162,7 +162,7 @@ def test_GR(main_path, res_params, Distance, Rlist_dict):
                 tmp1x = np.vstack((1, x))
                 u = Wout@tmp1x
                 # u = np.tanh(Wout@tmp1x)
-                if r == 533945774 and t in (15,16):
+                if r == 1533945774 and t in (15,16):
                     # print("u after update:", u/(10**expIndex))
                     # print("x after update:", np.mean(x))
                     plot_matrices_in_computing(d_i, t, tmp_dict["x"], Win, W, x, tmp_dict["u"], u, 1/(10**expIndex), save_folder='./debug_fig1_2/')
