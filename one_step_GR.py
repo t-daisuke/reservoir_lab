@@ -581,7 +581,7 @@ def get_copy_gr_data(main_path, saved_test_path, geo_res_params,nco_res_params, 
       print(tmp_nco_test_data)
       return tmp_nco_test_data
     
-    tmp_train_data = load_one_step_trained_data(saved_test_path, res_params, mesh_code,"1step_GR_train")
+    tmp_train_data = load_one_step_trained_data(saved_test_path, geo_res_params, mesh_code,"1step_GR_train")
     if type(tmp_train_data) != type({"A": 1}):
         print(tmp_train_data)
         return
