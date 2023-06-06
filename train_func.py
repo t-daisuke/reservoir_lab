@@ -539,7 +539,6 @@ def train_GR(main_path, res_params, raw_data_subset, mesh_code, is_update=False)
     np.random.seed(seed_num)
     Win = (np.random.rand(resSize, 1+inSize) - 0.5) * 2  # -1~1の一様分布
     W = create_sparse_rand_matrix(resSize, resSize, conectivity)
-    # rhoW = max(abs(linalg.eig(W)[0]))
     rhoW = max(linalg.eigh(W)[0])
     W *= spectralRadius / rhoW
     X = np.zeros((1+resSize, trainLen-initLen))
@@ -550,23 +549,11 @@ def train_GR(main_path, res_params, raw_data_subset, mesh_code, is_update=False)
     x = np.zeros((resSize, 1))
     for t in range(trainLen):
         u = In[0:inSize, t:t+1]
-        # x = (1-a)*x + a*np.tanh(np.dot(Win, np.vstack((1, u))) + np.dot(W, x))  # 瞬間の値
         x = (1-a)*x + a*np.tanh(Win@np.vstack((1, u)) + W @ x)
         if t >= initLen:
             X[:, t-initLen] = np.vstack((1, x))[:, 0]
     Wout = linalg.solve(np.dot(X, X.T) + reg *
                         np.eye(1+resSize), np.dot(X, Yt.T)).T
-    # Wout = linalg.solve(X @ X.T + reg *
-    #                         np.eye(1+resSize), X @ Yt.T).T
-    # Wout = np.tanh(Yt)@(np.linalg.inv(X.T @ X + reg *
-    #                         np.eye(1+resSize))@ X.T)
-    # Wout = linalg.solve(X @ X.T + reg *
-    #                          np.eye(1+resSize), X @ np.arctanh(Yt.T)).T
-    # Wout = Yt @ X.T @ linalg.inv(X @ X.T + reg *
-    #                         np.eye(1+resSize))
-    # limit = 0.999
-    # Yt_for_arctanh = np.clip(Yt,-1*limit,limit)
-    # Wout = np.arctanh(Yt_for_arctanh) @ np.linalg.pinv(X)
 
     # save
     np.savez_compressed(trained_file, Win=Win, W=W, X=X,
