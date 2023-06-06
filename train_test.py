@@ -6,6 +6,7 @@ from scipy import linalg
 
 import os
 import time
+import pdb
 from train_func import *
 
 if __name__ == '__main__':
@@ -19,6 +20,7 @@ if __name__ == '__main__':
     else:
         print("NO DF FILE")
     
+    # pdb.set_trace()
     print("Test 46 meshcode matrix")
     print(len(cut_mlist(get_raw_mesh_array(df),[46])))
     print()
