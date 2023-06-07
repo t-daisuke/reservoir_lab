@@ -643,8 +643,10 @@ if __name__ == '__main__':
     center_mesh_mat = (24,35) #ikebukuro 533945774 9*9
     d_list=[1]
     is_up = False
-    cnct_list = [0.001, 0.01, 0.1, 1.0]
-    sc_list = [-1, -3, -5, -7, -9, -11, -13]
+    # cnct_list = [0.001, 0.01, 0.1, 1.0]
+    # sc_list = [-1, -3, -5, -7, -9, -11, -13]
+    cnct_list = [0.001]
+    sc_list = [-1]
     
     all_program_start_time = time.perf_counter()
     
@@ -667,7 +669,7 @@ if __name__ == '__main__':
                 print("Start Train")
 
                 #TODO repeat_numはファイル名やres_paramsに含めていません。
-                create_local_area_trained_data(main_path,geo_res_params, nco_res_params,df,Smesh_list,repeat_num=60,is_update = is_up)
+                create_one_step_local_area_trained_data(main_path,geo_res_params, nco_res_params,df,Smesh_list,repeat_num=60,is_update = is_up)
 
                 print("Save Train Data:")
                 display_time(time.perf_counter() - start_time)
