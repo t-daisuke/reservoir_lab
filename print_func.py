@@ -271,6 +271,7 @@ def get_mse_map_NCO(grl, gmom, main_path, saved_test_path, res_params, distance,
   print("Complete!")
   return mse_mat
 
+#TODO res_paramsとgrlがいらなくね？
 def get_diff_map(grl, gmom,G_map, N_map, main_path, res_params, distance, Smesh_list=[]):
   is_existed, mse = load_mse_map("diff", main_path, res_params, distance)
   if is_existed == True: return mse

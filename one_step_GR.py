@@ -1,12 +1,11 @@
 #Ver June
 
-#fileの保存の名前はgeo_res_paramsを採用
+#gr_dataとdiff_mapのfileの保存の名前はgeo_res_paramsを採用
 ####
 #note
 ####
 
 """
-1次元と9次元で領域が変わるので困る
 trainとtestのデータが、geoをncoで異なる
 """
 
@@ -18,7 +17,7 @@ from scipy import linalg
 from train_func import *
 from test_func import dis_in_out
 from print_func import check_gr_data_existed, load_geo_test_data, load_nco_test_data
-from print_func import display_time #, create_mse_maps
+from print_func import display_time, get_mse_map_GR, get_mse_map_NCO, save_or_load_mse_map
 
 import os
 import time
@@ -621,16 +620,53 @@ def get_copy_gr_data(main_path, saved_test_path, geo_res_params,nco_res_params, 
   print("Copy Data Complete!")
   return
 
-def save_or_load_mse_map():
-    pass
-def get_mse_map_GR():
-    pass
-def get_mse_map_NCO():
-    pass
-def get_diff_map():
-    pass
-def create_mse_maps():
-    pass
+def create_mse_maps(main_path, saved_test_path, geo_res_params, nco_res_params, distance, df, Smesh_list=[]):
+  gmom = get_matrix_of_mesh()
+  if len(Smesh_list) != 0:
+    gmom = get_matrix_of_mesh(Smesh_l=[Smesh_list])
+  dma = get_raw_mesh_array(df)
+  
+  if len(Smesh_list) != 0:
+    dma = cut_mlist(dma,Smesh_list)
+    local_area_path = saved_test_path + "smesh"
+    for smesh in Smesh_list:
+        local_area_path += "-" + str(smesh)
+    local_area_path += "/"
+    if not os.path.isdir(local_area_path):
+        print("No path " + str(local_area_path))
+        return
+    saved_test_path = local_area_path
+    
+    main_path = main_path + "smesh"
+    for smesh in Smesh_list:
+        main_path += "-" + str(smesh)
+    main_path += "/"
+    if not os.path.isdir(main_path):
+      os.mkdir(main_path)
+      print("make" + str(main_path))
+    
+  gnl = get_n_list(geo_res_params[4])
+  Rl = get_R_list(dma, get_matrix_of_mesh(), gnl)
+  
+  geo_mse_map = get_mse_map_GR(Rl, gmom, main_path, saved_test_path, geo_res_params, distance, Smesh_list)
+  save_or_load_mse_map("geo", main_path, geo_res_params, distance, geo_mse_map)
+  
+  gnl = get_n_list(nco_res_params[4])
+  Rl = get_R_list(dma, get_matrix_of_mesh(), gnl)
+  nco_mse_map = get_mse_map_NCO(Rl, gmom, main_path, saved_test_path, nco_res_params, distance, Smesh_list)
+  save_or_load_mse_map("nco", main_path, nco_res_params, distance, nco_mse_map)
+  
+  diff_map = get_diff_map(gmom, geo_mse_map, nco_mse_map)
+  save_or_load_mse_map("diff", main_path, geo_res_params, distance, diff_map)
+  return
+
+def get_diff_map(gmom,G_map, N_map):
+  gmom_mat = gmom["mat"]
+  mse_mat = np.ones(gmom_mat.shape)
+  for y in range(gmom_mat.shape[0]):
+    for x in range(gmom_mat.shape[1]):
+      mse_mat[y,x] = G_map[y,x] - N_map[y,x]
+  return mse_mat
 
 def main():
     # Variable
@@ -699,7 +735,7 @@ def main():
                 start_time = time.perf_counter()  # Start
                 print("Start mse create")
                 
-                # create_mse_maps(main_path, saved_test_path, geo_res_params, distance, df, Smesh_list)
+                create_mse_maps(main_path, saved_test_path, geo_res_params, distance, df, Smesh_list)
                 
                 print("Save mse create Test Data:" )
                 display_time(time.perf_counter() - start_time)
