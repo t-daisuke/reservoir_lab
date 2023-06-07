@@ -343,9 +343,6 @@ def test_GR(main_path, res_params, Distance, Rlist_dict):
                 tmp_dict["UU"] = UU
 
             # Self Organize
-            for r in Rlist:
-                print("Error?")
-                return
 
         # set Y
         for r in Rlist:
@@ -356,7 +353,7 @@ def test_GR(main_path, res_params, Distance, Rlist_dict):
             for r in Rlist:
                 In = All_R_dict[r]["In"]
                 All_R_dict[r]["u"] = In[0:inSize, t+1:t+2]
-
+        
         rate = 100*t/(testLen//Distance)
         if sprit_printer(t,(testLen//Distance),sprit_num=20):
             print("{:.2f}".format(rate) + "% done " + "{:.2f}".format(time.time() -start_time) + " s passed, this subset needs " + "{:.2f}".format(time.time() - subsection_time)
@@ -680,7 +677,7 @@ def main():
                 print("Start Train")
 
                 #TODO repeat_numはファイル名やres_paramsに含めていません。
-                create_one_step_local_area_trained_data(main_path,geo_res_params, nco_res_params,df,Smesh_list,repeat_num=60,is_update = is_up)
+                #create_one_step_local_area_trained_data(main_path,geo_res_params, nco_res_params,df,Smesh_list,repeat_num=60,is_update = is_up)
 
                 print("Save Train Data:")
                 display_time(time.perf_counter() - start_time)
