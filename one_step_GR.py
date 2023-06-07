@@ -182,7 +182,7 @@ def create_one_step_local_area_trained_data(main_path, geo_res_params, nco_res_p
         raw_data_subset = create_subset_from_data_and_mesh_list(df, gml)
         real_data = extract_data_every_n(raw_data_subset,60)
         repeated_data = repeat_data_columns(real_data,repeat_num)
-        _ = train_1step_GR(local_area_path, geo_res_params, raw_data_subset,
+        _ = train_1step_GR(local_area_path, geo_res_params, repeated_data,
                       mesh_code, is_update=is_update)
         
         rate = 100 * index/len(Rlist)
@@ -213,7 +213,7 @@ def create_one_step_local_area_trained_data(main_path, geo_res_params, nco_res_p
         raw_data_subset = create_subset_from_data_and_mesh_list(df, gml)
         real_data = extract_data_every_n(raw_data_subset,60)
         repeated_data = repeat_data_columns(real_data,repeat_num)
-        _ = train_1step_GR_for_NCO(local_area_path, nco_res_params, raw_data_subset,
+        _ = train_1step_GR_for_NCO(local_area_path, nco_res_params, repeated_data,
                       mesh_code, is_update=is_update)
         rate = 100 * index/len(Rlist)
         if sprit_printer(index,len(Rlist),sprit_num=20):
