@@ -1,5 +1,15 @@
 #Ver June
 
+#fileの保存の名前はgeo_res_paramsを採用
+####
+#note
+####
+
+"""
+1次元と9次元で領域が変わるので困る
+trainとtestのデータが、geoをncoで異なる
+"""
+
 # import
 import numpy as np
 import pandas as pd
