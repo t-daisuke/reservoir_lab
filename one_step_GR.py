@@ -739,7 +739,7 @@ def main():
                 
                 start_time = time.perf_counter()  # Start
                 print("Start mse create")
-                pdb.set_trace()
+
                 create_mse_maps(main_path, saved_test_path, geo_res_params, nco_res_params, distance, df, Smesh_list)
                 
                 print("Save mse create Test Data:" )
