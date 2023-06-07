@@ -1,5 +1,4 @@
 #ASAP TASK
-*9→1 test,so, = u is not good
 
 # 6/7 TODO
 ## did
