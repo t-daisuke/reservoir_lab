@@ -624,7 +624,18 @@ def get_copy_gr_data(main_path, saved_test_path, geo_res_params,nco_res_params, 
   print("Copy Data Complete!")
   return
 
-if __name__ == '__main__':
+def save_or_load_mse_map():
+    pass
+def get_mse_map_GR():
+    pass
+def get_mse_map_NCO():
+    pass
+def get_diff_map():
+    pass
+def create_mse_maps():
+    pass
+
+def main():
     # Variable
 
     df_path = "./df/"
@@ -711,3 +722,7 @@ if __name__ == '__main__':
     
     print("All Time:")
     display_time(time.perf_counter() - all_program_start_time)
+    
+
+if __name__ == '__main__':
+    main()
