@@ -728,7 +728,7 @@ def main():
                 print(str(geo_res_params) + "d:" + str(distance)) 
                 print()
 
-                create_local_gr_test_data(main_path, geo_res_params, nco_res_params, distance, df, Smesh_list)
+                #create_local_gr_test_data(main_path, geo_res_params, nco_res_params, distance, df, Smesh_list)
 
                 print("Save Test Data:" )
                 display_time(time.perf_counter() - start_time)
@@ -739,8 +739,8 @@ def main():
                 
                 start_time = time.perf_counter()  # Start
                 print("Start mse create")
-                
-                create_mse_maps(main_path, saved_test_path, geo_res_params, distance, df, Smesh_list)
+                pdb.set_trace()
+                create_mse_maps(main_path, saved_test_path, geo_res_params, nco_res_params, distance, df, Smesh_list)
                 
                 print("Save mse create Test Data:" )
                 display_time(time.perf_counter() - start_time)
