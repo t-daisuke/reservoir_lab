@@ -497,7 +497,7 @@ def test_NCOGR(main_path, res_params, Distance, Rlist_dict):
 def create_local_gr_test_data(main_path, geo_res_params, nco_res_params, distance, df, Smesh_list):
     gmom = get_matrix_of_mesh()
     gnl = get_n_list(geo_res_params[4])
-    print("Local area trained at " + str(Smesh_list))
+    print("Geo: Local area trained at " + str(Smesh_list))
     all_dma = get_raw_mesh_array(df)
     dma = cut_mlist(all_dma,Smesh_list)
     Rl = get_R_list(dma, gmom, gnl)
@@ -515,7 +515,7 @@ def create_local_gr_test_data(main_path, geo_res_params, nco_res_params, distanc
     test_GR(local_area_path, geo_res_params, distance, grld)
     
     gnl = get_n_list(nco_res_params[4])
-    print("Local area trained at " + str(Smesh_list))
+    print("Nco: Local area trained at " + str(Smesh_list))
     all_dma = get_raw_mesh_array(df)
     dma = cut_mlist(all_dma,Smesh_list)
     Rl = get_R_list(dma, gmom, gnl)
