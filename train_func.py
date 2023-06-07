@@ -491,7 +491,7 @@ def create_normalized_data_from_mesh_list(df,mesh_list):
 
 def extract_data_every_n(raw_data,n=60):
     if len(raw_data.shape) == 1:
-        raw_data = raw_data.reshape(-1, 1)
+        raw_data = raw_data.reshape(-1, 1).T
     raw_n_data = np.hstack([raw_data[:, 0::n], raw_data[:, -1].reshape(-1, 1)])
     return raw_n_data
 
