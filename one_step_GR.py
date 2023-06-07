@@ -177,19 +177,19 @@ def create_one_step_local_area_trained_data(main_path, geo_res_params, nco_res_p
     Rlist = get_R_list(dma, gmom, gnl)
     start_time = time.time()
     subsection_time = time.time()
-    # for index, mesh_code in enumerate(Rlist):
-    #     gml = get_mesh_list(mesh_code, gmom, gnl)
-    #     raw_data_subset = create_subset_from_data_and_mesh_list(df, gml)
-    #     real_data = extract_data_every_n(raw_data_subset,60)
-    #     repeated_data = repeat_data_columns(real_data,repeat_num)
-    #     _ = train_1step_GR(local_area_path, geo_res_params, repeated_data,
-    #                   mesh_code, is_update=is_update)
+    for index, mesh_code in enumerate(Rlist):
+        gml = get_mesh_list(mesh_code, gmom, gnl)
+        raw_data_subset = create_subset_from_data_and_mesh_list(df, gml)
+        real_data = extract_data_every_n(raw_data_subset,60)
+        repeated_data = repeat_data_columns(real_data,repeat_num)
+        _ = train_1step_GR(local_area_path, geo_res_params, repeated_data,
+                      mesh_code, is_update=is_update)
         
-    #     rate = 100 * index/len(Rlist)
-    #     if sprit_printer(index,len(Rlist),sprit_num=20):
-    #         print("{:.2f}".format(rate) + "% done " + "{:.2f}".format(time.time() -start_time) + " s passed, this subset needs " + "{:.2f}".format(time.time() - subsection_time)
-    #               + " s")
-    #     subsection_time = time.time()
+        rate = 100 * index/len(Rlist)
+        if sprit_printer(index,len(Rlist),sprit_num=20):
+            print("{:.2f}".format(rate) + "% done " + "{:.2f}".format(time.time() -start_time) + " s passed, this subset needs " + "{:.2f}".format(time.time() - subsection_time)
+                  + " s")
+        subsection_time = time.time()
         
     gnl = get_n_list(nco_res_params[4])  # inSize
     print("Local area trained at " + str(Smesh_list))
@@ -536,7 +536,7 @@ def create_local_gr_test_data(main_path, geo_res_params, nco_res_params, distanc
     test_NCOGR(local_area_path, nco_res_params, distance, grld)
     return
 
-def copy_gr_data(main_path, saved_test_path, res_params, distance, Smesh_list=[], center_mesh_mat = (24,35)):
+def copy_gr_data(main_path, saved_test_path, geo_res_params,nco_res_params, distance, Smesh_list=[], center_mesh_mat = (24,35)):
   gmom = get_matrix_of_mesh()
   
   if len(Smesh_list) != 0:
@@ -563,7 +563,7 @@ def copy_gr_data(main_path, saved_test_path, res_params, distance, Smesh_list=[]
       if i*j != 0: continue
       mesh_list.append(gmom["mat"][center_mesh_mat[0] + i, center_mesh_mat[1] + j])
 
-  get_copy_gr_data(main_path, saved_test_path, res_params, distance, mesh_list)
+  get_copy_gr_data(main_path, saved_test_path, geo_res_params,nco_res_params, distance, mesh_list)
   return
 
 def get_copy_gr_data(main_path, saved_test_path, geo_res_params,nco_res_params, distance, mesh_list):
