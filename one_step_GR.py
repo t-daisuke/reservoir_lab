@@ -158,7 +158,7 @@ def train_1step_GR_for_NCO(main_path, res_params, raw_data_subset, mesh_code, is
 
     return (Win, W, X, Wout, x, Data)
 
-def create_one_step_local_area_trained_data(main_path, geo_res_params, nco_res_params, df, Smesh_list,is_update=False):
+def create_one_step_local_area_trained_data(main_path, geo_res_params, nco_res_params, df, Smesh_list,repeat_num=60,is_update=False):
     gmom = get_matrix_of_mesh()
     gnl = get_n_list(geo_res_params[4])  # inSize
     print("Local area trained at " + str(Smesh_list))
@@ -180,6 +180,8 @@ def create_one_step_local_area_trained_data(main_path, geo_res_params, nco_res_p
     for index, mesh_code in enumerate(Rlist):
         gml = get_mesh_list(mesh_code, gmom, gnl)
         raw_data_subset = create_subset_from_data_and_mesh_list(df, gml)
+        real_data = extract_data_every_n(raw_data_subset,60)
+        repeated_data = repeat_data_columns(real_data,repeat_num)
         _ = train_1step_GR(local_area_path, geo_res_params, raw_data_subset,
                       mesh_code, is_update=is_update)
         
@@ -209,6 +211,8 @@ def create_one_step_local_area_trained_data(main_path, geo_res_params, nco_res_p
     for index, mesh_code in enumerate(Rlist):
         gml = get_mesh_list(mesh_code, gmom, gnl)
         raw_data_subset = create_subset_from_data_and_mesh_list(df, gml)
+        real_data = extract_data_every_n(raw_data_subset,60)
+        repeated_data = repeat_data_columns(real_data,repeat_num)
         _ = train_1step_GR_for_NCO(local_area_path, nco_res_params, raw_data_subset,
                       mesh_code, is_update=is_update)
         rate = 100 * index/len(Rlist)
