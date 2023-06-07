@@ -316,6 +316,9 @@ def test_GR(main_path, res_params, Distance, Rlist_dict):
             # Compute Each
 
             for r in Rlist:
+                #Debug
+                if 2818 == t:
+                    pdb.set_trace()
                 tmp_dict = All_R_dict[r]  # params
 
                 Win = tmp_dict["Win"]
@@ -323,6 +326,8 @@ def test_GR(main_path, res_params, Distance, Rlist_dict):
                 Wout = tmp_dict["Wout"]
 
                 u = tmp_dict["u"]
+                if t>2800:
+                    print(u.shape)
                 x = tmp_dict["x"]
                 UU = tmp_dict["UU"]
                 # XX = tmp_dict["XX"]

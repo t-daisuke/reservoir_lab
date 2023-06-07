@@ -1,4 +1,7 @@
-# 6/7 TODODO
+#ASAP TASK
+*9→1 test,so, = u is not good
+
+# 6/7 TODO
 ## did
 * make train, test, and print
 * fix bug in change that occured for change 9-dim to 1-dim in Out-dim
