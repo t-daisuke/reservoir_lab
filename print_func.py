@@ -90,11 +90,12 @@ GET MSE MAP FUNCTION
 
 #sqrt 1/Time * sigma(t in Time){(Y - Yt)/ Yt}**2
 def get_ave_MSE(teacher, output):
-  se = np.zeros(len(output))
-  for i in range(len(output)):
-    if i == len(teacher):
+  min_len = min(len(output), len(teacher))
+  se = np.zeros(min_len)
+  for i in range(min_len):
+    if i == len(teacher) or i == len(output):
       #TODO (-1, 1, 100, 0.75, 9, 9, 1440, 4320, 2821, 1e-08, 2, 0.001), d=1でエラー
-      print(str(i)+": (Yt, Yout) = "+str((len(teacher),len(output))))
+      print(str(i)+": get ave mse error (Yt, Yout) = "+str((len(teacher),len(output))))
       break
     se[i] =  np.square( (output[i] - teacher[i]) / teacher[i])
 
@@ -233,6 +234,7 @@ def get_mse_map_GR(grl, gmom, main_path, saved_test_path, res_params, distance, 
     if sprit_printer(y,gmom_mat.shape[0],sprit_num=10):
         print("{:.2f}".format(rate) + "% done " + "{:.2f}".format(time.time() -start_time) + " s passed. in GR")
   print("Complete!")
+  
   return mse_mat
 
 def get_mse_map_NCO(grl, gmom, main_path, saved_test_path, res_params, distance, Smesh_list=[]):
