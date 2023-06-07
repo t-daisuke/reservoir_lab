@@ -316,9 +316,6 @@ def test_GR(main_path, res_params, Distance, Rlist_dict):
             # Compute Each
 
             for r in Rlist:
-                #Debug
-                if 2818 == t:
-                    pdb.set_trace()
                 tmp_dict = All_R_dict[r]  # params
 
                 Win = tmp_dict["Win"]
@@ -326,8 +323,6 @@ def test_GR(main_path, res_params, Distance, Rlist_dict):
                 Wout = tmp_dict["Wout"]
 
                 u = tmp_dict["u"]
-                if t>2800:
-                    print(u.shape)
                 x = tmp_dict["x"]
                 UU = tmp_dict["UU"]
                 # XX = tmp_dict["XX"]
@@ -357,6 +352,9 @@ def test_GR(main_path, res_params, Distance, Rlist_dict):
             for r in Rlist:
                 In = All_R_dict[r]["In"]
                 All_R_dict[r]["u"] = In[0:inSize, t+1:t+2]
+        else:
+            #つづきがないので
+            break
         
         rate = 100*t/(testLen//Distance)
         if sprit_printer(t,(testLen//Distance),sprit_num=20):
@@ -474,6 +472,8 @@ def test_NCOGR(main_path, res_params, Distance, Rlist_dict):
             # for next time
             if t+2 < In.shape[1]:
                 u = In[0:inSize, t+1:t+2]
+            else:
+                break
         
         test_path = main_path + str(res_params[0])
         for prm_i in range(1,len(res_params)):
