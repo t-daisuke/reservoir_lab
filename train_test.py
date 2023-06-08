@@ -34,6 +34,8 @@ if __name__ == '__main__':
     print(a_tmp)
     a2_tmp = A["dic"][a_tmp]
     print(a2_tmp)
+    print("Shape")
+    print(A["mat"].shape)
     print()
     
     print("Test get mesh near O mesh")
@@ -56,6 +58,23 @@ if __name__ == '__main__':
     print(len(dma))
     Rl = get_R_list(dma, gmom, gnl)
     print(len(Rl))
+    print("A[mat].shape")
+    dma_set = set(dma)
+    
+    # Initialize empty list to store the indices
+    indices = []
+    # indices_mesh = []
+    
+    # Iterate over the mesh_matrix
+    for i in range(A["mat"].shape[0]):
+        for j in range(A["mat"].shape[1]):
+            # If the mesh code is in dma, store the index
+            if A["mat"][i, j] in dma_set:
+                indices.append((i, j))
+                # indices_mesh.append(str(A["mat"][i, j])[6:])
+    print(indices)
+    print()
+    # print(indices_mesh)
     print()
     
     gmom = get_matrix_of_mesh()
