@@ -693,7 +693,7 @@ def main():
     center_mesh_mat = (19,30) #???
     d_list=[1]
     is_up = False
-    cnct_list = [0.1, 1.0]
+    cnct_list = [0.001, 0.01, 0.1, 1.0]
     sc_list = [-1, -3, -5, -7, -9, -11, -13]
     # cnct_list = [0.001]
     # sc_list = [-1]
@@ -703,10 +703,10 @@ def main():
     for d in d_list:       
         for cone in cnct_list:
             for sc in sc_list:
-                geo_res_params = (sc, 1, 10, 0.75, 9, 1,
+                geo_res_params = (sc, 1, 1000, 0.75, 9, 1,
                     24*60, 3*24*60, 2*24*60-60+1,
                     1e-8, 2, cone)
-                nco_res_params = (sc, 1, 10, 0.75, 1, 1,
+                nco_res_params = (sc, 1, 1000, 0.75, 1, 1,
                     24*60, 3*24*60, 2*24*60-60+1,
                     1e-8, 2, cone)
                 distance = d
