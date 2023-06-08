@@ -63,7 +63,7 @@ if __name__ == '__main__':
     
     # Initialize empty list to store the indices
     indices = []
-    # indices_mesh = []
+    indices_mesh = []
     
     # Iterate over the mesh_matrix
     for i in range(A["mat"].shape[0]):
@@ -71,10 +71,10 @@ if __name__ == '__main__':
             # If the mesh code is in dma, store the index
             if A["mat"][i, j] in dma_set:
                 indices.append((i, j))
-                # indices_mesh.append(str(A["mat"][i, j])[6:])
+                indices_mesh.append(str(A["mat"][i, j])[6:])
     print(indices)
     print()
-    # print(indices_mesh)
+    print(indices_mesh)
     print()
     
     gmom = get_matrix_of_mesh()
