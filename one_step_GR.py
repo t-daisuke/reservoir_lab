@@ -562,7 +562,8 @@ def copy_gr_data(main_path, saved_test_path, geo_res_params,nco_res_params, dist
   for i in [-1, 0, 1]:
     for j in [-1, 0, 1]:
       if i*j != 0: continue
-      mesh_list.append(gmom["mat"][center_mesh_mat[0] + i, center_mesh_mat[1] + j])
+      m = gmom["mat"][center_mesh_mat[0] + i, center_mesh_mat[1] + j]
+      mesh_list.append(m)
 
   get_copy_gr_data(main_path, saved_test_path, geo_res_params,nco_res_params, distance, mesh_list)
   return
@@ -585,9 +586,8 @@ def get_copy_gr_data(main_path, saved_test_path, geo_res_params,nco_res_params, 
     tmp_geo_test_data = load_geo_test_data(saved_test_path, geo_res_params, distance, mesh_code)
 
     if type(tmp_geo_test_data) != type((1,2)):
-      #ERROE
-      print(tmp_geo_test_data)
-      return tmp_geo_test_data
+      #ERROE mesh_codeが対応していない場合があり。
+      continue
     
     tmp_nco_test_data = load_nco_test_data(saved_test_path, nco_res_params, distance, mesh_code)
 
@@ -689,7 +689,8 @@ def main():
     #  initLen, trainLen, testLen,
     #  reg, seed_num, conectivity) = res_params
     Smesh_list = [45]
-    center_mesh_mat = (24,35) #ikebukuro 533945774 9*9
+    # center_mesh_mat = (24,35) #ikebukuro 533945774 9*9
+    center_mesh_mat = (19,30) #???
     d_list=[1]
     is_up = False
     cnct_list = [0.001, 0.01, 0.1, 1.0]
@@ -718,7 +719,7 @@ def main():
                 print("Start Train")
 
                 #TODO repeat_numはファイル名やres_paramsに含めていません。
-                create_one_step_local_area_trained_data(main_path,geo_res_params, nco_res_params,df,Smesh_list,repeat_num=60,is_update = is_up)
+                #create_one_step_local_area_trained_data(main_path,geo_res_params, nco_res_params,df,Smesh_list,repeat_num=60,is_update = is_up)
 
                 print("Save Train Data:")
                 display_time(time.perf_counter() - start_time)
@@ -728,7 +729,7 @@ def main():
                 print(str(geo_res_params) + "d:" + str(distance)) 
                 print()
 
-                create_local_gr_test_data(main_path, geo_res_params, nco_res_params, distance, df, Smesh_list)
+                #create_local_gr_test_data(main_path, geo_res_params, nco_res_params, distance, df, Smesh_list)
 
                 print("Save Test Data:" )
                 display_time(time.perf_counter() - start_time)
@@ -740,7 +741,7 @@ def main():
                 start_time = time.perf_counter()  # Start
                 print("Start mse create")
 
-                create_mse_maps(main_path, saved_test_path, geo_res_params, nco_res_params, distance, df, Smesh_list)
+                #create_mse_maps(main_path, saved_test_path, geo_res_params, nco_res_params, distance, df, Smesh_list)
                 
                 print("Save mse create Test Data:" )
                 display_time(time.perf_counter() - start_time)
