@@ -690,7 +690,7 @@ def main():
     #  reg, seed_num, conectivity) = res_params
     Smesh_list = [45]
     # center_mesh_mat = (24,35) #ikebukuro 533945774 9*9
-    center_mesh_mat = (19,30) #???
+    center_mesh_mat = (21,30) #???
     d_list=[1]
     is_up = False
     cnct_list = [0.001, 0.01, 0.1, 1.0]
