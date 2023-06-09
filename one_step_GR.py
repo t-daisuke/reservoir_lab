@@ -689,28 +689,29 @@ def main():
     #  initLen, trainLen, testLen,
     #  reg, seed_num, conectivity) = res_params
     Smesh_list = [45]
-    # center_mesh_mat = (24,35) #ikebukuro 533945774 9*9
-    center_mesh_mat = (21,30) #???
+    center_mesh_mat = (24,35) #ikebukuro 533945774 9*9
+    # center_mesh_mat = (21,30) #???
     d_list=[1]
     is_up = False
     cnct_list = [0.001, 0.01, 0.1, 1.0]
     sc_list = [-1, -3, -5, -7, -9, -11, -13]
+    seed_list=[1,2,3,4,5,6,7,8,9,10]
     neuro = 100
     # cnct_list = [0.001]
     # sc_list = [-1]
     
     all_program_start_time = time.perf_counter()
     
-    for d in d_list:       
+    for seed in seed_list:       
         for cone in cnct_list:
             for sc in sc_list:
                 geo_res_params = (sc, 1, neuro, 0.75, 9, 1,
                     24*60, 3*24*60, 2*24*60-60+1,
-                    1e-8, 2, cone)
+                    1e-8, seed, cone)
                 nco_res_params = (sc, 1, neuro, 0.75, 1, 1,
                     24*60, 3*24*60, 2*24*60-60+1,
-                    1e-8, 2, cone)
-                distance = d
+                    1e-8, seed, cone)
+                distance = 1
                 
                 main_path = './all_prgrm_output/'
                 ###################Reservoir
