@@ -695,10 +695,10 @@ def main():
     is_up = False
     cnct_list = [0.001, 0.01, 0.1, 1.0]
     sc_list = [-1, -3, -5, -7, -9, -11, -13]
-    # seed_list=[1,2,3,4,5,6,7,8,9,10]
-    seed_list=[2]
-    neuro=1000
-    # neuro = 100
+    seed_list=[1,2,3,4,5,6,7,8,9,10]
+    # seed_list=[2]
+    # neuro=1000
+    neuro = 100
     # cnct_list = [0.001]
     # sc_list = [-1]
     
@@ -753,10 +753,10 @@ def main():
                 start_time = time.perf_counter()  # Start
                 print("Start copy gr data")
                 
-                #copy_gr_data(main_path, saved_test_path, geo_res_params, nco_res_params, distance, Smesh_list, center_mesh_mat)
-                copy_gr_data(main_path, saved_test_path, geo_res_params, nco_res_params, distance, Smesh_list, (38,31))
-                copy_gr_data(main_path, saved_test_path, geo_res_params, nco_res_params, distance, Smesh_list, (35,33))
-                copy_gr_data(main_path, saved_test_path, geo_res_params, nco_res_params, distance, Smesh_list, (37,36))
+                copy_gr_data(main_path, saved_test_path, geo_res_params, nco_res_params, distance, Smesh_list, center_mesh_mat)
+                # copy_gr_data(main_path, saved_test_path, geo_res_params, nco_res_params, distance, Smesh_list, (38,31))
+                # copy_gr_data(main_path, saved_test_path, geo_res_params, nco_res_params, distance, Smesh_list, (35,33))
+                # copy_gr_data(main_path, saved_test_path, geo_res_params, nco_res_params, distance, Smesh_list, (37,36))
                 
                 print("Save copy gr data Test Data:" )
                 display_time(time.perf_counter() - start_time)
