@@ -9,6 +9,22 @@ import time
 import pdb
 from train_func import *
 
+def draw_coordinates(coordinate_list, mesh_code_list, size):
+    # Initialize the map
+    map_ = [[' ']*size[1] for _ in range(size[0])]
+    
+    # Draw the coordinates and their corresponding mesh code
+    for coordinate, mesh_code in zip(coordinate_list, mesh_code_list):
+        i, j = coordinate
+        #TODO Smesh45の時のみの仕様
+        i = i-20
+        j = j-20
+        map_[i][j] = str(coordinate) + '(' + str(mesh_code) + ')'
+
+    # Print the map
+    for row in map_:
+        print(' '.join(row))
+
 if __name__ == '__main__':
     # Variable
 
@@ -62,7 +78,7 @@ if __name__ == '__main__':
     dma_set = set(dma)
     
     # Initialize empty list to store the indices
-    indices = []
+    indices_index = []
     indices_mesh = []
     
     # Iterate over the mesh_matrix
@@ -70,12 +86,16 @@ if __name__ == '__main__':
         for j in range(A["mat"].shape[1]):
             # If the mesh code is in dma, store the index
             if A["mat"][i, j] in dma_set:
-                indices.append((i, j))
-                indices_mesh.append(str(A["mat"][i, j])[6:])
-    print(indices)
-    print()
-    print(indices_mesh)
-    print()
+                indices_index.append((i, j))
+                indices_mesh.append(str(A["mat"][i, j])[4:])
+                
+    # Test
+    coordinate_list = indices_index
+    mesh_code_list = indices_mesh
+    size = (20, 20)
+    draw_coordinates(coordinate_list, mesh_code_list, size)
+    
+    
     
     gmom = get_matrix_of_mesh()
     gnl = get_n_list(9)
