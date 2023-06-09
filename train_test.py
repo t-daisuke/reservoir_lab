@@ -19,11 +19,11 @@ def draw_coordinates(coordinate_list, mesh_code_list, size):
         #TODO Smesh45の時のみの仕様
         i = i-20
         j = j-20
-        map_[i][j] = str(coordinate) + '(' + str(mesh_code) + ')'
+        map_[i][j] = "("+ str(coordinate[0]) + ',' + str(coordinate[1]) + ',' + str(mesh_code) + ')'
 
     # Print the map
     for row in map_:
-        print(' '.join(row))
+        print(''.join(row))
 
 if __name__ == '__main__':
     # Variable
