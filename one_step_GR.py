@@ -697,8 +697,8 @@ def main():
     sc_list = [-1, -3, -5, -7, -9, -11, -13]
     seed_list=[1,2,3,4,5,6,7,8,9,10]
     # seed_list=[2]
-    # neuro=1000
-    neuro = 100
+    neuro=1000
+    # neuro = 100
     # cnct_list = [0.001]
     # sc_list = [-1]
     
