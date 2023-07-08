@@ -739,7 +739,93 @@ def get_diff_map(gmom,G_map, N_map):
       mse_mat[y,x] = G_map[y,x] - N_map[y,x]
   return mse_mat
 
-def main():
+def global_main():
+    # Variable
+
+    df_path = "./df/"
+    main_path = './all_prgrm_output/'
+    saved_test_path = './all_prgrm_output/'
+
+    if os.path.isfile(df_path+"df.csv"):
+        df = pd.read_csv(df_path+"df.csv")
+    else:
+        print("NO DF FILE")
+
+    # (expIndex, leakingRate, resSize, spectralRadius, inSize, outSize,
+    #  initLen, trainLen, testLen,
+    #  reg, seed_num, conectivity) = res_params
+    
+    is_up = False
+    cnct_list = [0.001, 0.01, 0.1, 1.0]
+    sc_list = [-1, -3, -5, -7]
+    seed_list=[1,2,3,4,5]
+    neuro=100
+    
+    all_program_start_time = time.perf_counter()
+    
+    for seed in seed_list:       
+        for cone in cnct_list:
+            for sc in sc_list:
+                geo_res_params = (sc, 1, neuro, 0.75, 9, 1,
+                    24*60, 3*24*60, 2*24*60-60+1,
+                    1e-8, seed, cone)
+                nco_res_params = (sc, 1, neuro, 0.75, 1, 1,
+                    24*60, 3*24*60, 2*24*60-60+1,
+                    1e-8, seed, cone)
+                distance = 1
+                
+                main_path = './all_prgrm_output/'
+                ###################Reservoir
+                for_time = time.perf_counter()
+                
+                start_time = time.perf_counter() #Start
+                print("Start Train")
+
+                #TODO repeat_numはファイル名やres_paramsに含めていません。
+                create_one_step_global_trained_data(main_path,geo_res_params, nco_res_params,df,repeat_num=60,is_update = is_up)
+
+                print("Save Train Data:")
+                display_time(time.perf_counter() - start_time)
+
+                start_time = time.perf_counter()  # Start
+                print("Start Test")
+                print(str(geo_res_params) + "d:" + str(distance)) 
+                print()
+
+                create_global_gr_test_data(main_path, geo_res_params, nco_res_params, distance, df)
+
+                print("Save Test Data:" )
+                display_time(time.perf_counter() - start_time)
+                
+                
+                #####################Print
+                main_path = './'
+                
+                start_time = time.perf_counter()  # Start
+                print("Start mse create")
+
+                create_mse_maps(main_path, saved_test_path, geo_res_params, nco_res_params, distance, df)
+                
+                print("Save mse create Test Data:" )
+                display_time(time.perf_counter() - start_time)
+                
+                start_time = time.perf_counter()  # Start
+                print("Start copy gr data")
+                
+                copy_gr_data(main_path, saved_test_path, geo_res_params, nco_res_params, distance)
+                
+                print("Save copy gr data Test Data:" )
+                display_time(time.perf_counter() - start_time)
+                
+                print("For Time:")
+                display_time(time.perf_counter() - for_time)
+                print(str(geo_res_params) + "d:" + str(distance)) 
+                print()
+    
+    print("All Time:")
+    display_time(time.perf_counter() - all_program_start_time)
+    
+def smesh_main():
     # Variable
 
     df_path = "./df/"
@@ -839,4 +925,4 @@ def main():
     
 
 if __name__ == '__main__':
-    main()
+    global_main()
