@@ -581,6 +581,28 @@ def create_local_gr_test_data(main_path, geo_res_params, nco_res_params, distanc
     test_NCOGR(local_area_path, nco_res_params, distance, grld)
     return
 
+def create_global_gr_test_data(main_path, geo_res_params, nco_res_params, distance, df):
+    gmom = get_matrix_of_mesh()
+    gnl = get_n_list(geo_res_params[4])
+    print("Geo: Local area trained at Global")
+    all_dma = get_raw_mesh_array(df)
+    Rl = get_R_list(all_dma, gmom, gnl)
+    grld = get_Rlist_dict(Rl,gmom,gnl)
+    
+    print("Data mesh:" + str(len(all_dma)))
+    print("Reservoir mesh:" + str(len(Rl)))
+    test_GR(main_path, geo_res_params, distance, grld)
+    
+    gnl = get_n_list(nco_res_params[4])
+    print("Nco: Local area trained at Global")
+    all_dma = get_raw_mesh_array(df)
+    Rl = get_R_list(all_dma, gmom, gnl)
+    grld = get_Rlist_dict(Rl,gmom,gnl)
+    print("Data mesh:" + str(len(all_dma)))
+    print("Reservoir mesh:" + str(len(Rl)))
+    test_NCOGR(main_path, nco_res_params, distance, grld)
+    return
+
 def copy_gr_data(main_path, saved_test_path, geo_res_params,nco_res_params, distance, Smesh_list=[], center_mesh_mat = (24,35)):
   gmom = get_matrix_of_mesh()
   
@@ -741,7 +763,7 @@ def main():
     # sc_list = [-1, -3, -5, -7, -9, -11, -13]
     sc_list = [-1, -3, -5, -7]
     # seed_list=[1,2,3,4,5,6,7,8,9,10]
-    seed_list=[1]
+    seed_list=[1,2,3,4,5]
     # seed_list=[2]
     neuro=100
     # neuro = 100
