@@ -221,6 +221,50 @@ def create_one_step_local_area_trained_data(main_path, geo_res_params, nco_res_p
         subsection_time = time.time()
     print("Train Data Saved")
     return
+def create_one_step_global_trained_data(main_path, geo_res_params, nco_res_params, df, repeat_num=60,is_update=False):
+    gmom = get_matrix_of_mesh()
+    gnl = get_n_list(geo_res_params[4])  # inSize
+    print("Global area trained for Geo")
+    all_dma = get_raw_mesh_array(df)
+
+    Rlist = get_R_list(all_dma, gmom, gnl)
+    start_time = time.time()
+    subsection_time = time.time()
+    for index, mesh_code in enumerate(Rlist):
+        gml = get_mesh_list(mesh_code, gmom, gnl)
+        raw_data_subset = create_subset_from_data_and_mesh_list(df, gml)
+        real_data = extract_data_every_n(raw_data_subset,60)
+        repeated_data = repeat_data_columns(real_data,repeat_num)
+        _ = train_1step_GR(main_path, geo_res_params, repeated_data,
+                      mesh_code, is_update=is_update)
+        
+        rate = 100 * index/len(Rlist)
+        if sprit_printer(index,len(Rlist),sprit_num=20):
+            print("{:.2f}".format(rate) + "% done " + "{:.2f}".format(time.time() -start_time) + " s passed, this subset needs " + "{:.2f}".format(time.time() - subsection_time)
+                  + " s")
+        subsection_time = time.time()
+        
+    gnl = get_n_list(nco_res_params[4])  # inSize
+    print("Global area trained for Nco")
+    all_dma = get_raw_mesh_array(df)
+
+    Rlist = get_R_list(all_dma, gmom, gnl)
+    start_time = time.time()
+    subsection_time = time.time()
+    for index, mesh_code in enumerate(Rlist):
+        gml = get_mesh_list(mesh_code, gmom, gnl)
+        raw_data_subset = create_subset_from_data_and_mesh_list(df, gml)
+        real_data = extract_data_every_n(raw_data_subset,60)
+        repeated_data = repeat_data_columns(real_data,repeat_num)
+        _ = train_1step_GR_for_NCO(main_path, nco_res_params, repeated_data,
+                      mesh_code, is_update=is_update)
+        rate = 100 * index/len(Rlist)
+        if sprit_printer(index,len(Rlist),sprit_num=20):
+            print("{:.2f}".format(rate) + "% done " + "{:.2f}".format(time.time() -start_time) + " s passed, this subset needs " + "{:.2f}".format(time.time() - subsection_time)
+                  + " s")
+        subsection_time = time.time()
+    print("Train Data Saved")
+    return
 #########
 #Test
 #########
