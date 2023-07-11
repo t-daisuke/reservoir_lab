@@ -328,6 +328,7 @@ def test_GR(main_path, res_params, Distance, Rlist_dict):
 
         tmp_dict["x"] = x
 
+        #TODO　このデータとinSize outSize Distanceを入力として、入力と正解をつくりたい。トレーニングとテストで違うデータにしたい
         (In, Out) = dis_in_out(
             Data[0:, trainLen:trainLen+testLen], inSize, outSize, Distance)
         tmp_dict["In"] = In
