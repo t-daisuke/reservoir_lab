@@ -760,6 +760,9 @@ def global_main():
     
     all_program_start_time = time.perf_counter()
     
+    total_iterations = len(seed_list) * len(cnct_list) * len(sc_list)
+    current_iteration = 0
+    
     for seed in seed_list:       
         for cone in cnct_list:
             for sc in sc_list:
@@ -814,7 +817,18 @@ def global_main():
                 print("Save copy gr data Test Data:" )
                 display_time(time.perf_counter() - start_time)
                 
-                print("For Time:")
+                # 進捗を表示
+                current_iteration += 1
+                elapsed_time = time.perf_counter() - all_program_start_time  # 経過時間
+                avg_time_per_iter = elapsed_time / current_iteration  # 1イテレーションあたりの時間
+                remaining_iters = total_iterations - current_iteration  # 残りのイテレーション数
+                estimated_remaining_time = avg_time_per_iter * remaining_iters  # 残り時間の推定
+                
+                # 進捗率と推定残り時間を表示（時間は秒単位）
+                progress = (current_iteration / total_iterations) * 100
+                print(f'Progress: {progress:.2f}%, Estimated remaining time: {estimated_remaining_time:.2f}s')
+                
+                print("This Section Time:", end="")
                 display_time(time.perf_counter() - for_time)
                 print(str(geo_res_params) + "d:" + str(distance)) 
                 print()
@@ -854,6 +868,9 @@ def smesh_main():
     # sc_list = [-1]
     
     all_program_start_time = time.perf_counter()
+    
+    total_iterations = len(seed_list) * len(cnct_list) * len(sc_list)
+    current_iteration = 0
     
     for seed in seed_list:       
         for cone in cnct_list:
@@ -912,7 +929,18 @@ def smesh_main():
                 print("Save copy gr data Test Data:" )
                 display_time(time.perf_counter() - start_time)
                 
-                print("For Time:")
+                # 進捗を表示
+                current_iteration += 1
+                elapsed_time = time.perf_counter() - all_program_start_time  # 経過時間
+                avg_time_per_iter = elapsed_time / current_iteration  # 1イテレーションあたりの時間
+                remaining_iters = total_iterations - current_iteration  # 残りのイテレーション数
+                estimated_remaining_time = avg_time_per_iter * remaining_iters  # 残り時間の推定
+                
+                # 進捗率と推定残り時間を表示（時間は秒単位）
+                progress = (current_iteration / total_iterations) * 100
+                print(f'Progress: {progress:.2f}%, Estimated remaining time: {estimated_remaining_time:.2f}s')
+                
+                print("This Section Time:", end="")
                 display_time(time.perf_counter() - for_time)
                 print(str(geo_res_params) + "d:" + str(distance)) 
                 print()
