@@ -359,6 +359,30 @@ def create_subset_from_data_and_mesh_list(df, mesh_list):
         data = np.vstack((data, np.array(data_list[i])))
     return data
 
+def create_hourly_subset_from_data_and_mesh_list(df, mesh_list):
+    result_data = []
+
+    for mesh_code in mesh_list:
+        # Select records for the given mesh_code
+        df_mesh = df[df['mesh_code'] == mesh_code]
+        if df_mesh.empty:
+            print(f"Mesh code {mesh_code} not found in the data.")
+            continue
+
+        # Group by yyyymm, hour, and gender, then calculate the sum of sum_population
+        df_mesh_grouped = df_mesh.groupby(['yyyymm', 'hour', 'gender']).agg({'sum_population': 'sum'}).reset_index()
+
+        # Group by yyyymm and hour again, then calculate the mean of sum_population
+        df_mesh_grouped = df_mesh_grouped.groupby(['yyyymm', 'hour']).agg({'sum_population': 'mean'}).reset_index()
+
+        # Store the data (excluding yyyymm and hour) as numpy array
+        result_data.append(df_mesh_grouped['sum_population'].values)
+
+    # Convert the list into a numpy array and transpose it to fit the desired format
+    result_array = np.array(result_data)
+    
+    return result_array
+
 def create_sparse_rand_matrix(m, n, density):
     """
     Create a sparse matrix of size m x n with density specified by the given value.

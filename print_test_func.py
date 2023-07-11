@@ -19,7 +19,7 @@ if __name__ == '__main__':
     gnl = get_n_list(9) #たぶんinSize
     dma = get_raw_mesh_array(df) #おおすぎた
     Rlist = get_R_list(dma,gmom,gnl)
-    mesh_code = 533945774
+    mesh_code = 533945262
     gml = get_mesh_list(mesh_code, gmom, gnl)
     
     ###Figure Print
@@ -34,11 +34,17 @@ if __name__ == '__main__':
     
     real_data = extract_data_every_n(raw_data,60)
     show_print_array(real_data.T,"real data",4)
+    print(real_data.shape)
     
     repeated_data = repeat_data_columns(real_data,60)
     show_print_array(repeated_data.T,"repeated data",5, figsize=(100,5))
+    print(repeated_data.shape)
     
     show_print_array(repeated_data[0:,0:144*3].T,"subset of repeated data",6)
+    
+    raw_data2=create_hourly_subset_from_data_and_mesh_list(df,gml)
+    show_print_array(raw_data2[0:9,0:].T,"raw_data2",7)
+    print(raw_data2.shape)
     
     plt.show()
     
