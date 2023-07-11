@@ -178,9 +178,8 @@ def create_one_step_local_area_trained_data(main_path, geo_res_params, nco_res_p
     subsection_time = time.time()
     for index, mesh_code in enumerate(Rlist):
         gml = get_mesh_list(mesh_code, gmom, gnl)
-        raw_data_subset = create_subset_from_data_and_mesh_list(df, gml)
-        real_data = extract_data_every_n(raw_data_subset,60)
-        repeated_data = repeat_data_columns(real_data,repeat_num)
+        raw_data_subset = create_hourly_subset_from_data_and_mesh_list(df,gml)
+        repeated_data = repeat_data_with_trainLen(raw_data_subset,raw_data_subset.shape[1]//2,repeat_num)
         _ = train_1step_GR(local_area_path, geo_res_params, repeated_data,
                       mesh_code, is_update=is_update)
         
@@ -209,9 +208,8 @@ def create_one_step_local_area_trained_data(main_path, geo_res_params, nco_res_p
     subsection_time = time.time()
     for index, mesh_code in enumerate(Rlist):
         gml = get_mesh_list(mesh_code, gmom, gnl)
-        raw_data_subset = create_subset_from_data_and_mesh_list(df, gml)
-        real_data = extract_data_every_n(raw_data_subset,60)
-        repeated_data = repeat_data_columns(real_data,repeat_num)
+        raw_data_subset = create_hourly_subset_from_data_and_mesh_list(df,gml)
+        repeated_data = repeat_data_with_trainLen(raw_data_subset,raw_data_subset.shape[1]//2,repeat_num)
         _ = train_1step_GR_for_NCO(local_area_path, nco_res_params, repeated_data,
                       mesh_code, is_update=is_update)
         rate = 100 * index/len(Rlist)
@@ -232,9 +230,8 @@ def create_one_step_global_trained_data(main_path, geo_res_params, nco_res_param
     subsection_time = time.time()
     for index, mesh_code in enumerate(Rlist):
         gml = get_mesh_list(mesh_code, gmom, gnl)
-        raw_data_subset = create_subset_from_data_and_mesh_list(df, gml)
-        real_data = extract_data_every_n(raw_data_subset,60)
-        repeated_data = repeat_data_columns(real_data,repeat_num)
+        raw_data_subset = create_hourly_subset_from_data_and_mesh_list(df,gml)
+        repeated_data = repeat_data_with_trainLen(raw_data_subset,raw_data_subset.shape[1]//2,repeat_num)
         _ = train_1step_GR(main_path, geo_res_params, repeated_data,
                       mesh_code, is_update=is_update)
         
@@ -253,9 +250,8 @@ def create_one_step_global_trained_data(main_path, geo_res_params, nco_res_param
     subsection_time = time.time()
     for index, mesh_code in enumerate(Rlist):
         gml = get_mesh_list(mesh_code, gmom, gnl)
-        raw_data_subset = create_subset_from_data_and_mesh_list(df, gml)
-        real_data = extract_data_every_n(raw_data_subset,60)
-        repeated_data = repeat_data_columns(real_data,repeat_num)
+        raw_data_subset = create_hourly_subset_from_data_and_mesh_list(df,gml)
+        repeated_data = repeat_data_with_trainLen(raw_data_subset,raw_data_subset.shape[1]//2,repeat_num)
         _ = train_1step_GR_for_NCO(main_path, nco_res_params, repeated_data,
                       mesh_code, is_update=is_update)
         rate = 100 * index/len(Rlist)
