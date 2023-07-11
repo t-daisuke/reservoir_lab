@@ -46,6 +46,10 @@ if __name__ == '__main__':
     show_print_array(raw_data2[0:9,0:].T,"raw_data2",7)
     print(raw_data2.shape)
     
+    repeated_data2=repeat_data_with_trainLen(raw_data2,raw_data2.shape[1]//2,60)
+    show_print_array(repeated_data2.T,"repeated data2",8, figsize=(100,5))
+    print(repeated_data2.shape)
+    
     plt.show()
     
     

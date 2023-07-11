@@ -523,6 +523,18 @@ def repeat_data_columns(raw_data, n):
     repeated_data = np.tile(raw_data, n)
     return repeated_data
 
+def repeat_data_with_trainLen(real_data, trainLen, repeat_num):
+    test_len = real_data.shape[1] - trainLen
+    if test_len < 0:
+        raise ValueError("trainLen must be less than or equal to the second dimension of real_data.")
+    
+    train_data = real_data[:, :trainLen]
+    test_data = real_data[:, trainLen:]
+    
+    repeated_data = np.concatenate((np.tile(train_data, (1, repeat_num)), np.tile(test_data, (1, repeat_num))), axis=1)
+    
+    return repeated_data
+
 """### train_GR
 
 途中でやめると、途中のデータを読み出してエラーになることがある。そのときはファイルを消してください
