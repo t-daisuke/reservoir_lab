@@ -922,4 +922,4 @@ def smesh_main():
     
 
 if __name__ == '__main__':
-    global_main()
+    smesh_main()
