@@ -827,7 +827,7 @@ def global_main():
                 # 進捗率と推定残り時間を表示（時間は秒単位）
                 progress = (current_iteration / total_iterations) * 100
                 print(f'Progress: {progress:.2f}%, Estimated remaining time: {estimated_remaining_time:.2f}s')
-                
+                display_time(estimated_remaining_time)
                 print("This Section Time:", end="")
                 display_time(time.perf_counter() - for_time)
                 print(str(geo_res_params) + "d:" + str(distance)) 
@@ -860,7 +860,7 @@ def smesh_main():
     # sc_list = [-1, -3, -5, -7, -9, -11, -13]
     sc_list = [-1, -3, -5, -7]
     # seed_list=[1,2,3,4,5,6,7,8,9,10]
-    seed_list=[1,2]
+    seed_list=[5,6]
     # seed_list=[2]
     neuro=100
     # neuro = 100
@@ -939,7 +939,7 @@ def smesh_main():
                 # 進捗率と推定残り時間を表示（時間は秒単位）
                 progress = (current_iteration / total_iterations) * 100
                 print(f'Progress: {progress:.2f}%, Estimated remaining time: {estimated_remaining_time:.2f}s')
-                
+                display_time(estimated_remaining_time)
                 print("This Section Time:", end="")
                 display_time(time.perf_counter() - for_time)
                 print(str(geo_res_params) + "d:" + str(distance)) 
